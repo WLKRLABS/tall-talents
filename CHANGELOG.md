@@ -1,5 +1,11 @@
 # Changelog
 
+## 0.6.0 - 2026-04-17
+
+- Rewrote `README.md` around the Tall Talents brand position, usage model, and repo role.
+- Added a true one-command install path by making `scripts/install.sh` work from either a local checkout or a raw GitHub script invocation.
+- Refreshed `bootstrap/README.md` so the seeded live library copy matches the tighter product language.
+
 ## 0.5.0 - 2026-04-17
 
 - Marked Phase 3 (Enforcement), Phase 4 (Agent workflow hardening), and Phase 5 (v1 hardening) as complete in `PLAN.md`.
