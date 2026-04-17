@@ -1,0 +1,28 @@
+name: ci
+
+on:
+  push:
+  pull_request:
+
+jobs:
+  validate:
+    runs-on: macos-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Python version
+        run: python3 --version
+
+      - name: Prepare temp root from bootstrap
+        run: |
+          ROOT="${RUNNER_TEMP}/tall-talents-live"
+          mkdir -p "$ROOT"
+          cp -R bootstrap/. "$ROOT"/
+          echo "ROOT=$ROOT" >> "$GITHUB_ENV"
+
+      - name: Validate talents
+        run: python3 scripts/validate-talents.py --root "$ROOT"
+
+      - name: Rebuild index
+        run: python3 scripts/rebuild-index.py --root "$ROOT"
