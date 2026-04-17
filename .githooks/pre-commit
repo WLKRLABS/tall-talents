@@ -1,0 +1,8 @@
+#!/usr/bin/env bash
+set -euo pipefail
+
+REPO_ROOT="$(git rev-parse --show-toplevel)"
+
+python3 "${REPO_ROOT}/scripts/validate-talents.py" --root "${REPO_ROOT}/bootstrap"
+python3 "${REPO_ROOT}/scripts/sync-bootstrap.py" --live-root "${REPO_ROOT}/bootstrap" --bootstrap-root "${REPO_ROOT}/bootstrap"
+git -C "${REPO_ROOT}" add bootstrap/index.md bootstrap/manifest.txt

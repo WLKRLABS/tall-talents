@@ -76,9 +76,20 @@ bash <(curl -fsSL https://raw.githubusercontent.com/scwlkr/tall-talents/main/scr
 git clone https://github.com/scwlkr/tall-talents.git
 cd tall-talents
 bash scripts/install.sh
+python3 scripts/dev-env.py install
 bash scripts/doctor.sh
 python3 scripts/validate-talents.py --root ~/.tall-talents
 python3 scripts/rebuild-index.py --root ~/.tall-talents
+```
+
+`python3 scripts/dev-env.py install` is the maintainer/dev-contributor mode.
+It points `~/.tall-talents` at this clone's `bootstrap/` directory and enables the committed
+pre-commit hook so talent edits happen directly in the repo while derived files stay in sync.
+
+If you already have unsynced local live-library changes that should be imported into this clone first:
+
+```bash
+python3 scripts/dev-env.py install --import-live
 ```
 
 ## Usage
@@ -105,7 +116,9 @@ After solving something difficult:
 - Use `templates/create-talent-from-session.md`
 - Decide whether to create a new talent, update an existing talent, or do no talent
 - Write the markdown file in `~/.tall-talents/talents/`
-- Rebuild `~/.tall-talents/index.md`
+- In repo dev mode, those edits land directly in `bootstrap/`
+- Derived files refresh automatically at commit time via the repo hook
+- Outside repo dev mode, run the manual bootstrap sync
 - Validate the library
 
 ## Commands
@@ -116,6 +129,11 @@ bash scripts/doctor.sh
 python3 scripts/validate-talents.py --root ~/.tall-talents
 python3 scripts/rebuild-index.py --root ~/.tall-talents
 python3 scripts/create-talent.py --title "My Talent" --summary "One-line summary"
+python3 scripts/dev-env.py install
+python3 scripts/dev-env.py install --import-live
+python3 scripts/dev-env.py status
+python3 scripts/dev-env.py uninstall
+python3 scripts/sync-bootstrap.py --live-root ~/.tall-talents --bootstrap-root bootstrap
 ```
 
 ## Philosophy
@@ -146,10 +164,12 @@ Instead of rediscovering macOS signing issues every time, you reuse a workflow t
 ## Scripts
 
 - `scripts/install.sh` — bootstrap `~/.tall-talents` from the local repo or directly from GitHub raw files.
+- `scripts/dev-env.py` — switch `~/.tall-talents` into repo-live dev mode for this clone and restore the previous live root on uninstall.
 - `scripts/doctor.sh` — verify environment and live folder layout.
 - `scripts/validate-talents.py` — enforce the talent format contract.
 - `scripts/rebuild-index.py` — regenerate `~/.tall-talents/index.md`.
 - `scripts/create-talent.py` — scaffold a new talent file from a title and summary.
+- `scripts/sync-bootstrap.py` — import one live library into `bootstrap/` or regenerate derived files in place when `bootstrap/` is the live root.
 
 ## Versioning
 

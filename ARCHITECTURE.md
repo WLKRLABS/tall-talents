@@ -22,12 +22,23 @@ No hidden cache, no database, no background process.
 - Index markdown derived from active talents
 - Incoming/archive directories for lifecycle handling
 
-### 3) Tooling layer
+### 3) Distribution snapshot layer
+- Repo snapshot in `bootstrap/`
+- In repo dev mode, `bootstrap/` is the live library via a symlink from `~/.tall-talents`
+- `bootstrap/talents/` holds the editable talent files that contributors review and commit
+- `bootstrap/index.md` and `bootstrap/manifest.txt` include active talents only
+- `scripts/sync-bootstrap.py` regenerates the snapshot from the live library
+- `.githooks/pre-commit` regenerates derived files before commit
+- `scripts/dev-env.py` installs repo-live dev mode for contributors and restores the previous live root on uninstall
+
+### 4) Tooling layer
 - `install.sh`: initialize live folder
+- `dev-env.py`: install/uninstall/status for repo-live dev mode
 - `doctor.sh`: health checks
 - `validate-talents.py`: contract enforcement
 - `rebuild-index.py`: deterministic index generation
 - `create-talent.py`: safe scaffolding
+- `sync-bootstrap.py`: repo snapshot import + derived-file generation
 
 ## Read path
 
@@ -41,7 +52,9 @@ No hidden cache, no database, no background process.
 1. Agent derives workflow from completed real session.
 2. Agent writes or updates one talent markdown file.
 3. Agent validates file against format contract.
-4. Agent updates index (manual edit or rebuild script).
+4. Agent updates the live index (manual edit or rebuild script).
+5. In repo dev mode, edits land directly in `bootstrap/` and the pre-commit hook refreshes derived files.
+6. Outside repo dev mode, run manual bootstrap sync when the repo snapshot must catch up to a separate live root.
 
 ## Constraints
 
@@ -57,3 +70,4 @@ No hidden cache, no database, no background process.
 - No automatic merge conflict resolution for concurrent edits.
 - No schema migration engine beyond file validation + manual edits.
 - No cloud sync; users can manage sync separately (git, rsync, etc.).
+- Repo dev mode repoints `~/.tall-talents` for this clone; contributors who do not want that should stay in manual sync mode.

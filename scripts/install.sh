@@ -9,23 +9,15 @@ INSTALL_MODE="${TALL_TALENTS_INSTALL_MODE:-auto}"
 TALL_TALENTS_REF="${TALL_TALENTS_REF:-main}"
 BOOTSTRAP_BASE="${TALL_TALENTS_BOOTSTRAP_BASE:-https://raw.githubusercontent.com/scwlkr/tall-talents/${TALL_TALENTS_REF}/bootstrap}"
 SCRIPT_BASE="${TALL_TALENTS_SCRIPT_BASE:-https://raw.githubusercontent.com/scwlkr/tall-talents/${TALL_TALENTS_REF}/scripts}"
-
-# Keep this list in sync with bootstrap/ when adding or removing seeded files.
-REMOTE_BOOTSTRAP_FILES=(
-  "README.md"
-  "index.md"
-  "talents/fix-ad-hoc-codesign-fallback.md"
-  "talents/gh-pages-site-subfolder-assets.md"
-  "talents/literal-wordpress-port-mode.md"
-  "incoming/.gitkeep"
-  "archive/.gitkeep"
-)
+BOOTSTRAP_MANIFEST="${BOOTSTRAP_DIR}/manifest.txt"
+REMOTE_BOOTSTRAP_MANIFEST="${TALL_TALENTS_BOOTSTRAP_MANIFEST:-manifest.txt}"
 
 mkdir -p "${ROOT}" "${ROOT}/talents" "${ROOT}/incoming" "${ROOT}/archive"
 
 copy_if_missing() {
   local src="$1"
   local dst="$2"
+  mkdir -p "$(dirname "${dst}")"
   if [[ ! -e "${dst}" ]]; then
     cp "${src}" "${dst}"
     echo "[install] copied: ${dst}"
@@ -37,6 +29,7 @@ copy_if_missing() {
 download_if_missing() {
   local rel="$1"
   local dst="$2"
+  mkdir -p "$(dirname "${dst}")"
   if [[ ! -e "${dst}" ]]; then
     curl -fsSL "${BOOTSTRAP_BASE}/${rel}" -o "${dst}"
     echo "[install] downloaded: ${dst}"
@@ -48,20 +41,29 @@ download_if_missing() {
 has_local_bootstrap() {
   [[ -f "${BOOTSTRAP_DIR}/README.md" ]] \
     && [[ -f "${BOOTSTRAP_DIR}/index.md" ]] \
-    && [[ -d "${BOOTSTRAP_DIR}/talents" ]]
+    && [[ -d "${BOOTSTRAP_DIR}/talents" ]] \
+    && [[ -f "${BOOTSTRAP_MANIFEST}" ]]
+}
+
+install_from_manifest() {
+  local manifest="$1"
+  local source_root="$2"
+  local mode="$3"
+  local rel=""
+
+  while IFS= read -r rel || [[ -n "${rel}" ]]; do
+    [[ -z "${rel}" ]] && continue
+    [[ "${rel}" =~ ^# ]] && continue
+    if [[ "${mode}" == "local" ]]; then
+      copy_if_missing "${source_root}/${rel}" "${ROOT}/${rel}"
+    else
+      download_if_missing "${rel}" "${ROOT}/${rel}"
+    fi
+  done < "${manifest}"
 }
 
 install_from_local() {
-  copy_if_missing "${BOOTSTRAP_DIR}/README.md" "${ROOT}/README.md"
-  copy_if_missing "${BOOTSTRAP_DIR}/index.md" "${ROOT}/index.md"
-
-  for file in "${BOOTSTRAP_DIR}/talents"/*.md; do
-    name="$(basename "${file}")"
-    copy_if_missing "${file}" "${ROOT}/talents/${name}"
-  done
-
-  copy_if_missing "${BOOTSTRAP_DIR}/incoming/.gitkeep" "${ROOT}/incoming/.gitkeep"
-  copy_if_missing "${BOOTSTRAP_DIR}/archive/.gitkeep" "${ROOT}/archive/.gitkeep"
+  install_from_manifest "${BOOTSTRAP_MANIFEST}" "${BOOTSTRAP_DIR}" "local"
 }
 
 install_from_remote() {
@@ -70,9 +72,7 @@ install_from_remote() {
     exit 1
   fi
 
-  for rel in "${REMOTE_BOOTSTRAP_FILES[@]}"; do
-    download_if_missing "${rel}" "${ROOT}/${rel}"
-  done
+  install_from_manifest <(curl -fsSL "${BOOTSTRAP_BASE}/${REMOTE_BOOTSTRAP_MANIFEST}") "" "remote"
 }
 
 print_next_commands() {
@@ -89,6 +89,7 @@ print_next_commands() {
     echo "bash scripts/doctor.sh"
     echo "python3 scripts/validate-talents.py --root ~/.tall-talents"
     echo "python3 scripts/rebuild-index.py --root ~/.tall-talents"
+    echo "python3 scripts/dev-env.py install    # optional repo-live contributor mode"
   fi
 }
 
