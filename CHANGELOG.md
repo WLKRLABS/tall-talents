@@ -1,5 +1,11 @@
 # Changelog
 
+## 0.5.0 - 2026-04-17
+
+- Marked Phase 3 (Enforcement), Phase 4 (Agent workflow hardening), and Phase 5 (v1 hardening) as complete in `PLAN.md`.
+- Verified enforcement and hardening scripts against bootstrap content, including install/doctor/validate/rebuild flows.
+- Verified bootstrap and examples talent content remain synchronized for the three baseline talents.
+
 ## 0.2.0 - 2026-04-17
 
 - Marked Phase 2 (Bootstrap) complete in the implementation plan.
