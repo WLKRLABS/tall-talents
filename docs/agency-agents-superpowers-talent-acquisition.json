@@ -1,0 +1,849 @@
+[
+  {
+    "slug": "design-before-build",
+    "name": "Design Before Build",
+    "category": "planning",
+    "source_repo": "superpowers",
+    "source_files": [
+      "skills/brainstorming/SKILL.md",
+      "docs/superpowers/specs/2026-01-22-document-review-system-design.md"
+    ],
+    "original_names": [
+      "brainstorming",
+      "Document Review System Design"
+    ],
+    "summary": "Pre-code design gate that forces context exploration, structured questioning, alternatives, and approval before implementation.",
+    "purpose": "Prevent premature coding by requiring an approved design and explicit open-question resolution first.",
+    "port_strategy": "adapted",
+    "reuse_frequency": "high",
+    "complexity": "medium",
+    "confidence": 10,
+    "dependencies": [
+      "implementation-planning"
+    ],
+    "implementation_notes": "Port the hard gate and review loop; drop tool-specific browser companion behavior unless Tall Talents adds it."
+  },
+  {
+    "slug": "implementation-planning",
+    "name": "Implementation Planning",
+    "category": "planning",
+    "source_repo": "both",
+    "source_files": [
+      "skills/writing-plans/SKILL.md",
+      "project-management/project-manager-senior.md"
+    ],
+    "original_names": [
+      "writing-plans",
+      "Senior Project Manager"
+    ],
+    "summary": "Turns approved specs into exact, bite-sized tasks with file paths, tests, commands, and acceptance criteria.",
+    "purpose": "Produce execution-ready plans that another agent or engineer can follow without filling in missing details.",
+    "port_strategy": "merged",
+    "reuse_frequency": "high",
+    "complexity": "medium",
+    "confidence": 10,
+    "dependencies": [
+      "design-before-build",
+      "plan-execution",
+      "subagent-task-loop"
+    ],
+    "implementation_notes": "Merge Superpowers’ no-placeholder rigor with Agency’s spec quoting, scope realism, and acceptance-criteria structure."
+  },
+  {
+    "slug": "plan-execution",
+    "name": "Plan Execution",
+    "category": "execution",
+    "source_repo": "superpowers",
+    "source_files": [
+      "skills/executing-plans/SKILL.md"
+    ],
+    "original_names": [
+      "executing-plans"
+    ],
+    "summary": "Executes an existing implementation plan faithfully, with critical review before work starts and verification as tasks complete.",
+    "purpose": "Provide a reliable non-subagent execution path for written plans.",
+    "port_strategy": "ported directly",
+    "reuse_frequency": "high",
+    "complexity": "low",
+    "confidence": 9,
+    "dependencies": [
+      "implementation-planning",
+      "verification-gate"
+    ],
+    "implementation_notes": "Keep the process intact; only neutralize tool-specific references."
+  },
+  {
+    "slug": "subagent-task-loop",
+    "name": "Subagent Task Loop",
+    "category": "execution",
+    "source_repo": "both",
+    "source_files": [
+      "skills/subagent-driven-development/SKILL.md",
+      "specialized/agents-orchestrator.md"
+    ],
+    "original_names": [
+      "subagent-driven-development",
+      "Agents Orchestrator"
+    ],
+    "summary": "Task-scoped execution loop using a fresh implementer plus mandatory spec and code-quality review loops.",
+    "purpose": "Raise implementation quality while keeping controller context small and task focus sharp.",
+    "port_strategy": "merged",
+    "reuse_frequency": "high",
+    "complexity": "high",
+    "confidence": 10,
+    "dependencies": [
+      "implementation-planning",
+      "code-review",
+      "verification-gate"
+    ],
+    "implementation_notes": "Use Superpowers for the per-task mechanics and Agency for retry/state management language."
+  },
+  {
+    "slug": "parallel-agent-dispatch",
+    "name": "Parallel Agent Dispatch",
+    "category": "coordination",
+    "source_repo": "both",
+    "source_files": [
+      "skills/dispatching-parallel-agents/SKILL.md",
+      "strategy/playbooks/phase-0-discovery.md",
+      "strategy/playbooks/phase-3-build.md"
+    ],
+    "original_names": [
+      "dispatching-parallel-agents",
+      "Phase 0 Playbook",
+      "Phase 3 Playbook"
+    ],
+    "summary": "Runs independent workstreams concurrently without sharing unnecessary context or overlapping write scopes.",
+    "purpose": "Improve throughput on unrelated investigations or tasks without creating coordination chaos.",
+    "port_strategy": "merged",
+    "reuse_frequency": "high",
+    "complexity": "medium",
+    "confidence": 9,
+    "dependencies": [
+      "handoff-contracts",
+      "workflow-orchestration"
+    ],
+    "implementation_notes": "Keep the strict independence test and focused task-prompt structure."
+  },
+  {
+    "slug": "workflow-orchestration",
+    "name": "Workflow Orchestration",
+    "category": "coordination",
+    "source_repo": "agency-agents",
+    "source_files": [
+      "specialized/agents-orchestrator.md",
+      "strategy/nexus-strategy.md",
+      "strategy/playbooks/phase-3-build.md",
+      "strategy/playbooks/phase-4-hardening.md"
+    ],
+    "original_names": [
+      "Agents Orchestrator",
+      "NEXUS",
+      "Phase 3 Playbook",
+      "Phase 4 Playbook"
+    ],
+    "summary": "Program-level delivery orchestration with phase gates, retry limits, status reporting, and escalation paths.",
+    "purpose": "Turn collections of specialist talents into a controlled delivery system.",
+    "port_strategy": "adapted",
+    "reuse_frequency": "high",
+    "complexity": "high",
+    "confidence": 9,
+    "dependencies": [
+      "handoff-contracts",
+      "release-readiness-audit",
+      "verification-gate"
+    ],
+    "implementation_notes": "Strip NEXUS branding and preserve the gate/retry/state machine logic."
+  },
+  {
+    "slug": "handoff-contracts",
+    "name": "Handoff Contracts",
+    "category": "coordination",
+    "source_repo": "agency-agents",
+    "source_files": [
+      "strategy/coordination/handoff-templates.md",
+      "strategy/nexus-strategy.md",
+      "specialized/specialized-workflow-architect.md"
+    ],
+    "original_names": [
+      "NEXUS Handoff Templates",
+      "NEXUS",
+      "Workflow Architect"
+    ],
+    "summary": "Reusable templates for standard handoffs, QA verdicts, escalations, and phase transitions.",
+    "purpose": "Reduce context loss and improve reliability at every transfer boundary.",
+    "port_strategy": "adapted",
+    "reuse_frequency": "high",
+    "complexity": "medium",
+    "confidence": 9,
+    "dependencies": [
+      "workflow-orchestration",
+      "parallel-agent-dispatch"
+    ],
+    "implementation_notes": "Preserve the metadata, evidence, retry-instruction, and decision-needed sections."
+  },
+  {
+    "slug": "systematic-debugging",
+    "name": "Systematic Debugging",
+    "category": "quality",
+    "source_repo": "superpowers",
+    "source_files": [
+      "skills/systematic-debugging/SKILL.md"
+    ],
+    "original_names": [
+      "systematic-debugging"
+    ],
+    "summary": "Root-cause-first debugging process with explicit investigation, pattern analysis, hypothesis testing, and only then fixes.",
+    "purpose": "Replace random patching with evidence-led debugging.",
+    "port_strategy": "ported directly",
+    "reuse_frequency": "high",
+    "complexity": "low",
+    "confidence": 10,
+    "dependencies": [
+      "verification-gate"
+    ],
+    "implementation_notes": "This is already a durable process talent with minimal adaptation needed."
+  },
+  {
+    "slug": "test-first-delivery",
+    "name": "Test-First Delivery",
+    "category": "quality",
+    "source_repo": "superpowers",
+    "source_files": [
+      "skills/test-driven-development/SKILL.md"
+    ],
+    "original_names": [
+      "test-driven-development"
+    ],
+    "summary": "A real red-green-refactor loop that requires observing failure before trusting a test.",
+    "purpose": "Ensure behavior changes are driven by tests rather than retrofitted after implementation.",
+    "port_strategy": "ported directly",
+    "reuse_frequency": "high",
+    "complexity": "low",
+    "confidence": 10,
+    "dependencies": [
+      "verification-gate"
+    ],
+    "implementation_notes": "Keep the explicit failure verification step and anti-rationalization language."
+  },
+  {
+    "slug": "verification-gate",
+    "name": "Verification Gate",
+    "category": "quality",
+    "source_repo": "both",
+    "source_files": [
+      "skills/verification-before-completion/SKILL.md",
+      "testing/testing-reality-checker.md"
+    ],
+    "original_names": [
+      "verification-before-completion",
+      "Reality Checker"
+    ],
+    "summary": "No success claim without fresh proof from the full verifying command or artifact.",
+    "purpose": "Prevent false completion claims and force evidence-backed status reporting.",
+    "port_strategy": "merged",
+    "reuse_frequency": "high",
+    "complexity": "low",
+    "confidence": 10,
+    "dependencies": [
+      "systematic-debugging",
+      "release-readiness-audit"
+    ],
+    "implementation_notes": "Merge Superpowers’ proving-command gate with Agency’s skeptical readiness posture."
+  },
+  {
+    "slug": "code-review",
+    "name": "Code Review",
+    "category": "quality",
+    "source_repo": "both",
+    "source_files": [
+      "skills/requesting-code-review/SKILL.md",
+      "agents/code-reviewer.md",
+      "engineering/engineering-code-reviewer.md"
+    ],
+    "original_names": [
+      "requesting-code-review",
+      "code-reviewer",
+      "Code Reviewer"
+    ],
+    "summary": "Plan-aware, severity-ranked review flow for correctness, security, maintainability, performance, and tests.",
+    "purpose": "Catch issues before they compound and give actionable review output tied to the plan.",
+    "port_strategy": "merged",
+    "reuse_frequency": "high",
+    "complexity": "medium",
+    "confidence": 10,
+    "dependencies": [
+      "implementation-planning",
+      "review-feedback-triage"
+    ],
+    "implementation_notes": "Keep the diff/base/head framing from Superpowers and the severity/comment format from Agency."
+  },
+  {
+    "slug": "review-feedback-triage",
+    "name": "Review Feedback Triage",
+    "category": "quality",
+    "source_repo": "superpowers",
+    "source_files": [
+      "skills/receiving-code-review/SKILL.md"
+    ],
+    "original_names": [
+      "receiving-code-review"
+    ],
+    "summary": "Technical evaluation workflow for incoming review feedback before agreeing, pushing back, or implementing.",
+    "purpose": "Improve engineering rigor and stop performative agreement.",
+    "port_strategy": "ported directly",
+    "reuse_frequency": "high",
+    "complexity": "low",
+    "confidence": 10,
+    "dependencies": [
+      "code-review"
+    ],
+    "implementation_notes": "Keep the response pattern and forbidden-response rules almost unchanged."
+  },
+  {
+    "slug": "worktree-isolation",
+    "name": "Worktree Isolation",
+    "category": "operations",
+    "source_repo": "superpowers",
+    "source_files": [
+      "skills/using-git-worktrees/SKILL.md",
+      "docs/superpowers/specs/2026-03-23-codex-app-compatibility-design.md"
+    ],
+    "original_names": [
+      "using-git-worktrees",
+      "Codex App Compatibility: Worktree and Finishing Skill Adaptation"
+    ],
+    "summary": "Safe isolated workspace setup with ignore checks, setup auto-detection, and baseline verification.",
+    "purpose": "Reduce branch/workspace contamination and establish a clean starting point for implementation.",
+    "port_strategy": "adapted",
+    "reuse_frequency": "high",
+    "complexity": "medium",
+    "confidence": 9,
+    "dependencies": [
+      "branch-finish-workflow"
+    ],
+    "implementation_notes": "Add environment detection so the talent can skip manual worktree creation when the harness already isolates work."
+  },
+  {
+    "slug": "branch-finish-workflow",
+    "name": "Branch Finish Workflow",
+    "category": "operations",
+    "source_repo": "superpowers",
+    "source_files": [
+      "skills/finishing-a-development-branch/SKILL.md"
+    ],
+    "original_names": [
+      "finishing-a-development-branch"
+    ],
+    "summary": "Structured end-of-branch workflow: verify tests, choose disposition, execute choice, clean up safely.",
+    "purpose": "Make the final integration step explicit and low-risk.",
+    "port_strategy": "ported directly",
+    "reuse_frequency": "high",
+    "complexity": "low",
+    "confidence": 9,
+    "dependencies": [
+      "worktree-isolation",
+      "verification-gate"
+    ],
+    "implementation_notes": "Keep the exact four-option decision flow and destructive-action confirmation."
+  },
+  {
+    "slug": "minimal-diff-execution",
+    "name": "Minimal Diff Execution",
+    "category": "execution",
+    "source_repo": "agency-agents",
+    "source_files": [
+      "engineering/engineering-minimal-change-engineer.md"
+    ],
+    "original_names": [
+      "Minimal Change Engineer"
+    ],
+    "summary": "Implementation discipline centered on the smallest justifiable diff and explicit refusal of scope creep.",
+    "purpose": "Keep targeted changes reviewable, low-risk, and faithful to the request.",
+    "port_strategy": "adapted",
+    "reuse_frequency": "high",
+    "complexity": "low",
+    "confidence": 10,
+    "dependencies": [
+      "verification-gate"
+    ],
+    "implementation_notes": "Very strong direct port candidate; preserve the line-by-line justification test and follow-up list."
+  },
+  {
+    "slug": "architecture-decisioning",
+    "name": "Architecture Decisioning",
+    "category": "architecture",
+    "source_repo": "agency-agents",
+    "source_files": [
+      "engineering/engineering-software-architect.md",
+      "engineering/engineering-backend-architect.md"
+    ],
+    "original_names": [
+      "Software Architect",
+      "Backend Architect"
+    ],
+    "summary": "Trade-off-driven architecture talent with ADRs, domain boundaries, and quality-attribute analysis.",
+    "purpose": "Produce maintainable, reversible, domain-first architectural direction.",
+    "port_strategy": "merged",
+    "reuse_frequency": "high",
+    "complexity": "medium",
+    "confidence": 9,
+    "dependencies": [
+      "workflow-mapping",
+      "security-review"
+    ],
+    "implementation_notes": "Merge ADR rigor with service/data architecture coverage; avoid turning it into abstract generic architecture advice."
+  },
+  {
+    "slug": "repo-onboarding-map",
+    "name": "Repo Onboarding Map",
+    "category": "research",
+    "source_repo": "agency-agents",
+    "source_files": [
+      "engineering/engineering-codebase-onboarding-engineer.md"
+    ],
+    "original_names": [
+      "Codebase Onboarding Engineer"
+    ],
+    "summary": "Facts-only orientation map for unfamiliar codebases, including entry points, data flow, and inspected-file boundaries.",
+    "purpose": "Reduce onboarding time and support safe later edits by improving source-grounded understanding.",
+    "port_strategy": "adapted",
+    "reuse_frequency": "high",
+    "complexity": "medium",
+    "confidence": 10,
+    "dependencies": [],
+    "implementation_notes": "Preserve the three-level output format and read-only/facts-only constraint."
+  },
+  {
+    "slug": "documentation-pass",
+    "name": "Documentation Pass",
+    "category": "documentation",
+    "source_repo": "agency-agents",
+    "source_files": [
+      "engineering/engineering-technical-writer.md"
+    ],
+    "original_names": [
+      "Technical Writer"
+    ],
+    "summary": "Audience-first docs workflow for README, API docs, tutorials, and docs-as-code maintenance.",
+    "purpose": "Create or repair documentation that is accurate, navigable, and testable.",
+    "port_strategy": "adapted",
+    "reuse_frequency": "high",
+    "complexity": "medium",
+    "confidence": 9,
+    "dependencies": [
+      "repo-onboarding-map",
+      "verification-gate"
+    ],
+    "implementation_notes": "Keep the workflow and templates; trim bulky sample content and persona language."
+  },
+  {
+    "slug": "security-review",
+    "name": "Security Review",
+    "category": "security",
+    "source_repo": "agency-agents",
+    "source_files": [
+      "engineering/engineering-security-engineer.md"
+    ],
+    "original_names": [
+      "Security Engineer"
+    ],
+    "summary": "Threat modeling and secure-code/architecture review across auth, validation, trust boundaries, and dependencies.",
+    "purpose": "Catch and remediate security risks early in design and implementation.",
+    "port_strategy": "adapted",
+    "reuse_frequency": "high",
+    "complexity": "medium",
+    "confidence": 9,
+    "dependencies": [
+      "verification-gate",
+      "architecture-decisioning"
+    ],
+    "implementation_notes": "Keep the phased workflow and threat-model structure; remove heavy sample code blocks."
+  },
+  {
+    "slug": "devops-automation",
+    "name": "DevOps Automation",
+    "category": "operations",
+    "source_repo": "agency-agents",
+    "source_files": [
+      "engineering/engineering-devops-automator.md",
+      "support/support-infrastructure-maintainer.md"
+    ],
+    "original_names": [
+      "DevOps Automator",
+      "Infrastructure Maintainer"
+    ],
+    "summary": "CI/CD, infrastructure-as-code, monitoring, rollback, and reliability automation for production systems.",
+    "purpose": "Improve delivery speed and system reliability while keeping operations observable and reversible.",
+    "port_strategy": "merged",
+    "reuse_frequency": "medium",
+    "complexity": "high",
+    "confidence": 8,
+    "dependencies": [
+      "verification-gate",
+      "incident-response"
+    ],
+    "implementation_notes": "Merge pipeline automation and infrastructure reliability into one ops-focused talent without cloud-vendor bias."
+  },
+  {
+    "slug": "incident-response",
+    "name": "Incident Response",
+    "category": "operations",
+    "source_repo": "agency-agents",
+    "source_files": [
+      "engineering/engineering-incident-response-commander.md",
+      "strategy/runbooks/scenario-incident-response.md"
+    ],
+    "original_names": [
+      "Incident Response Commander",
+      "Runbook: Incident Response"
+    ],
+    "summary": "Structured incident handling with severity classes, roles, communication cadence, remediation paths, and blameless post-mortems.",
+    "purpose": "Turn production chaos into a repeatable response system.",
+    "port_strategy": "adapted",
+    "reuse_frequency": "medium",
+    "complexity": "medium",
+    "confidence": 9,
+    "dependencies": [
+      "verification-gate"
+    ],
+    "implementation_notes": "Preserve the severity matrix, role assignment, and post-mortem template."
+  },
+  {
+    "slug": "release-readiness-audit",
+    "name": "Release Readiness Audit",
+    "category": "quality",
+    "source_repo": "agency-agents",
+    "source_files": [
+      "testing/testing-reality-checker.md",
+      "strategy/playbooks/phase-4-hardening.md"
+    ],
+    "original_names": [
+      "Reality Checker",
+      "Phase 4 Playbook — Quality & Hardening"
+    ],
+    "summary": "Skeptical final ship/no-ship audit that defaults to 'needs work' until evidence proves readiness.",
+    "purpose": "Provide a disciplined final gate for production readiness decisions.",
+    "port_strategy": "adapted",
+    "reuse_frequency": "high",
+    "complexity": "medium",
+    "confidence": 9,
+    "dependencies": [
+      "visual-evidence-qa",
+      "verification-gate",
+      "compliance-review"
+    ],
+    "implementation_notes": "Keep the skeptical posture and evidence matrix; replace repo-specific screenshot scripts with generalized evidence requirements."
+  },
+  {
+    "slug": "visual-evidence-qa",
+    "name": "Visual Evidence QA",
+    "category": "quality",
+    "source_repo": "agency-agents",
+    "source_files": [
+      "testing/testing-evidence-collector.md"
+    ],
+    "original_names": [
+      "Evidence Collector"
+    ],
+    "summary": "Visual-first QA discipline centered on screenshots, interaction evidence, and realistic quality ratings.",
+    "purpose": "Ground UI QA in proof rather than optimistic claims.",
+    "port_strategy": "adapted",
+    "reuse_frequency": "medium",
+    "complexity": "medium",
+    "confidence": 9,
+    "dependencies": [
+      "release-readiness-audit"
+    ],
+    "implementation_notes": "Keep the evidence-first posture and issue-report structure; neutralize Playwright-specific scripts."
+  },
+  {
+    "slug": "api-validation",
+    "name": "API Validation",
+    "category": "quality",
+    "source_repo": "agency-agents",
+    "source_files": [
+      "testing/testing-api-tester.md"
+    ],
+    "original_names": [
+      "API Tester"
+    ],
+    "summary": "Comprehensive API testing across functional behavior, auth/security, failure handling, and performance.",
+    "purpose": "Raise confidence in APIs and integrations before release.",
+    "port_strategy": "adapted",
+    "reuse_frequency": "medium",
+    "complexity": "medium",
+    "confidence": 8,
+    "dependencies": [
+      "verification-gate",
+      "performance-benchmarking"
+    ],
+    "implementation_notes": "Port the validation matrix and workflow, not the large sample code payloads."
+  },
+  {
+    "slug": "performance-benchmarking",
+    "name": "Performance Benchmarking",
+    "category": "quality",
+    "source_repo": "agency-agents",
+    "source_files": [
+      "testing/testing-performance-benchmarker.md"
+    ],
+    "original_names": [
+      "Performance Benchmarker"
+    ],
+    "summary": "Baseline, load, stress, endurance, and SLA-focused performance analysis with bottleneck reporting.",
+    "purpose": "Make performance work measurable and decision-ready.",
+    "port_strategy": "adapted",
+    "reuse_frequency": "medium",
+    "complexity": "medium",
+    "confidence": 8,
+    "dependencies": [
+      "verification-gate"
+    ],
+    "implementation_notes": "Preserve the baseline-first method and report structure; let user SLAs replace hardcoded thresholds."
+  },
+  {
+    "slug": "product-requirements",
+    "name": "Product Requirements",
+    "category": "product",
+    "source_repo": "agency-agents",
+    "source_files": [
+      "product/product-manager.md"
+    ],
+    "original_names": [
+      "Product Manager"
+    ],
+    "summary": "PRD and opportunity-assessment talent tying goals, non-goals, users, solution framing, and launch intent together.",
+    "purpose": "Translate user and business needs into a usable product definition artifact.",
+    "port_strategy": "adapted",
+    "reuse_frequency": "medium",
+    "complexity": "medium",
+    "confidence": 8,
+    "dependencies": [
+      "trend-research",
+      "feedback-synthesis",
+      "ux-research"
+    ],
+    "implementation_notes": "Keep the PRD and opportunity-assessment shape; drop the persona wrapper."
+  },
+  {
+    "slug": "sprint-prioritization",
+    "name": "Sprint Prioritization",
+    "category": "product",
+    "source_repo": "agency-agents",
+    "source_files": [
+      "product/product-sprint-prioritizer.md",
+      "project-management/project-manager-senior.md"
+    ],
+    "original_names": [
+      "Sprint Prioritizer",
+      "Senior Project Manager"
+    ],
+    "summary": "Backlog prioritization and sprint shaping using RICE, capacity, dependency mapping, and realistic task sizing.",
+    "purpose": "Help teams choose the right work and shape it into something actually deliverable.",
+    "port_strategy": "merged",
+    "reuse_frequency": "medium",
+    "complexity": "medium",
+    "confidence": 8,
+    "dependencies": [
+      "product-requirements",
+      "implementation-planning"
+    ],
+    "implementation_notes": "Merge prioritization frameworks with grounded spec-to-task conversion rules."
+  },
+  {
+    "slug": "feedback-synthesis",
+    "name": "Feedback Synthesis",
+    "category": "research",
+    "source_repo": "agency-agents",
+    "source_files": [
+      "product/product-feedback-synthesizer.md"
+    ],
+    "original_names": [
+      "Feedback Synthesizer"
+    ],
+    "summary": "Multi-channel feedback analysis that turns qualitative input into themes, priorities, and actionable product insight.",
+    "purpose": "Convert raw user voice into decision-grade product evidence.",
+    "port_strategy": "adapted",
+    "reuse_frequency": "medium",
+    "complexity": "medium",
+    "confidence": 8,
+    "dependencies": [
+      "product-requirements"
+    ],
+    "implementation_notes": "Port the collection-processing-synthesis method without the enterprise analytics sprawl."
+  },
+  {
+    "slug": "trend-research",
+    "name": "Trend Research",
+    "category": "research",
+    "source_repo": "agency-agents",
+    "source_files": [
+      "product/product-trend-researcher.md",
+      "strategy/playbooks/phase-0-discovery.md"
+    ],
+    "original_names": [
+      "Trend Researcher",
+      "Phase 0 Playbook — Intelligence & Discovery"
+    ],
+    "summary": "Market, competitor, and emerging-signal research for product and strategy decisions.",
+    "purpose": "Bring outside-world evidence into product and roadmap choices.",
+    "port_strategy": "adapted",
+    "reuse_frequency": "medium",
+    "complexity": "medium",
+    "confidence": 8,
+    "dependencies": [
+      "executive-briefing",
+      "product-requirements"
+    ],
+    "implementation_notes": "Merge Agency’s market-research role with the Phase 0 gate mindset."
+  },
+  {
+    "slug": "ux-research",
+    "name": "UX Research",
+    "category": "design",
+    "source_repo": "agency-agents",
+    "source_files": [
+      "design/design-ux-researcher.md",
+      "strategy/playbooks/phase-0-discovery.md"
+    ],
+    "original_names": [
+      "UX Researcher",
+      "Phase 0 Playbook — Intelligence & Discovery"
+    ],
+    "summary": "Evidence-led usability and behavior research for user-facing decision making.",
+    "purpose": "Ground interface and journey choices in observed user behavior and validated pain points.",
+    "port_strategy": "adapted",
+    "reuse_frequency": "medium",
+    "complexity": "medium",
+    "confidence": 8,
+    "dependencies": [
+      "design-before-build",
+      "ux-foundation"
+    ],
+    "implementation_notes": "Keep the evidence bias and journey framing; trim role/personality language."
+  },
+  {
+    "slug": "ux-foundation",
+    "name": "UX Foundation",
+    "category": "design",
+    "source_repo": "agency-agents",
+    "source_files": [
+      "design/design-ux-architect.md",
+      "engineering/engineering-frontend-developer.md"
+    ],
+    "original_names": [
+      "UX Architect",
+      "Frontend Developer"
+    ],
+    "summary": "Implementation-oriented UX structure talent for layouts, component systems, and developer-friendly foundations.",
+    "purpose": "Bridge user-facing intent into a workable front-end structure before styling and polish.",
+    "port_strategy": "merged",
+    "reuse_frequency": "medium",
+    "complexity": "medium",
+    "confidence": 7,
+    "dependencies": [
+      "ux-research",
+      "design-before-build"
+    ],
+    "implementation_notes": "Merge structural UX work with implementation realism, not visual-style direction."
+  },
+  {
+    "slug": "compliance-review",
+    "name": "Compliance Review",
+    "category": "compliance",
+    "source_repo": "agency-agents",
+    "source_files": [
+      "support/support-legal-compliance-checker.md",
+      "strategy/playbooks/phase-0-discovery.md",
+      "strategy/playbooks/phase-4-hardening.md"
+    ],
+    "original_names": [
+      "Legal Compliance Checker",
+      "Phase 0 Playbook",
+      "Phase 4 Playbook"
+    ],
+    "summary": "Regulatory and legal scan talent for privacy, content, operational risk, and launch conditions.",
+    "purpose": "Surface compliance blockers, required controls, and audit-trail obligations before release.",
+    "port_strategy": "adapted",
+    "reuse_frequency": "medium",
+    "complexity": "high",
+    "confidence": 8,
+    "dependencies": [
+      "release-readiness-audit",
+      "product-requirements"
+    ],
+    "implementation_notes": "Keep the audit logic and control questions; remove heavy sample code and jurisdiction-specific verbosity."
+  },
+  {
+    "slug": "workflow-mapping",
+    "name": "Workflow Mapping",
+    "category": "architecture",
+    "source_repo": "agency-agents",
+    "source_files": [
+      "specialized/specialized-workflow-architect.md"
+    ],
+    "original_names": [
+      "Workflow Architect"
+    ],
+    "summary": "Maps complete workflow trees, states, failure paths, handoff contracts, and registries before or alongside implementation.",
+    "purpose": "Make complex system behavior explicit enough to build, QA, and operate safely.",
+    "port_strategy": "adapted",
+    "reuse_frequency": "medium",
+    "complexity": "high",
+    "confidence": 8,
+    "dependencies": [
+      "handoff-contracts",
+      "architecture-decisioning"
+    ],
+    "implementation_notes": "Preserve discovery-first workflow mapping and the insistence on non-happy-path branches."
+  },
+  {
+    "slug": "automation-governance",
+    "name": "Automation Governance",
+    "category": "governance",
+    "source_repo": "agency-agents",
+    "source_files": [
+      "specialized/automation-governance-architect.md"
+    ],
+    "original_names": [
+      "Automation Governance Architect"
+    ],
+    "summary": "Governance-first talent for deciding whether and how automation should exist, including risk, fallback, and testing standards.",
+    "purpose": "Stop low-value or unsafe automations and standardize the ones worth building.",
+    "port_strategy": "adapted",
+    "reuse_frequency": "medium",
+    "complexity": "medium",
+    "confidence": 9,
+    "dependencies": [
+      "workflow-mapping"
+    ],
+    "implementation_notes": "This ports well once n8n bias is softened and the verdict framework is kept intact."
+  },
+  {
+    "slug": "executive-briefing",
+    "name": "Executive Briefing",
+    "category": "communication",
+    "source_repo": "agency-agents",
+    "source_files": [
+      "support/support-executive-summary-generator.md",
+      "strategy/EXECUTIVE-BRIEF.md"
+    ],
+    "original_names": [
+      "Executive Summary Generator",
+      "NEXUS Executive Brief"
+    ],
+    "summary": "Condenses complex findings into quantified, decision-ready executive communication.",
+    "purpose": "Help technical or research work land with decision-makers who need concise, structured output.",
+    "port_strategy": "adapted",
+    "reuse_frequency": "medium",
+    "complexity": "low",
+    "confidence": 9,
+    "dependencies": [
+      "trend-research",
+      "feedback-synthesis",
+      "release-readiness-audit"
+    ],
+    "implementation_notes": "Keep the strict output contract and quantified recommendation style; remove consulting-brand framing."
+  }
+]
