@@ -7,7 +7,7 @@
 - Define slug and filename constraints.
 - Publish short strict rules.
 
-## Phase 2 — Bootstrap
+## Phase 2 — Bootstrap (done in this repo)
 
 - Provide initial `bootstrap/` root contents.
 - Include live README, initial index, and 3 real talents.
