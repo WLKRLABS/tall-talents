@@ -4,6 +4,7 @@ talents/fix-ad-hoc-codesign-fallback.md
 talents/gh-pages-site-subfolder-assets.md
 talents/github-ssh-repo-alias-setup.md
 talents/literal-wordpress-port-mode.md
+talents/reddit-community-presence.md
 talents/repo-talent-acquisition-pass.md
 incoming/.gitkeep
 archive/.gitkeep
