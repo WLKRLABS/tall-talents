@@ -1,10 +1,14 @@
 README.md
 index.md
+talents/design-before-build.md
 talents/fix-ad-hoc-codesign-fallback.md
 talents/gh-pages-site-subfolder-assets.md
 talents/github-ssh-repo-alias-setup.md
+talents/implementation-planning.md
 talents/literal-wordpress-port-mode.md
 talents/reddit-community-presence.md
 talents/repo-talent-acquisition-pass.md
+talents/source-grounded-readme-upgrade.md
+talents/systematic-debugging.md
 incoming/.gitkeep
 archive/.gitkeep
