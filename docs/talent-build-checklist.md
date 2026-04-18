@@ -29,13 +29,13 @@
 - [x] `trend-research`
 
 ## Wave 3
-- [ ] `workflow-orchestration`
-- [ ] `visual-evidence-qa`
-- [ ] `api-validation`
-- [ ] `performance-benchmarking`
-- [ ] `ux-research`
-- [ ] `ux-foundation`
-- [ ] `compliance-review`
-- [ ] `workflow-mapping`
-- [ ] `automation-governance`
-- [ ] `executive-briefing`
+- [x] `workflow-orchestration`
+- [x] `visual-evidence-qa`
+- [x] `api-validation`
+- [x] `performance-benchmarking`
+- [x] `ux-research`
+- [x] `ux-foundation`
+- [x] `compliance-review`
+- [x] `workflow-mapping`
+- [x] `automation-governance`
+- [x] `executive-briefing`

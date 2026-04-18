@@ -1,11 +1,15 @@
 README.md
 index.md
+talents/api-validation.md
 talents/architecture-decisioning.md
+talents/automation-governance.md
 talents/branch-finish-workflow.md
 talents/code-review.md
+talents/compliance-review.md
 talents/design-before-build.md
 talents/devops-automation.md
 talents/documentation-pass.md
+talents/executive-briefing.md
 talents/feedback-synthesis.md
 talents/fix-ad-hoc-codesign-fallback.md
 talents/gh-pages-site-subfolder-assets.md
@@ -16,6 +20,7 @@ talents/incident-response.md
 talents/literal-wordpress-port-mode.md
 talents/minimal-diff-execution.md
 talents/parallel-agent-dispatch.md
+talents/performance-benchmarking.md
 talents/plan-execution.md
 talents/product-requirements.md
 talents/reddit-community-presence.md
@@ -29,7 +34,12 @@ talents/sprint-prioritization.md
 talents/subagent-task-loop.md
 talents/systematic-debugging.md
 talents/trend-research.md
+talents/ux-foundation.md
+talents/ux-research.md
 talents/verification-gate.md
+talents/visual-evidence-qa.md
+talents/workflow-mapping.md
+talents/workflow-orchestration.md
 talents/worktree-isolation.md
 incoming/.gitkeep
 archive/.gitkeep
