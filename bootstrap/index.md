@@ -2,12 +2,16 @@
 
 Active talents (sorted by slug):
 
+- `api-validation` — Validate APIs across contract, authentication, error handling, integration, and performance expectations with a traceable test matrix.
 - `architecture-decisioning` — Produce domain-first architecture decisions with explicit trade-offs, ADRs, operational implications, and a clear evolution path.
+- `automation-governance` — Decide whether automation should exist at all, choose the right rollout posture, and require reliability, fallback, ownership, and audit standards before approval.
 - `branch-finish-workflow` — Inspect all open worktrees, separate real local edits from stale branch drift, commit each true delta, and fast-forward the integration branch without losing on-disk work.
 - `code-review` — Review completed work against exact requirements and real code, then return one-pass findings ordered by severity and evidence.
+- `compliance-review` — Evaluate legal, regulatory, policy, and audit obligations against the actual product or process, classify gaps, and define the controls or escalation needed before launch.
 - `design-before-build` — Require context discovery, option analysis, written design review, and explicit approval before any implementation starts.
 - `devops-automation` — Build delivery and infrastructure automation that is reproducible, observable, reversible, and secure enough to run in production.
 - `documentation-pass` — Create or repair documentation through source-grounded auditing, audience-first structure, tested examples, and explicit maintenance rules.
+- `executive-briefing` — Turn validated findings into concise, quantified, decision-ready executive communication with explicit recommendations, owners, and timelines.
 - `feedback-synthesis` — Convert raw user feedback into decision-grade evidence by collecting, normalizing, coding, quantifying, and prioritizing themes without losing the original user voice.
 - `fix-ad-hoc-codesign-fallback` — Restore runnable macOS binaries by removing invalid signatures and applying deterministic ad-hoc signing.
 - `gh-pages-site-subfolder-assets` — Correct broken CSS/JS/image links when a static site is served from a repo subpath on GitHub Pages.
@@ -18,6 +22,7 @@ Active talents (sorted by slug):
 - `literal-wordpress-port-mode` — Reproduce legacy WordPress page structure literally during migration before any cleanup/refactor pass.
 - `minimal-diff-execution` — Solve the stated task with the smallest justifiable diff, resist scope creep, and separate follow-ups from the patch itself.
 - `parallel-agent-dispatch` — Run independent investigations or implementation tracks concurrently only when their context, dependencies, and write scopes are cleanly separated.
+- `performance-benchmarking` — Establish baselines, run realistic performance tests, analyze bottlenecks statistically, and report pass or fail against explicit targets.
 - `plan-execution` — Execute a written implementation plan faithfully, stop on ambiguity, and only finish after the plan's required verification passes.
 - `product-requirements` — Turn user and business need into a decision-grade opportunity assessment and PRD with explicit goals, non-goals, evidence, risks, and launch intent.
 - `reddit-community-presence` — Build brand presence on Reddit by mapping the right subreddits, following community rules, contributing value-first content, and handling mentions transparently.
@@ -31,5 +36,10 @@ Active talents (sorted by slug):
 - `subagent-task-loop` — Execute a written plan through one task-scoped implementer at a time, with mandatory spec-compliance and code-quality review loops before a task can close.
 - `systematic-debugging` — Debug through root-cause investigation, pattern analysis, single-hypothesis testing, and only then a minimal verified fix.
 - `trend-research` — Bring outside-world evidence into product and strategy decisions through source-diverse market, competitor, technology, and timing analysis.
+- `ux-foundation` — Translate approved scope and user evidence into implementation-ready interface structure, component boundaries, and interaction rules before polish work begins.
+- `ux-research` — Gather and synthesize user-behavior evidence so design and product decisions are driven by observed reality rather than internal intuition.
 - `verification-gate` — Block success claims until fresh commands, artifacts, and requirement checks prove the exact claim being made.
+- `visual-evidence-qa` — Validate visual and interaction quality through captured evidence, honest inspection, and issue reporting tied to exact screenshots or recordings.
+- `workflow-mapping` — Discover real workflows in code and operations, map their branches, states, handoffs, and cleanup paths, and maintain a registry that stays aligned with reality.
+- `workflow-orchestration` — Coordinate multi-phase delivery with explicit phase gates, retry limits, structured handoffs, and evidence-backed status reporting.
 - `worktree-isolation` — Create or confirm an isolated workspace on a dedicated branch, run setup, and prove the baseline is clean before implementation starts.
