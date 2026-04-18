@@ -4,29 +4,29 @@
 - [x] `design-before-build`
 - [x] `implementation-planning`
 - [x] `systematic-debugging`
-- [ ] `verification-gate`
-- [ ] `code-review`
-- [ ] `review-feedback-triage`
-- [ ] `worktree-isolation`
+- [x] `verification-gate`
+- [x] `code-review`
+- [x] `review-feedback-triage`
+- [x] `worktree-isolation`
 - [x] `branch-finish-workflow`
-- [ ] `minimal-diff-execution`
-- [ ] `repo-onboarding-map`
-- [ ] `handoff-contracts`
-- [ ] `release-readiness-audit`
+- [x] `minimal-diff-execution`
+- [x] `repo-onboarding-map`
+- [x] `handoff-contracts`
+- [x] `release-readiness-audit`
 
 ## Wave 2
-- [ ] `plan-execution`
-- [ ] `subagent-task-loop`
-- [ ] `parallel-agent-dispatch`
-- [ ] `architecture-decisioning`
-- [ ] `documentation-pass`
-- [ ] `security-review`
-- [ ] `devops-automation`
-- [ ] `incident-response`
-- [ ] `product-requirements`
-- [ ] `sprint-prioritization`
-- [ ] `feedback-synthesis`
-- [ ] `trend-research`
+- [x] `plan-execution`
+- [x] `subagent-task-loop`
+- [x] `parallel-agent-dispatch`
+- [x] `architecture-decisioning`
+- [x] `documentation-pass`
+- [x] `security-review`
+- [x] `devops-automation`
+- [x] `incident-response`
+- [x] `product-requirements`
+- [x] `sprint-prioritization`
+- [x] `feedback-synthesis`
+- [x] `trend-research`
 
 ## Wave 3
 - [ ] `workflow-orchestration`
