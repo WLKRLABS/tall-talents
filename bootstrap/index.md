@@ -2,6 +2,7 @@
 
 Active talents (sorted by slug):
 
+- `branch-finish-workflow` — Inspect all open worktrees, separate real local edits from stale branch drift, commit each true delta, and fast-forward the integration branch without losing on-disk work.
 - `design-before-build` — Require context discovery, option analysis, written design review, and explicit approval before any implementation starts.
 - `fix-ad-hoc-codesign-fallback` — Restore runnable macOS binaries by removing invalid signatures and applying deterministic ad-hoc signing.
 - `gh-pages-site-subfolder-assets` — Correct broken CSS/JS/image links when a static site is served from a repo subpath on GitHub Pages.

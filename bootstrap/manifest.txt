@@ -1,5 +1,6 @@
 README.md
 index.md
+talents/branch-finish-workflow.md
 talents/design-before-build.md
 talents/fix-ad-hoc-codesign-fallback.md
 talents/gh-pages-site-subfolder-assets.md

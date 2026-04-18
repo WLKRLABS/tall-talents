@@ -8,7 +8,7 @@
 - [ ] `code-review`
 - [ ] `review-feedback-triage`
 - [ ] `worktree-isolation`
-- [ ] `branch-finish-workflow`
+- [x] `branch-finish-workflow`
 - [ ] `minimal-diff-execution`
 - [ ] `repo-onboarding-map`
 - [ ] `handoff-contracts`
