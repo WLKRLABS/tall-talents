@@ -31,7 +31,7 @@ If you already solved a painful workflow once, Tall Talents gives you a strict p
 >
 > Just files.
 
-## Why Tall Talents Exists
+## 🚀 Why Tall Talents Exists
 
 Most hard-won agent workflows disappear into chat history, terminal scrollback, or personal memory.
 
@@ -45,7 +45,7 @@ Tall Talents turns those one-off wins into reusable operational assets:
 - small deterministic scripts so setup, validation, and indexing stay trustworthy
 - a repo-live contributor mode so the public repository can act as the working source when needed
 
-## What a Talent Actually Is
+## 🧩 What a Talent Actually Is
 
 A talent is a reusable operational workflow written as a markdown file.
 
@@ -55,7 +55,7 @@ It is something you actually struggled through, solved, and would want an agent 
 
 If handing that file to an agent would produce a meaningfully better outcome than starting from scratch, it qualifies as a talent.
 
-## Why This Repo Is Different
+## 🔍 Why This Repo Is Different
 
 Tall Talents is deliberately narrow.
 
@@ -68,7 +68,7 @@ Tall Talents is deliberately narrow.
 
 This repo is small enough to inspect quickly and strict enough to trust under real use.
 
-## What You Get
+## ✨ What You Get
 
 - Global live library bootstrap for `~/.tall-talents`
 - Strict talent rules and reusable templates
@@ -77,21 +77,76 @@ This repo is small enough to inspect quickly and strict enough to trust under re
 - A safe talent scaffolder
 - A doctor script for environment checks
 - Repo-live dev mode for contributors working directly against `bootstrap/`
-- Real example talents instead of placeholder demo content
+- A shipped library of active talents instead of placeholder demo content
 
-## Included Talents
+## 🎨 The Talent Roster
 
-Tall Talents already ships with working examples:
+Tall Talents currently ships with `41` active talents in [`bootstrap/talents/`](bootstrap/talents/) and a canonical snapshot index at [`bootstrap/index.md`](bootstrap/index.md).
 
-- [`fix-ad-hoc-codesign-fallback`](bootstrap/talents/fix-ad-hoc-codesign-fallback.md) - restore runnable macOS binaries by removing invalid signatures and applying deterministic ad-hoc signing
-- [`gh-pages-site-subfolder-assets`](bootstrap/talents/gh-pages-site-subfolder-assets.md) - fix broken asset paths when GitHub Pages serves a site from a repo subpath
-- [`github-ssh-repo-alias-setup`](bootstrap/talents/github-ssh-repo-alias-setup.md) - pin a repo to the right SSH alias and identity safely
-- [`literal-wordpress-port-mode`](bootstrap/talents/literal-wordpress-port-mode.md) - reproduce legacy WordPress structure literally before cleanup or refactor
-- [`repo-talent-acquisition-pass`](bootstrap/talents/repo-talent-acquisition-pass.md) - mine external repos for durable, reusable Tall Talents candidates
+The grouped roster below is a README browsing aid modeled for quick scanning. The files in `bootstrap/talents/` remain the source of truth.
 
-These examples matter because they prove the system is about operational reuse, not placeholder theory.
+### 🧭 Planning, Discovery, and Product Direction
 
-## Global System
+| Talent | Focus | When to Use |
+| --- | --- | --- |
+| [Architecture Decisioning](bootstrap/talents/architecture-decisioning.md) | Domain-first architecture, ADRs, trade-offs | Choosing system shape or documenting a major technical direction |
+| [Design Before Build](bootstrap/talents/design-before-build.md) | Context discovery, option analysis, design review | Before implementation when the shape of the solution is still unclear |
+| [Implementation Planning](bootstrap/talents/implementation-planning.md) | Exact files, tasks, tests, acceptance criteria | Turning an approved design into execution-ready work |
+| [Product Requirements](bootstrap/talents/product-requirements.md) | Goals, non-goals, evidence, risks, launch intent | Defining what should be built before delivery starts |
+| [Repo Onboarding Map](bootstrap/talents/repo-onboarding-map.md) | Facts-only repo orientation and execution tracing | Getting familiar with an unfamiliar codebase quickly |
+| [Sprint Prioritization](bootstrap/talents/sprint-prioritization.md) | Capacity, dependencies, scope control | Deciding what belongs in the next sprint |
+| [Workflow Mapping](bootstrap/talents/workflow-mapping.md) | States, branches, handoffs, cleanup paths | Discovering how a real system or process actually behaves |
+| [Workflow Orchestration](bootstrap/talents/workflow-orchestration.md) | Phase gates, retries, structured handoffs | Coordinating multi-phase delivery with explicit control points |
+| [UX Foundation](bootstrap/talents/ux-foundation.md) | Interface structure, component boundaries, interaction rules | Converting approved UX scope into buildable UI foundations |
+| [UX Research](bootstrap/talents/ux-research.md) | User-behavior evidence and synthesis | Replacing intuition with observed user evidence |
+| [Trend Research](bootstrap/talents/trend-research.md) | Market, competitor, and timing evidence | Bringing outside-world research into product and strategy decisions |
+| [Feedback Synthesis](bootstrap/talents/feedback-synthesis.md) | Normalize and quantify raw user feedback | Turning messy qualitative input into usable priorities |
+
+### 🛠️ Delivery, Refactoring, and Repository Operations
+
+| Talent | Focus | When to Use |
+| --- | --- | --- |
+| [Automation Governance](bootstrap/talents/automation-governance.md) | Automation approval, fallback, ownership, audit standards | Evaluating whether a proposed automation should exist at all |
+| [Finish open worktrees into the integration branch safely](bootstrap/talents/branch-finish-workflow.md) | Open worktrees, branch drift, safe integration | Closing scattered local branches without losing real work |
+| [DevOps Automation](bootstrap/talents/devops-automation.md) | Reproducible, observable, reversible delivery systems | Building CI/CD and infrastructure automation |
+| [Fix macOS ad-hoc codesign fallback for local binaries](bootstrap/talents/fix-ad-hoc-codesign-fallback.md) | Deterministic local binary repair | Recovering broken unsigned macOS binaries |
+| [Fix GitHub Pages asset paths for project subfolder sites](bootstrap/talents/gh-pages-site-subfolder-assets.md) | Subpath-safe asset linking | Static sites that break when served from a repo subpath |
+| [Set per-repo GitHub SSH identity via host alias](bootstrap/talents/github-ssh-repo-alias-setup.md) | Repo-local SSH auth and Git identity | Fixing GitHub push and PR auth problems for one repo |
+| [Literal WordPress port mode for static migration parity](bootstrap/talents/literal-wordpress-port-mode.md) | Near-1:1 migration discipline | Porting a legacy WordPress site before cleanup or redesign |
+| [Minimal Diff Execution](bootstrap/talents/minimal-diff-execution.md) | Smallest justifiable patch discipline | Keeping scope tight and the diff honest |
+| [Parallel Agent Dispatch](bootstrap/talents/parallel-agent-dispatch.md) | Safe parallel investigations or implementations | Splitting independent work without stepping on shared context |
+| [Plan Execution](bootstrap/talents/plan-execution.md) | Faithful execution of an approved plan | Implementing from a written plan without drifting |
+| [Acquire reusable talents from external repositories](bootstrap/talents/repo-talent-acquisition-pass.md) | Mine repos for durable workflow patterns | Turning solved external work into Tall Talents candidates |
+| [Subagent Task Loop](bootstrap/talents/subagent-task-loop.md) | One task-scoped implementer loop with review gates | Running staged implementation with enforced QA loops |
+| [Worktree Isolation](bootstrap/talents/worktree-isolation.md) | Dedicated branch, workspace setup, baseline proof | Starting risky work in a clean isolated workspace |
+
+### 🔎 Review, Debugging, and Quality Control
+
+| Talent | Focus | When to Use |
+| --- | --- | --- |
+| [API Validation](bootstrap/talents/api-validation.md) | Contract, auth, errors, integration, performance | Verifying APIs with a traceable test matrix |
+| [Code Review](bootstrap/talents/code-review.md) | Evidence-first review findings | Reviewing completed work for bugs, regressions, and risk |
+| [Compliance Review](bootstrap/talents/compliance-review.md) | Legal, regulatory, and audit gap assessment | Determining whether a system is compliant enough to ship |
+| [Incident Response](bootstrap/talents/incident-response.md) | Structured incident handling and follow-through | Managing active production incidents and their aftermath |
+| [Performance Benchmarking](bootstrap/talents/performance-benchmarking.md) | Baselines, realistic tests, bottleneck analysis | Measuring speed and reporting pass or fail against targets |
+| [Release Readiness Audit](bootstrap/talents/release-readiness-audit.md) | Skeptical go/no-go assessment | Deciding whether a release is truly ready |
+| [Review Feedback Triage](bootstrap/talents/review-feedback-triage.md) | Accept, clarify, push back, or escalate | Handling review comments without knee-jerk changes |
+| [Security Review](bootstrap/talents/security-review.md) | Threat modeling and remediation verification | Assessing security posture and closing real risk |
+| [Systematic Debugging](bootstrap/talents/systematic-debugging.md) | Single-hypothesis root-cause debugging | Untangling hard bugs without random guessing |
+| [Verification Gate](bootstrap/talents/verification-gate.md) | Fresh proof before claiming success | Blocking unverified completion claims |
+| [Visual Evidence QA](bootstrap/talents/visual-evidence-qa.md) | Screenshot-backed UI and interaction QA | Checking visual quality with captured evidence |
+
+### 📚 Documentation, Communication, and Community
+
+| Talent | Focus | When to Use |
+| --- | --- | --- |
+| [Documentation Pass](bootstrap/talents/documentation-pass.md) | Source-grounded docs with tested examples | Rewriting or repairing documentation without drift |
+| [Executive Briefing](bootstrap/talents/executive-briefing.md) | Decision-ready summaries with owners and timelines | Condensing validated findings for leadership |
+| [Handoff Contracts](bootstrap/talents/handoff-contracts.md) | Task, QA, escalation, and phase handoffs | Preserving context across people, phases, or agents |
+| [Upgrade a README into a source-grounded showcase page](bootstrap/talents/source-grounded-readme-upgrade.md) | Public-facing README upgrades without fabrication | Turning a repo README into a credible landing page |
+| [Build authentic Reddit community presence](bootstrap/talents/reddit-community-presence.md) | Value-first subreddit participation | Planning Reddit community work without spam or rule-breaking |
+
+## 🗂️ Global System
 
 All live talents live here:
 
@@ -111,7 +166,7 @@ Structure:
 
 This is the single source of truth.
 
-## Install
+## ⚡ Install
 
 ### Quick install
 
@@ -148,7 +203,7 @@ If you already have unsynced local live-library changes that should be imported 
 python3 scripts/dev-env.py install --import-live
 ```
 
-## How Agents Use It
+## 🤖 How Agents Use It
 
 Start any non-trivial task with:
 
@@ -170,7 +225,24 @@ This is the discipline:
 - turn it into a reusable workflow
 - stop paying the same thinking cost twice
 
-## Create or Update a Talent
+## 🧠 Persistent Agent Instructions
+
+This repo also ships [`agent-instructions.md`](agent-instructions.md).
+
+That file is the portable persistent instruction set for this project.
+You can paste it into Codex personalization, project instructions, or any other agent's saved system prompt/custom-instructions field to make Tall Talents the default operating discipline instead of a one-off reminder in chat.
+
+It tells the agent:
+
+- when to activate Tall Talents
+- when to skip Tall Talents for trivial work
+- which files to inspect before solving
+- how to apply an existing talent without force-fitting it
+- how to decide between creating a new talent, updating one, or making no talent change after the task
+
+If you want an agent to work on this repo consistently, use `agent-instructions.md` as the persistent prompt and keep the repo-local `README.md` plus `~/.tall-talents` library as the operational source of truth.
+
+## 🛠️ Create or Update a Talent
 
 After solving something difficult:
 
@@ -182,7 +254,7 @@ After solving something difficult:
 6. Outside repo dev mode, run manual bootstrap sync
 7. Validate the library
 
-## Commands
+## 📋 Commands
 
 ```bash
 bash scripts/install.sh
@@ -197,7 +269,7 @@ python3 scripts/dev-env.py uninstall
 python3 scripts/sync-bootstrap.py --live-root ~/.tall-talents --bootstrap-root bootstrap
 ```
 
-## Philosophy
+## 📜 Philosophy
 
 - Files are the source of truth
 - No hidden state
@@ -207,7 +279,7 @@ python3 scripts/sync-bootstrap.py --live-root ~/.tall-talents --bootstrap-root b
 
 A talent should exist only if you would actually reuse it.
 
-## What This Is Not
+## 🚫 What This Is Not
 
 - Not an agent framework
 - Not a SaaS product
@@ -216,7 +288,7 @@ A talent should exist only if you would actually reuse it.
 
 It is a discipline backed by a folder.
 
-## How The Repo Proves Itself
+## ✅ How The Repo Proves Itself
 
 This repository does not just describe the idea.
 It includes the pieces required to keep the idea honest:
@@ -230,7 +302,7 @@ It includes the pieces required to keep the idea honest:
 - `scripts/sync-bootstrap.py` imports a live library into `bootstrap/` or regenerates derived files in place
 - `.github/workflows/ci.yml` validates the shipped bootstrap snapshot on `push` and `pull_request`
 
-## Versioning
+## 🔢 Versioning
 
 This repo uses SemVer.
 
@@ -240,14 +312,14 @@ This repo uses SemVer.
 
 Current version: `0.6.0`
 
-## GitHub Stars
+## ⭐ GitHub Stars
 
 If Tall Talents is useful, star the repo.
 Stars are the simplest signal that the project is solving a real problem for real people.
 
 [![Star History Chart](https://api.star-history.com/svg?repos=scwlkr/tall-talents&type=Date)](https://star-history.com/#scwlkr/tall-talents&Date)
 
-## Support the Project
+## ☕ Support the Project
 
 If Tall Talents saves you time:
 
@@ -259,7 +331,7 @@ Buy me a coffee support link coming soon.
 
 <!-- Replace the line above with the real Buy Me a Coffee URL when it exists publicly. -->
 
-## A WLKR LABS Product
+## 🏷️ A WLKR LABS Product
 
 Tall Talents is a WLKR LABS product.
 
@@ -272,6 +344,6 @@ That means the project is intentionally opinionated about a few things:
 
 Built and maintained by [scwlkr](https://github.com/scwlkr).
 
-## License
+## 📄 License
 
 MIT.
