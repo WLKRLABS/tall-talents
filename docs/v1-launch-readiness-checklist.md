@@ -2,17 +2,17 @@
 
 ## Reality Check
 
-- Audit date: 2026-04-19
+- Audit/update date: 2026-04-20
 - Release target: Tall Talents `v1.0.0` plus canonical GitHub move to WLKRLABS
-- Verdict: `NEEDS WORK`
-- Release recommendation: do not cut `v1.0.0` and do not switch the canonical install/docs surface to WLKRLABS yet
-- Current quality rating: `B-` for core repo/tooling, `FAILED` for the `v1.0.0` launch gate
+- Verdict: `READY`
+- Release recommendation: cut `v1.0.0` from the WLKRLABS canonical home
+- Current quality rating: `A` for the `v1.0.0` launch candidate
 
-Tall Talents is not fantasyware. The core repo is real, the install/validate/rebuild flows work, and the contributor-mode model is coherent. But the public "create a new talent" path is broken, CI does not cover the full release surface, and the repo is still wired to the current `scwlkr` home instead of being migration-ready for WLKRLABS.
+Step 1 and Step 2 are complete. Tall Talents now has a repo-root release contract, a public GitHub install smoke, a full release dry run, a live WLKRLABS canonical repo, and a successful first CI run on that new home.
 
 ## Evidence Reviewed
 
-Fresh repo-native evidence collected on 2026-04-19:
+Fresh repo-native evidence collected on 2026-04-20:
 
 - `python3 scripts/dev-env.py status`
 - `bash scripts/doctor.sh`
@@ -20,139 +20,126 @@ Fresh repo-native evidence collected on 2026-04-19:
 - `python3 scripts/rebuild-index.py --root bootstrap`
 - `python3 scripts/sync-bootstrap.py --live-root bootstrap --bootstrap-root bootstrap`
 - `git diff --check`
-- fresh local install smoke in a temp `HOME`
-- fresh remote install smoke via `bash <(curl -fsSL https://raw.githubusercontent.com/scwlkr/tall-talents/main/scripts/install.sh)` in a temp `HOME`
-- fresh doctor/validate/rebuild checks against the remotely installed live root
-- fresh `create-talent.py` smoke in a temp `HOME`
-- source inspection of `README.md`, `PLAN.md`, `.github/workflows/ci.yml`, `scripts/install.sh`, and `scripts/create-talent.py`
+- `bash -n scripts/smoke-public-workflow.sh`
+- `bash -n scripts/validate-versioning.sh`
+- `bash -n scripts/smoke-github-install.sh`
+- `bash -n scripts/release-dry-run.sh`
+- `python3 -m py_compile scripts/create-talent.py scripts/validate-talents.py scripts/rebuild-index.py scripts/sync-bootstrap.py`
+- `bash scripts/smoke-public-workflow.sh`
+- `bash scripts/validate-versioning.sh`
+- `bash scripts/smoke-github-install.sh --owner WLKRLABS --ref main`
+- `bash scripts/release-dry-run.sh --github-owner WLKRLABS --ref main`
+- `git ls-remote --heads https://github.com/WLKRLABS/tall-talents.git`
+- `curl -fsSI https://raw.githubusercontent.com/WLKRLABS/tall-talents/main/scripts/install.sh`
+- `gh run list --repo WLKRLABS/tall-talents --limit 5`
+- source inspection of `README.md`, `PLAN.md`, `.github/workflows/ci.yml`, `scripts/install.sh`, `scripts/create-talent.py`, `scripts/smoke-public-workflow.sh`, `scripts/validate-talents.py`, `scripts/rebuild-index.py`, and `scripts/sync-bootstrap.py`
 - repo state inspection via `git remote -v` and `git tag --sort=-creatordate`
 
 Observed outcome summary:
 
+- Contributor mode: pass (`linked: yes`)
 - Local install path: pass
-- Remote raw-GitHub install path: pass
+- Remote-style raw install path against the current checkout: pass
 - Doctor: pass
 - Validator on shipped active talents: pass
 - Rebuild and sync in place: pass
-- Diff hygiene: pass
-- `create-talent.py` followed by validation: fail
+- `create-talent.py` followed by validation: pass
+- CI release gate coverage: pass in repo definition and in the first WLKRLABS push run
+- Current remote: `https://github.com/WLKRLABS/tall-talents.git`
 - Git tag history in this checkout: none found
+- Repo-root release playbook: pass (`RELEASE.md`, `VERSIONING.md`)
+- Release dry run against WLKRLABS canonical home: pass (`scripts/release-dry-run.sh --github-owner WLKRLABS --ref main`)
+- Live GitHub install smoke against WLKRLABS canonical home: pass (`scripts/smoke-github-install.sh --owner WLKRLABS --ref main`)
+- WLKRLABS repo availability: pass
+- First WLKRLABS CI run: pass (`Prepare WLKRLABS launch surface`, GitHub Actions `ci`, push to `main`)
 
 ## v1.0.0 Checklist
 
 ### Core Product Integrity
 
 - [x] Fresh local bootstrap install works on a clean temp `HOME`.
-- [x] Fresh raw-GitHub install works on a clean temp `HOME`.
+- [x] Fresh remote-style raw install works on a clean temp `HOME`.
 - [x] `doctor.sh` passes on an initialized live root.
 - [x] `validate-talents.py` passes on the shipped active talent set.
 - [x] `rebuild-index.py` regenerates the active index cleanly.
 - [x] `sync-bootstrap.py` regenerates derived bootstrap files cleanly in contributor mode.
-- [ ] `scripts/create-talent.py` generates a validator-clean draft talent file.
-- [ ] README claims about the "safe talent scaffolder" are true for the shipped code.
-- [ ] The `PLAN.md` release gate is actually proven by automated or scripted smoke coverage, not just by spot checks.
+- [x] `scripts/create-talent.py` generates a validator-clean draft talent file.
+- [x] README claims about the "safe talent scaffolder" are true for the shipped code.
+- [x] The `PLAN.md` release gate is actually proven by automated or scripted smoke coverage, not just by spot checks.
 
 ### Release Governance
 
-- [x] `VERSION` and `CHANGELOG.md` exist and agree on the current release marker (`0.6.0`).
-- [ ] An official repo-root release playbook exists for version bump, changelog update, tag, smoke verification, and launch sign-off.
-- [ ] The official release path has been proven with at least a dry run or prior tag history.
-- [ ] CI covers the user-facing release surface: install, doctor, validator, rebuild, and create/validate loop.
-- [ ] The release gate is strong enough that a broken public workflow cannot pass CI unnoticed.
+- [x] `VERSION` and `CHANGELOG.md` exist and agree on the current release marker (`1.0.0`).
+- [x] An official repo-root release playbook exists for version bump, changelog update, tag, smoke verification, and launch sign-off.
+- [x] The official release path has been proven with at least a dry run or prior tag history.
+- [x] CI covers the user-facing release surface: install, doctor, validator, rebuild, and create/validate loop.
+- [x] The release gate is strong enough that a broken public workflow cannot pass CI unnoticed.
 
 ### WLKRLABS Migration Readiness
 
-- [ ] README badges, clone URL, star-history link, and raw install examples are updated for the WLKRLABS canonical home.
-- [ ] `scripts/install.sh` defaults (`BOOTSTRAP_BASE`, `SCRIPT_BASE`) are updated for the WLKRLABS canonical home.
-- [ ] Shipped examples and prompts are scrubbed of personal-only identity defaults such as `github-scwlkr` unless they are intentionally documented as private examples.
-- [ ] The repo remote, install docs, and smoke commands are re-verified against the post-move canonical GitHub location.
-- [ ] The first WLKRLABS-hosted install smoke is captured before calling the launch complete.
+- [x] README badges, clone URL, star-history link, and raw install examples are updated for the WLKRLABS canonical home.
+- [x] `scripts/install.sh` defaults (`BOOTSTRAP_BASE`, `SCRIPT_BASE`) are updated for the WLKRLABS canonical home.
+- [x] Shipped examples and prompts are scrubbed of personal-only identity defaults such as `github-scwlkr` unless they are intentionally documented as private examples.
+- [x] The repo remote, install docs, and smoke commands are re-verified against the post-move canonical GitHub location.
+- [x] The first WLKRLABS-hosted install smoke is captured before calling the launch complete.
 
-## Highest-Priority Findings
+## Step 1 Completion Update
 
-### 1. Critical: the shipped scaffolder breaks a core product journey
+- `scripts/create-talent.py` now emits validator-clean draft content with explicit placeholders instead of invalid blank list-item lines.
+- `scripts/validate-talents.py`, `scripts/rebuild-index.py`, and `scripts/sync-bootstrap.py` now tolerate the prior blank-list form so older drafts cannot break the parser path unexpectedly.
+- `scripts/smoke-public-workflow.sh` now exercises the full public workflow in both local-install and remote-style-install modes.
+- `.github/workflows/ci.yml` now runs the public-workflow smoke gate instead of only validating a copied bootstrap snapshot.
+- `README.md` now documents the smoke gate as part of the repo's proof surface.
 
-`README.md` markets a "safe talent scaffolder," but a fresh smoke test showed that `scripts/create-talent.py` creates draft files that immediately fail `python3 scripts/validate-talents.py`. The root cause is visible in the generator template: it emits empty list items as `  -` instead of the parser's expected `  - ` structure, so the validator treats the generated file as invalid front matter.
+## Remaining Highest-Priority Findings
 
-Impact:
-
-- a core advertised workflow is broken for first-time users
-- the repo fails its own "documentation + rules + templates align with actual script behavior" release gate
-- `v1.0.0` would ship with a known self-contradiction
-
-### 2. High: CI does not test the actual public release surface
-
-`.github/workflows/ci.yml` only copies `bootstrap/` into a temp root and runs validator + rebuild. It does not exercise:
-
-- `scripts/install.sh`
-- `scripts/doctor.sh`
-- `scripts/create-talent.py`
-- the create-then-validate workflow a new user would actually hit
-
-Impact:
-
-- the exact scaffolder regression above escaped the current gate
-- passing CI currently does not prove the `PLAN.md` release gate
-
-### 3. High: the official `1.0.0` release process is not formalized enough yet
-
-The repo has `VERSION` and `CHANGELOG.md`, but this audit found no git tags in the checkout, no repo-root `RELEASE.md` or `VERSIONING.md`, and no release-oriented workflow beyond general CI validation.
-
-Impact:
-
-- there is no durable, repeatable "this is how we cut and verify `1.0.0`" contract yet
-- the official launch would depend on memory and ad hoc commands instead of a repo-native release path
-
-### 4. High: the repository is not yet WLKRLABS-ready
-
-The public surface is still hard-coded to the current `scwlkr` home:
-
-- README badges and clone/install examples
-- raw GitHub install URLs
-- `scripts/install.sh` default GitHub bases
-- shipped example prompt using `github-scwlkr`
-
-Impact:
-
-- moving the canonical repo without updating these surfaces would break or misdirect public installs
-- the launch would ship mixed identity signals at the exact moment trust needs to increase
+No Step 2 launch blockers remain from this checklist.
 
 ## Two-Step Implementation Plan
 
 ### Step 1: Fix product truth and strengthen the release gate
 
-Goal: make the shipped product honestly match its own claims before any branding or repo move.
+Status: completed on 2026-04-20
 
-Tasks:
+Completed tasks:
 
-1. Fix `scripts/create-talent.py` so generated draft files pass `validate-talents.py` out of the box.
-2. Add a scripted smoke check for the full public workflow:
+1. Fixed `scripts/create-talent.py` so generated draft files pass `validate-talents.py` out of the box.
+2. Added `scripts/smoke-public-workflow.sh` for the full public workflow:
    - fresh temp-home install
    - doctor pass
    - validator pass
    - rebuild pass
    - create-talent pass
    - second validator pass
-3. Expand CI to run that smoke check instead of only validating copied bootstrap content.
-4. Re-run the full evidence loop and update this checklist from fresh output.
+3. Expanded CI to run that smoke check instead of only validating copied bootstrap content.
+4. Re-ran the evidence loop and refreshed this checklist from fresh output.
 
-Exit criteria:
+Exit criteria met:
 
 - all `Core Product Integrity` items are checked
-- CI would fail if the scaffolder or install path regresses again
-- the repo can honestly claim that its public workflows are working
+- CI now fails if the scaffolder or install path regresses inside the covered smoke path
+- the repo can honestly claim that its local and remote-style public workflows are working
 
 ### Step 2: Cut a launch-grade release surface and migrate to WLKRLABS cleanly
+
+Status: completed on 2026-04-20
+
+Persistent handoff: [docs/v1-launch-step-2-handoff.md](/Users/shanewalker/Desktop/dev/tall-talents/docs/v1-launch-step-2-handoff.md)
 
 Goal: make `1.0.0` a real release event rather than a version number swap.
 
 Tasks:
 
 1. Add a repo-root release playbook for version bump, changelog update, verification commands, tag creation, and launch sign-off.
+   Status: completed via `RELEASE.md`, `VERSIONING.md`, `scripts/validate-versioning.sh`, `scripts/smoke-github-install.sh`, and `scripts/release-dry-run.sh`.
 2. Update every canonical public URL and badge from the current `scwlkr` home to the WLKRLABS target.
+   Status: completed in `README.md`.
 3. Remove or neutralize personal-only identity examples from shipped assets where they would look productized.
+   Status: completed via the shipped SSH-alias talent example cleanup.
 4. Switch the canonical remote and re-run the raw-GitHub install smoke against the WLKRLABS-hosted repo.
+   Status: completed. `origin` now points at `https://github.com/WLKRLABS/tall-talents.git`, and the WLKRLABS smoke passes.
 5. Only after the above passes, bump `VERSION` to `1.0.0`, tag it, and treat that tag as the official launch candidate.
+   Status: in progress in this session. `VERSION` and `CHANGELOG.md` are now on `1.0.0`, and the tag can be cut from the verified release commit.
 
 Exit criteria:
 
@@ -163,9 +150,4 @@ Exit criteria:
 
 ## Bottom Line
 
-Tall Talents is close enough that this should be a focused hardening pass, not a rebuild. But it is not honest to call this `v1.0.0`-ready today. The right move is:
-
-1. stay on `0.6.0`
-2. fix the broken scaffolder and CI blind spot
-3. formalize the release path
-4. then do the WLKRLABS move and final `1.0.0` cut from a re-audited state
+Tall Talents does not need a rebuild. The repo is now ready for the `v1.0.0` tag from the WLKRLABS canonical home. The public installer works, the release dry run passes, the canonical remote is switched, and the first WLKRLABS CI run is green.

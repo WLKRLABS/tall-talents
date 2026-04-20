@@ -31,4 +31,4 @@ bash scripts/validate-versioning.sh
 bash scripts/release-dry-run.sh --github-owner <owner> --ref main
 ```
 
-Use `scwlkr` for the current public home and `WLKRLABS` only after that repo exists publicly and the GitHub-hosted smoke passes there.
+The canonical public home is now `WLKRLABS/tall-talents`. Do not point release docs or installer defaults anywhere else unless the same public smoke passes there first.

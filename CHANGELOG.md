@@ -2,9 +2,13 @@
 
 ## Unreleased
 
+## 1.0.0 - 2026-04-20
+
 - Added repo-root `VERSIONING.md` and `RELEASE.md` so versioning, dry runs, cutover rules, and tag flow are explicit instead of ad hoc.
 - Added `scripts/validate-versioning.sh`, `scripts/smoke-github-install.sh`, and `scripts/release-dry-run.sh` to prove the release path from both the checkout and a live GitHub raw-install surface.
-- Scrubbed the shipped personal-only SSH alias example and refreshed the Step 2 launch docs around the remaining WLKRLABS cutover blocker.
+- Scrubbed the shipped personal-only SSH alias example and completed the canonical-home cutover to `WLKRLABS/tall-talents`.
+- Switched the canonical public README/install surface and installer defaults to the WLKRLABS GitHub home.
+- Proved the launch candidate with a live GitHub install smoke and a full release dry run against the WLKRLABS-hosted repo.
 
 ## 0.6.0 - 2026-04-17
 

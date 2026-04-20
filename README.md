@@ -13,7 +13,7 @@
   <a href="https://github.com/WLKRLABS/tall-talents/actions/workflows/ci.yml">
     <img src="https://img.shields.io/github/actions/workflow/status/WLKRLABS/tall-talents/ci.yml?branch=main&style=flat-square&label=ci" alt="CI status">
   </a>
-  <img src="https://img.shields.io/badge/version-0.6.0-black?style=flat-square" alt="Version 0.6.0">
+  <img src="https://img.shields.io/badge/version-1.0.0-black?style=flat-square" alt="Version 1.0.0">
   <a href="LICENSE">
     <img src="https://img.shields.io/github/license/WLKRLABS/tall-talents?style=flat-square" alt="MIT License">
   </a>
@@ -319,7 +319,7 @@ This repo uses SemVer.
 - `scripts/release-dry-run.sh` proves the release path through local, remote-style, and live GitHub install smoke coverage
 - `1.0.0` is the stability target for the file format, tooling, and workflow
 
-Current version: `0.6.0`
+Current version: `1.0.0`
 
 ## ⭐ GitHub Stars
 
