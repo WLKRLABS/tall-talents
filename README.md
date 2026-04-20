@@ -7,15 +7,15 @@
 <p align="center">Capture real workflows. Reuse them everywhere. Keep the source of truth in plain files.</p>
 
 <p align="center">
-  <a href="https://github.com/scwlkr/tall-talents/stargazers">
-    <img src="https://img.shields.io/github/stars/scwlkr/tall-talents?style=flat-square" alt="GitHub stars">
+  <a href="https://github.com/WLKRLABS/tall-talents/stargazers">
+    <img src="https://img.shields.io/github/stars/WLKRLABS/tall-talents?style=flat-square" alt="GitHub stars">
   </a>
-  <a href="https://github.com/scwlkr/tall-talents/actions/workflows/ci.yml">
-    <img src="https://img.shields.io/github/actions/workflow/status/scwlkr/tall-talents/ci.yml?branch=main&style=flat-square&label=ci" alt="CI status">
+  <a href="https://github.com/WLKRLABS/tall-talents/actions/workflows/ci.yml">
+    <img src="https://img.shields.io/github/actions/workflow/status/WLKRLABS/tall-talents/ci.yml?branch=main&style=flat-square&label=ci" alt="CI status">
   </a>
   <img src="https://img.shields.io/badge/version-0.6.0-black?style=flat-square" alt="Version 0.6.0">
   <a href="LICENSE">
-    <img src="https://img.shields.io/github/license/scwlkr/tall-talents?style=flat-square" alt="MIT License">
+    <img src="https://img.shields.io/github/license/WLKRLABS/tall-talents?style=flat-square" alt="MIT License">
   </a>
 </p>
 
@@ -171,7 +171,7 @@ This is the single source of truth.
 ### Quick install
 
 ```bash
-bash <(curl -fsSL https://raw.githubusercontent.com/scwlkr/tall-talents/main/scripts/install.sh)
+bash <(curl -fsSL https://raw.githubusercontent.com/WLKRLABS/tall-talents/main/scripts/install.sh)
 ```
 
 That bootstraps `~/.tall-talents` without cloning the repo first.
@@ -179,13 +179,13 @@ That bootstraps `~/.tall-talents` without cloning the repo first.
 ### Optional verify
 
 ```bash
-bash <(curl -fsSL https://raw.githubusercontent.com/scwlkr/tall-talents/main/scripts/doctor.sh)
+bash <(curl -fsSL https://raw.githubusercontent.com/WLKRLABS/tall-talents/main/scripts/doctor.sh)
 ```
 
 ### Local repo workflow
 
 ```bash
-git clone https://github.com/scwlkr/tall-talents.git
+git clone https://github.com/WLKRLABS/tall-talents.git
 cd tall-talents
 bash scripts/install.sh
 python3 scripts/dev-env.py install
@@ -259,6 +259,10 @@ After solving something difficult:
 ```bash
 bash scripts/install.sh
 bash scripts/doctor.sh
+bash scripts/smoke-public-workflow.sh
+bash scripts/smoke-github-install.sh --owner <github-owner> --ref main
+bash scripts/validate-versioning.sh
+bash scripts/release-dry-run.sh --github-owner <github-owner> --ref main
 python3 scripts/validate-talents.py --root ~/.tall-talents
 python3 scripts/rebuild-index.py --root ~/.tall-talents
 python3 scripts/create-talent.py --title "My Talent" --summary "One-line summary"
@@ -296,18 +300,23 @@ It includes the pieces required to keep the idea honest:
 - `scripts/install.sh` initializes the live folder from a local clone or a raw GitHub install path
 - `scripts/dev-env.py` switches `~/.tall-talents` into repo-live contributor mode and restores the prior root on uninstall
 - `scripts/doctor.sh` verifies environment and folder layout
+- `scripts/smoke-public-workflow.sh` runs local-install and remote-style-install smoke coverage through doctor, validator, rebuild, and create/validate checks
 - `scripts/validate-talents.py` enforces the talent format contract
 - `scripts/rebuild-index.py` regenerates `~/.tall-talents/index.md`
 - `scripts/create-talent.py` scaffolds new talent files
 - `scripts/sync-bootstrap.py` imports a live library into `bootstrap/` or regenerates derived files in place
-- `.github/workflows/ci.yml` validates the shipped bootstrap snapshot on `push` and `pull_request`
+- `.github/workflows/ci.yml` runs the public-workflow smoke gate on `push` and `pull_request`
 
 ## 🔢 Versioning
 
 This repo uses SemVer.
 
 - `VERSION` is the repository version marker
-- `CHANGELOG.md` tracks notable changes
+- `CHANGELOG.md` tracks `Unreleased` work plus released versions
+- [`VERSIONING.md`](VERSIONING.md) defines the version, changelog, and tag contract
+- [`RELEASE.md`](RELEASE.md) is the release playbook, including canonical-home cutover rules
+- `scripts/validate-versioning.sh` validates the version/changelog contract
+- `scripts/release-dry-run.sh` proves the release path through local, remote-style, and live GitHub install smoke coverage
 - `1.0.0` is the stability target for the file format, tooling, and workflow
 
 Current version: `0.6.0`
@@ -317,7 +326,7 @@ Current version: `0.6.0`
 If Tall Talents is useful, star the repo.
 Stars are the simplest signal that the project is solving a real problem for real people.
 
-[![Star History Chart](https://api.star-history.com/svg?repos=scwlkr/tall-talents&type=Date)](https://star-history.com/#scwlkr/tall-talents&Date)
+[![Star History Chart](https://api.star-history.com/svg?repos=WLKRLABS/tall-talents&type=Date)](https://star-history.com/#WLKRLABS/tall-talents&Date)
 
 ## ☕ Support the Project
 
@@ -342,7 +351,7 @@ That means the project is intentionally opinionated about a few things:
 - strict workflows beat loose prompts when repeatability matters
 - small tools with sharp edges beat large systems with fuzzy boundaries
 
-Built and maintained by [scwlkr](https://github.com/scwlkr).
+Built and maintained by WLKR LABS.
 
 ## 📄 License
 

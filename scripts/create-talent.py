@@ -35,35 +35,36 @@ slug: {slug}
 title: {args.title}
 summary: {args.summary}
 tags:
-  -
+  - replace-with-tag
 triggers:
-  -
+  - Describe when this talent should be used.
 inputs:
-  -
+  - List the concrete inputs this workflow needs.
 outputs:
-  -
+  - List the concrete artifacts or outcomes this workflow produces.
 agent_behavior:
-  -
+  - Describe the execution rules the agent should follow.
 safety:
-  -
+  - Capture the main guardrail or failure to avoid.
 status: draft
 version: 1.0.0
 ---
 
 # Goal
 
+Describe the outcome this talent is meant to achieve.
 
 # Procedure
 
-1. 
+1. Replace this placeholder with the first concrete step.
 
 # Success Criteria
 
-- 
+- Replace with the measurable definition of done.
 
 # Common Failure Modes
 
-- 
+- Replace with the most likely way this workflow can go wrong.
 
 # Example Prompt
 

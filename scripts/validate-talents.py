@@ -52,7 +52,7 @@ def parse_front_matter(text: str):
         line = raw.rstrip()
         if not line.strip():
             continue
-        if line.startswith("  - ") and current_key:
+        if current_key and (line == "  -" or line.startswith("  - ")):
             data.setdefault(current_key, []).append(line[4:].strip())
             continue
         if ":" in line:

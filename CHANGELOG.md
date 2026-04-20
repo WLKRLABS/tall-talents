@@ -1,5 +1,11 @@
 # Changelog
 
+## Unreleased
+
+- Added repo-root `VERSIONING.md` and `RELEASE.md` so versioning, dry runs, cutover rules, and tag flow are explicit instead of ad hoc.
+- Added `scripts/validate-versioning.sh`, `scripts/smoke-github-install.sh`, and `scripts/release-dry-run.sh` to prove the release path from both the checkout and a live GitHub raw-install surface.
+- Scrubbed the shipped personal-only SSH alias example and refreshed the Step 2 launch docs around the remaining WLKRLABS cutover blocker.
+
 ## 0.6.0 - 2026-04-17
 
 - Rewrote `README.md` around the Tall Talents brand position, usage model, and repo role.

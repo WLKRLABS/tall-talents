@@ -73,4 +73,4 @@ Bind one local repo to the intended GitHub SSH identity and confirm the setup wo
 
 # Example Prompt
 
-"Use `github-ssh-repo-alias-setup` on `/path/to/repo` with alias `github-scwlkr`, set the repo-local identity, and verify both `ssh -T` and `git ls-remote --heads origin`."
+"Use `github-ssh-repo-alias-setup` on `/path/to/repo` with alias `github-work`, set the repo-local identity, and verify both `ssh -T` and `git ls-remote --heads origin`."
