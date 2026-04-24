@@ -25,6 +25,7 @@ Active talents (sorted by slug):
 - `performance-benchmarking` — Establish baselines, run realistic performance tests, analyze bottlenecks statistically, and report pass or fail against explicit targets.
 - `plan-execution` — Execute a written implementation plan faithfully, stop on ambiguity, and only finish after the plan's required verification passes.
 - `product-requirements` — Turn user and business need into a decision-grade opportunity assessment and PRD with explicit goals, non-goals, evidence, risks, and launch intent.
+- `pwa-conversion-architect` — Audit an existing web app for honest PWA fit, then design or implement the smallest viable upgrade path with explicit iPhone and browser constraints.
 - `reddit-community-presence` — Build brand presence on Reddit by mapping the right subreddits, following community rules, contributing value-first content, and handling mentions transparently.
 - `release-readiness-audit` — Judge ship readiness with a skeptical evidence-first audit that defaults to needs work until user journeys, quality gates, and release risks are actually proven.
 - `repo-onboarding-map` — Build a facts-only orientation map of an unfamiliar repository by reading code, tracing execution paths, and stating exactly what was inspected.

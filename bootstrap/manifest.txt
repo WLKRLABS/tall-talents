@@ -23,6 +23,7 @@ talents/parallel-agent-dispatch.md
 talents/performance-benchmarking.md
 talents/plan-execution.md
 talents/product-requirements.md
+talents/pwa-conversion-architect.md
 talents/reddit-community-presence.md
 talents/release-readiness-audit.md
 talents/repo-onboarding-map.md
