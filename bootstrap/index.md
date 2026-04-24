@@ -27,6 +27,7 @@ Active talents (sorted by slug):
 - `product-requirements` — Turn user and business need into a decision-grade opportunity assessment and PRD with explicit goals, non-goals, evidence, risks, and launch intent.
 - `pwa-conversion-architect` — Audit an existing web app for honest PWA fit, then design or implement the smallest viable upgrade path with explicit iPhone and browser constraints.
 - `reddit-community-presence` — Build brand presence on Reddit by mapping the right subreddits, following community rules, contributing value-first content, and handling mentions transparently.
+- `release-cut-and-publish` — Harden repo-controlled release gaps, cut a versioned release through the repo's own scripts, push the branch and tag, and verify the published GitHub release end to end.
 - `release-readiness-audit` — Judge ship readiness with a skeptical evidence-first audit that defaults to needs work until user journeys, quality gates, and release risks are actually proven.
 - `repo-onboarding-map` — Build a facts-only orientation map of an unfamiliar repository by reading code, tracing execution paths, and stating exactly what was inspected.
 - `repo-talent-acquisition-pass` — Scan external repositories for durable workflows, normalize them into Tall Talents candidates, merge overlaps, and produce a prioritized port plan with source traceability.
