@@ -8,3 +8,5 @@ Rules:
 - Increase specificity from observed commands, files, and failure patterns.
 - Keep format contract valid.
 - Update summary and failure modes when evidence supports it.
+- Keep personal context generic enough to publish.
+- Do not add secrets, tokens, passwords, service-role values, private URLs, customer data, or private identifiers.

@@ -2,6 +2,9 @@
 
 ## Unreleased
 
+- Added multi-talent composition guidance for larger tasks that need a primary workflow plus supporting specialist workflows.
+- Added privacy guidance, a local-only `private/` area, and a high-confidence talent privacy scanner to reduce the chance of committing secrets or owner-only context.
+
 ## 1.0.0 - 2026-04-20
 
 - Added repo-root `VERSIONING.md` and `RELEASE.md` so versioning, dry runs, cutover rules, and tag flow are explicit instead of ad hoc.

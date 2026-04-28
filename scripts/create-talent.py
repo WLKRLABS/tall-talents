@@ -46,6 +46,7 @@ agent_behavior:
   - Describe the execution rules the agent should follow.
 safety:
   - Capture the main guardrail or failure to avoid.
+  - Do not include secrets, private identifiers, or owner-only context in the committed talent.
 status: draft
 version: 1.0.0
 ---

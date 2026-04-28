@@ -4,3 +4,11 @@ __pycache__/
 .pytest_cache/
 *.log
 marketing/
+private/
+bootstrap/private/
+.env
+.env.*
+!.env.example
+!.env.*.example
+*.pem
+*.key

@@ -15,6 +15,7 @@ agent_behavior:
   - Be literal, deterministic, and file-first.
 safety:
   - Do not delete user files without explicit confirmation.
+  - Do not include secrets, private identifiers, or owner-only context in the committed talent.
 status: active
 version: 1.0.0
 ---

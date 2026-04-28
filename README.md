@@ -81,7 +81,7 @@ This repo is small enough to inspect quickly and strict enough to trust under re
 
 ## 🎨 The Talent Roster
 
-Tall Talents currently ships with `41` active talents in [`bootstrap/talents/`](bootstrap/talents/) and a canonical snapshot index at [`bootstrap/index.md`](bootstrap/index.md).
+Tall Talents currently ships with `49` active talents in [`bootstrap/talents/`](bootstrap/talents/) and a canonical snapshot index at [`bootstrap/index.md`](bootstrap/index.md).
 
 The grouped roster below is a README browsing aid modeled for quick scanning. The files in `bootstrap/talents/` remain the source of truth.
 
@@ -93,6 +93,7 @@ The grouped roster below is a README browsing aid modeled for quick scanning. Th
 | [Design Before Build](bootstrap/talents/design-before-build.md) | Context discovery, option analysis, design review | Before implementation when the shape of the solution is still unclear |
 | [Implementation Planning](bootstrap/talents/implementation-planning.md) | Exact files, tasks, tests, acceptance criteria | Turning an approved design into execution-ready work |
 | [Product Requirements](bootstrap/talents/product-requirements.md) | Goals, non-goals, evidence, risks, launch intent | Defining what should be built before delivery starts |
+| [PWA Conversion Architect](bootstrap/talents/pwa-conversion-architect.md) | Honest PWA fit and upgrade paths | Auditing or implementing a minimal viable PWA conversion |
 | [Repo Onboarding Map](bootstrap/talents/repo-onboarding-map.md) | Facts-only repo orientation and execution tracing | Getting familiar with an unfamiliar codebase quickly |
 | [Sprint Prioritization](bootstrap/talents/sprint-prioritization.md) | Capacity, dependencies, scope control | Deciding what belongs in the next sprint |
 | [Workflow Mapping](bootstrap/talents/workflow-mapping.md) | States, branches, handoffs, cleanup paths | Discovering how a real system or process actually behaves |
@@ -111,13 +112,18 @@ The grouped roster below is a README browsing aid modeled for quick scanning. Th
 | [DevOps Automation](bootstrap/talents/devops-automation.md) | Reproducible, observable, reversible delivery systems | Building CI/CD and infrastructure automation |
 | [Fix macOS ad-hoc codesign fallback for local binaries](bootstrap/talents/fix-ad-hoc-codesign-fallback.md) | Deterministic local binary repair | Recovering broken unsigned macOS binaries |
 | [Fix GitHub Pages asset paths for project subfolder sites](bootstrap/talents/gh-pages-site-subfolder-assets.md) | Subpath-safe asset linking | Static sites that break when served from a repo subpath |
+| [Game Live Preview Workspace](bootstrap/talents/game-live-preview-workspace.md) | Local game preview setup | Keeping Codex and a playable game surface side by side |
+| [Initialize a private GitHub repo with SSH alias](bootstrap/talents/github-private-repo-init-ssh.md) | Safe private repo creation | Turning a local folder into a private GitHub repo with the intended SSH identity |
 | [Set per-repo GitHub SSH identity via host alias](bootstrap/talents/github-ssh-repo-alias-setup.md) | Repo-local SSH auth and Git identity | Fixing GitHub push and PR auth problems for one repo |
 | [Literal WordPress port mode for static migration parity](bootstrap/talents/literal-wordpress-port-mode.md) | Near-1:1 migration discipline | Porting a legacy WordPress site before cleanup or redesign |
 | [Minimal Diff Execution](bootstrap/talents/minimal-diff-execution.md) | Smallest justifiable patch discipline | Keeping scope tight and the diff honest |
 | [Parallel Agent Dispatch](bootstrap/talents/parallel-agent-dispatch.md) | Safe parallel investigations or implementations | Splitting independent work without stepping on shared context |
 | [Plan Execution](bootstrap/talents/plan-execution.md) | Faithful execution of an approved plan | Implementing from a written plan without drifting |
 | [Acquire reusable talents from external repositories](bootstrap/talents/repo-talent-acquisition-pass.md) | Mine repos for durable workflow patterns | Turning solved external work into Tall Talents candidates |
+| [Release Cut and Publish](bootstrap/talents/release-cut-and-publish.md) | Release hardening, tag, and publish flow | Cutting and verifying a versioned GitHub release |
+| [Sprite Sheet Background Cleanup](bootstrap/talents/sprite-sheet-background-cleanup.md) | Transparent sprite-sheet asset cleanup | Removing only background pixels while preserving character details |
 | [Subagent Task Loop](bootstrap/talents/subagent-task-loop.md) | One task-scoped implementer loop with review gates | Running staged implementation with enforced QA loops |
+| [Vercel Git Connect SSH Alias](bootstrap/talents/vercel-git-connect-ssh-alias.md) | Vercel repo connection with local SSH alias preserved | Connecting Vercel to GitHub without breaking local custom remotes |
 | [Worktree Isolation](bootstrap/talents/worktree-isolation.md) | Dedicated branch, workspace setup, baseline proof | Starting risky work in a clean isolated workspace |
 
 ### 🔎 Review, Debugging, and Quality Control
@@ -132,6 +138,8 @@ The grouped roster below is a README browsing aid modeled for quick scanning. Th
 | [Release Readiness Audit](bootstrap/talents/release-readiness-audit.md) | Skeptical go/no-go assessment | Deciding whether a release is truly ready |
 | [Review Feedback Triage](bootstrap/talents/review-feedback-triage.md) | Accept, clarify, push back, or escalate | Handling review comments without knee-jerk changes |
 | [Security Review](bootstrap/talents/security-review.md) | Threat modeling and remediation verification | Assessing security posture and closing real risk |
+| [Supabase Admin Password Reset](bootstrap/talents/supabase-admin-password-reset.md) | Secret-minimizing auth recovery | Resetting an existing Supabase Auth password without exposing credentials |
+| [Supabase Hosted Auth Email Repair](bootstrap/talents/supabase-hosted-auth-email-repair.md) | Hosted auth email/provider repair | Restoring Supabase email login after config drift |
 | [Systematic Debugging](bootstrap/talents/systematic-debugging.md) | Single-hypothesis root-cause debugging | Untangling hard bugs without random guessing |
 | [Verification Gate](bootstrap/talents/verification-gate.md) | Fresh proof before claiming success | Blocking unverified completion claims |
 | [Visual Evidence QA](bootstrap/talents/visual-evidence-qa.md) | Screenshot-backed UI and interaction QA | Checking visual quality with captured evidence |
@@ -161,7 +169,8 @@ Structure:
 ├─ index.md
 ├─ talents/
 ├─ incoming/
-└─ archive/
+├─ archive/
+└─ private/
 ```
 
 This is the single source of truth.
@@ -215,9 +224,10 @@ Then:
 
 1. Read `~/.tall-talents/index.md`
 2. Open only the relevant files in `~/.tall-talents/talents/`
-3. Name the matching talents being used
-4. Apply their procedures literally
-5. If none fit, say so explicitly and do not force-fit one
+3. Name the matching talent or talent set being used
+4. For larger tasks, pick a primary talent plus supporting talents and state the execution order
+5. Apply their procedures literally
+6. If none fit, say so explicitly and do not force-fit one
 
 This is the discipline:
 
@@ -237,7 +247,7 @@ It tells the agent:
 - when to activate Tall Talents
 - when to skip Tall Talents for trivial work
 - which files to inspect before solving
-- how to apply an existing talent without force-fitting it
+- how to apply one or more existing talents without force-fitting them
 - how to decide between creating a new talent, updating one, or making no talent change after the task
 
 If you want an agent to work on this repo consistently, use `agent-instructions.md` as the persistent prompt and keep the repo-local `README.md` plus `~/.tall-talents` library as the operational source of truth.
@@ -248,11 +258,25 @@ After solving something difficult:
 
 1. Use `templates/create-talent-from-session.md`
 2. Decide whether this should be a new talent, an update to an existing talent, or no talent at all
-3. Write the markdown file in `~/.tall-talents/talents/`
-4. In repo dev mode, those edits land directly in `bootstrap/`
-5. Derived files refresh automatically at commit time via the repo hook
-6. Outside repo dev mode, run manual bootstrap sync
-7. Validate the library
+3. Run a publishability pass: remove secrets and replace private names, paths, emails, account names, private repo names, and customer data with placeholders
+4. Write the markdown file in `~/.tall-talents/talents/`
+5. In repo dev mode, those edits land directly in `bootstrap/`
+6. Derived files refresh automatically at commit time via the repo hook
+7. Outside repo dev mode, run manual bootstrap sync
+8. Validate the library and run the privacy scanner
+
+## 🔐 Personal Work Without Leaking Secrets
+
+Tall Talents can come from personal work. The committed talent should still be safe to publish.
+
+Use personal experience to shape the workflow, then commit the reusable version:
+
+- replace private values with placeholders such as `<project-root>`, `<github-owner>`, `<repo-name>`, `<customer-name>`, or `<provider-token>`
+- keep commands, decision rules, failure modes, and verification steps
+- remove secrets, service-role values, reset links, auth headers, tokens, passwords, customer data, private URLs, and copied private logs
+- move owner-only context into `~/.tall-talents/private/`, which is local-only and not part of the shipped bootstrap manifest
+
+The repo includes `scripts/scan-talent-privacy.py` for high-confidence secret checks. It fails on obvious secrets and warns on personal identifiers that should usually become placeholders before publishing.
 
 ## 📋 Commands
 
@@ -266,6 +290,7 @@ bash scripts/release-dry-run.sh --github-owner <github-owner> --ref main
 python3 scripts/validate-talents.py --root ~/.tall-talents
 python3 scripts/rebuild-index.py --root ~/.tall-talents
 python3 scripts/create-talent.py --title "My Talent" --summary "One-line summary"
+python3 scripts/scan-talent-privacy.py --root ~/.tall-talents
 python3 scripts/dev-env.py install
 python3 scripts/dev-env.py install --import-live
 python3 scripts/dev-env.py status
@@ -302,6 +327,7 @@ It includes the pieces required to keep the idea honest:
 - `scripts/doctor.sh` verifies environment and folder layout
 - `scripts/smoke-public-workflow.sh` runs local-install and remote-style-install smoke coverage through doctor, validator, rebuild, and create/validate checks
 - `scripts/validate-talents.py` enforces the talent format contract
+- `scripts/scan-talent-privacy.py` blocks high-confidence secrets in talents and warns on personal identifiers
 - `scripts/rebuild-index.py` regenerates `~/.tall-talents/index.md`
 - `scripts/create-talent.py` scaffolds new talent files
 - `scripts/sync-bootstrap.py` imports a live library into `bootstrap/` or regenerates derived files in place

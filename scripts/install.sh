@@ -12,7 +12,7 @@ SCRIPT_BASE="${TALL_TALENTS_SCRIPT_BASE:-https://raw.githubusercontent.com/WLKRL
 BOOTSTRAP_MANIFEST="${BOOTSTRAP_DIR}/manifest.txt"
 REMOTE_BOOTSTRAP_MANIFEST="${TALL_TALENTS_BOOTSTRAP_MANIFEST:-manifest.txt}"
 
-mkdir -p "${ROOT}" "${ROOT}/talents" "${ROOT}/incoming" "${ROOT}/archive"
+mkdir -p "${ROOT}" "${ROOT}/talents" "${ROOT}/incoming" "${ROOT}/archive" "${ROOT}/private"
 
 copy_if_missing() {
   local src="$1"

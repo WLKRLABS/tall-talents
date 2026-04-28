@@ -23,3 +23,5 @@ Required headings:
 - `# Example Prompt`
 
 Status values allowed: `active`, `draft`, `archived`.
+
+The `safety` field must include any publishability guardrail that matters for the workflow. Talents may come from personal sessions, but committed active talents must not contain secrets, private identifiers, customer data, or owner-only context that should stay local.

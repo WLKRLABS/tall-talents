@@ -12,7 +12,9 @@ talents/documentation-pass.md
 talents/executive-briefing.md
 talents/feedback-synthesis.md
 talents/fix-ad-hoc-codesign-fallback.md
+talents/game-live-preview-workspace.md
 talents/gh-pages-site-subfolder-assets.md
+talents/github-private-repo-init-ssh.md
 talents/github-ssh-repo-alias-setup.md
 talents/handoff-contracts.md
 talents/implementation-planning.md
@@ -33,11 +35,15 @@ talents/review-feedback-triage.md
 talents/security-review.md
 talents/source-grounded-readme-upgrade.md
 talents/sprint-prioritization.md
+talents/sprite-sheet-background-cleanup.md
 talents/subagent-task-loop.md
+talents/supabase-admin-password-reset.md
+talents/supabase-hosted-auth-email-repair.md
 talents/systematic-debugging.md
 talents/trend-research.md
 talents/ux-foundation.md
 talents/ux-research.md
+talents/vercel-git-connect-ssh-alias.md
 talents/verification-gate.md
 talents/visual-evidence-qa.md
 talents/workflow-mapping.md

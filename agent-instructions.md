@@ -19,48 +19,54 @@ Skip Tall Talents for:
    - ~/.tall-talents/index.md
    - relevant files in ~/.tall-talents/talents/
 
-2. Identify the smallest applicable talent, if any.
+2. Identify the smallest applicable talent set, if any.
 
-3. If a talent applies:
-   - name it
-   - summarize its procedure briefly
-   - follow its procedure, constraints, and success criteria
+3. If one or more talents apply:
+   - name each talent
+   - identify the primary talent for the task and any supporting talents
+   - summarize the applicable procedure(s) briefly
+   - follow their procedures, constraints, and success criteria in a clear order
 
-4. If no talent applies:
+4. Use multiple talents only when the task has distinct stages or work types.
+   - Do not force a second talent just because one is nearby.
+   - If talents conflict, state the conflict and let the task goal choose the controlling rule.
+   - Prefer a coordinating talent for phase/order control and specialist talents for narrow work.
+
+5. If no talent applies:
    - proceed normally
 
 ## During Solving
 
-5. Prefer updating an existing talent over creating a duplicate when overlap exists.
+6. Prefer updating an existing talent over creating a duplicate when overlap exists.
 
-6. Do not force-fit a talent that only partially matches.
+7. Do not force-fit a talent that only partially matches.
 
-7. Do not invent knowledge or procedures not established by the repo, the environment, or the current session.
+8. Do not invent knowledge or procedures not established by the repo, the environment, or the current session.
 
 ## After Solving
 
-8. Evaluate reuse value:
+9. Evaluate reuse value:
    - was the workflow reusable?
    - did an existing talent help materially?
    - was an existing talent missing a necessary constraint or step?
    - did no talent deserve to exist here?
 
-9. Choose exactly one:
+10. Choose exactly one:
    - create new talent
    - update existing talent
    - no change
 
-10. Create a new talent only if:
+11. Create a new talent only if:
    - the workflow is likely reusable
    - it is specific and operational
    - it would meaningfully improve a future session
 
-11. Update an existing talent only if:
+12. Update an existing talent only if:
    - a clear, justified improvement was discovered
    - the change improves precision, correctness, or completeness
    - the update does not broaden scope unnecessarily
 
-12. Do not create or update talents for:
+13. Do not create or update talents for:
    - trivial tasks
    - one-off noise
    - vague advice
@@ -69,20 +75,27 @@ Skip Tall Talents for:
 
 ## If Creating or Updating
 
-13. Generate exact markdown content that matches the Tall Talents format.
+14. Generate exact markdown content that matches the Tall Talents format.
 
-14. Write or update the exact file in:
+15. Before writing, run a publishability pass:
+   - remove secrets, tokens, keys, passwords, service-role values, private URLs, customer data, and private identifiers
+   - replace personal machine paths, account names, repo names, and emails with placeholders unless they are intentionally public and necessary
+   - keep the reusable workflow personal in origin but generic in the committed artifact
+
+16. Write or update the exact file in:
    - ~/.tall-talents/talents/
 
-15. Update:
+17. Update:
    - ~/.tall-talents/index.md
 
 ## Quality Rules
 
-16. Keep talents narrow, reusable, and grounded in real solved work.
+18. Keep talents narrow, reusable, and grounded in real solved work.
 
-17. Preserve what already works. Evolve talents conservatively.
+19. Preserve what already works. Evolve talents conservatively.
 
-18. If no clear improvement is justified, do nothing.
+20. If no clear improvement is justified, do nothing.
 
-19. Treat ~/.tall-talents as a durable working library, not a scratchpad.
+21. Treat ~/.tall-talents as a durable working library, not a scratchpad.
+
+22. If a talent needs private context to stay useful, keep that context in `~/.tall-talents/private/` or another local-only note and commit only the sanitized workflow.

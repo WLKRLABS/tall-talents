@@ -59,12 +59,14 @@ run_checks() {
 
   HOME="${home_dir}" bash "${REPO_ROOT}/scripts/doctor.sh"
   HOME="${home_dir}" python3 "${REPO_ROOT}/scripts/validate-talents.py" --root "${live_root}"
+  HOME="${home_dir}" python3 "${REPO_ROOT}/scripts/scan-talent-privacy.py" --root "${live_root}"
   HOME="${home_dir}" python3 "${REPO_ROOT}/scripts/rebuild-index.py" --root "${live_root}"
   HOME="${home_dir}" python3 "${REPO_ROOT}/scripts/create-talent.py" \
     --root "${live_root}" \
     --title "Smoke Test Talent" \
     --summary "Verify the scaffolder produces a validator-clean draft."
   HOME="${home_dir}" python3 "${REPO_ROOT}/scripts/validate-talents.py" --root "${live_root}"
+  HOME="${home_dir}" python3 "${REPO_ROOT}/scripts/scan-talent-privacy.py" --root "${live_root}"
 }
 
 run_local_smoke() {

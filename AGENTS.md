@@ -39,6 +39,7 @@ Before changing talent content or install/sync tooling:
 - Committed repo snapshot lives in `bootstrap/`
 - Shipped install seed is defined by `bootstrap/manifest.txt`
 - `bootstrap/index.md` is derived from active bootstrap talents
+- `bootstrap/private/` is local-only and must not be committed
 - `scripts/install.sh` must stay in sync with the manifest-based bootstrap workflow
 
 ## Required Verification
@@ -46,6 +47,7 @@ Before changing talent content or install/sync tooling:
 For repo changes that touch talent content or bootstrap/install flow, run:
 
 - `python3 scripts/validate-talents.py --root bootstrap`
+- `python3 scripts/scan-talent-privacy.py --root bootstrap`
 - `python3 scripts/sync-bootstrap.py --live-root bootstrap --bootstrap-root bootstrap`
 - `git diff --check`
 
@@ -57,4 +59,5 @@ If operating in normal user mode and importing from the live library, also run:
 
 - Writing only to `~/.tall-talents` while expecting this repo's `bootstrap/` to update itself
 - Editing `bootstrap/` but forgetting to regenerate `bootstrap/index.md` and `bootstrap/manifest.txt`
+- Committing owner-only private context instead of keeping it in `~/.tall-talents/private/`
 - Modifying install/dev-mode tooling without checking how contributor mode repoints the live root

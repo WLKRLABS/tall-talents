@@ -14,7 +14,9 @@ Active talents (sorted by slug):
 - `executive-briefing` — Turn validated findings into concise, quantified, decision-ready executive communication with explicit recommendations, owners, and timelines.
 - `feedback-synthesis` — Convert raw user feedback into decision-grade evidence by collecting, normalizing, coding, quantifying, and prioritizing themes without losing the original user voice.
 - `fix-ad-hoc-codesign-fallback` — Restore runnable macOS binaries by removing invalid signatures and applying deterministic ad-hoc signing.
+- `game-live-preview-workspace` — Start the local game dev server and open the in-app browser preview before game UI or asset work so Codex and the playable surface stay side by side.
 - `gh-pages-site-subfolder-assets` — Correct broken CSS/JS/image links when a static site is served from a repo subpath on GitHub Pages.
+- `github-private-repo-init-ssh` — Turn a local project folder into a private GitHub repository, commit only safe files, bind origin to a specific SSH alias, and verify live access.
 - `github-ssh-repo-alias-setup` — Switch a local repo to a specific GitHub SSH key alias, pin repo-local Git identity, and verify safe auth plus remote access.
 - `handoff-contracts` — Standardize task, QA, escalation, and phase-transition handoffs so context, evidence, and next-owner expectations survive the transfer.
 - `implementation-planning` — Convert an approved design into an execution-ready plan with exact files, tasks, tests, commands, and acceptance criteria.
@@ -35,11 +37,15 @@ Active talents (sorted by slug):
 - `security-review` — Review a system through threat modeling, secure-code assessment, prioritized findings, and verification that remediations actually close the risk.
 - `source-grounded-readme-upgrade` — Turn a repository README into a high-credibility landing page by preserving what already works, surfacing verified proof, and only adding badges, graphs, support links, and brand sections that can be confirmed.
 - `sprint-prioritization` — Choose the right sprint work and shape it into realistic, verifiable tasks using explicit prioritization, capacity, dependency, and scope-control rules.
+- `sprite-sheet-background-cleanup` — Convert chosen source frames into transparent, same-canvas sprite sheets without keying out character details that share the background color.
 - `subagent-task-loop` — Execute a written plan through one task-scoped implementer at a time, with mandatory spec-compliance and code-quality review loops before a task can close.
+- `supabase-admin-password-reset` — Reset an existing Supabase Auth user's password with a service-role workflow that avoids chat-secret exposure and preserves app authorization rules.
+- `supabase-hosted-auth-email-repair` — Repair hosted Supabase email/password login after CLI config pushes disable the email provider while signup remains disabled.
 - `systematic-debugging` — Debug through root-cause investigation, pattern analysis, single-hypothesis testing, and only then a minimal verified fix.
 - `trend-research` — Bring outside-world evidence into product and strategy decisions through source-diverse market, competitor, technology, and timing analysis.
 - `ux-foundation` — Translate approved scope and user evidence into implementation-ready interface structure, component boundaries, and interaction rules before polish work begins.
 - `ux-research` — Gather and synthesize user-behavior evidence so design and product decisions are driven by observed reality rather than internal intuition.
+- `vercel-git-connect-ssh-alias` — Attach a Vercel project to its GitHub repository without losing a repo-local custom SSH host alias used for local pushes.
 - `verification-gate` — Block success claims until fresh commands, artifacts, and requirement checks prove the exact claim being made.
 - `visual-evidence-qa` — Validate visual and interaction quality through captured evidence, honest inspection, and issue reporting tied to exact screenshots or recordings.
 - `workflow-mapping` — Discover real workflows in code and operations, map their branches, states, handoffs, and cleanup paths, and maintain a registry that stays aligned with reality.
