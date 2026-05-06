@@ -1,7 +1,7 @@
 ---
 slug: product-requirements
 title: Product Requirements
-summary: Turn user and business need into a decision-grade opportunity assessment and PRD with explicit goals, non-goals, evidence, risks, and launch intent.
+summary: Turn user and business need, or the current conversation context, into a decision-grade PRD with goals, non-goals, implementation decisions, testing decisions, and issue-tracker handoff.
 tags:
   - product
   - requirements
@@ -9,21 +9,23 @@ tags:
 triggers:
   - A team needs to define what should be built and why before design or implementation begins.
   - Stakeholder requests, market opportunities, or user pain need to be translated into a reviewable product artifact.
+  - User says "to-prd" or asks to turn the current conversation into a PRD issue without a new interview.
 inputs:
   - Problem statement, user evidence, business context, and current product constraints.
-  - Access to stakeholder goals, available research, and technical dependency awareness.
+  - Access to stakeholder goals, available research, repo state, issue-tracker configuration, and technical dependency awareness.
 outputs:
   - Opportunity assessment and PRD that define scope, success metrics, non-goals, risks, and launch intent.
-  - Clear build, explore, defer, or kill recommendation with documented reasoning.
+  - Clear build, explore, defer, or kill recommendation with documented reasoning, or a published PRD issue when invoked as `to-prd`.
 agent_behavior:
   - Lead with the problem and evidence, not the requested feature.
   - Make trade-offs and non-goals explicit before solution detail expands.
   - Align business, user, and technical reality in one artifact.
+  - When invoked as `to-prd`, synthesize what is already known instead of interviewing the user again.
 safety:
   - Do not write requirements around an unvalidated solution request without exposing the underlying problem.
   - Do not hide open questions, timeline risk, or dependency risk behind polished prose.
 status: active
-version: 1.0.0
+version: 1.1.0
 ---
 
 # Goal
@@ -121,6 +123,10 @@ Describe:
 
 Do not harden speculative implementation detail into requirement text. The PRD should guide design and engineering, not impersonate them.
 
+When the request is explicitly `to-prd`, use the current conversation and repo understanding as the input. Do not start a fresh interview. Explore the repo only enough to understand the current state, likely modules, and testing surface, then write the PRD from the context already available.
+
+For engineering-heavy PRDs, sketch the major modules to build or modify and actively look for deep module opportunities: small interfaces that hide meaningful behavior and can be tested in isolation. Check with the user only when the module choice or testing focus is not already clear from context.
+
 ## 7. Add Technical And Delivery Reality Early
 
 Include:
@@ -174,6 +180,46 @@ Possible next steps:
 - gather more evidence through `feedback-synthesis`
 - validate external demand through `trend-research`
 - defer with revisit conditions
+
+## To-PRD Issue Template
+
+When publishing a PRD to the configured issue tracker, use this structure and apply the tracker's `needs-triage` role so the work enters the normal triage flow:
+
+```markdown
+## Problem Statement
+
+[Problem from the user's perspective.]
+
+## Solution
+
+[Proposed behavior from the user's perspective.]
+
+## User Stories
+
+1. As a [actor], I want [feature], so that [benefit].
+
+## Implementation Decisions
+
+- [Modules to build or modify.]
+- [Interfaces, schema changes, API contracts, or technical clarifications.]
+- [Architectural decisions already made.]
+
+## Testing Decisions
+
+- [What should be tested through public behavior.]
+- [Which modules or interfaces need tests.]
+- [Similar tests or prior art in the codebase.]
+
+## Out of Scope
+
+- [Explicit non-goals.]
+
+## Further Notes
+
+- [Open questions, risks, or references.]
+```
+
+Do not include fragile file paths or code snippets in the PRD issue unless the repo's issue convention explicitly requires them.
 
 ## Product Requirements Review Template
 

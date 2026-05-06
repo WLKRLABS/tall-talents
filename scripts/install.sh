@@ -38,6 +38,38 @@ download_if_missing() {
   fi
 }
 
+is_allowed_manifest_path() {
+  local rel="$1"
+
+  [[ -n "${rel}" ]] || return 1
+  [[ "${rel}" != /* ]] || return 1
+  [[ "${rel}" != *".."* ]] || return 1
+  [[ "${rel}" != *[[:space:]]* ]] || return 1
+
+  case "${rel}" in
+    README.md|index.md|manifest.txt|incoming/.gitkeep|archive/.gitkeep)
+      return 0
+      ;;
+    talents/*.md)
+      [[ "${rel#talents/}" != */* ]] || return 1
+      return 0
+      ;;
+    *)
+      return 1
+      ;;
+  esac
+}
+
+validate_manifest_path() {
+  local rel="$1"
+
+  if ! is_allowed_manifest_path "${rel}"; then
+    echo "[fail] unsafe bootstrap manifest path: ${rel}" >&2
+    echo "[fail] allowed paths: README.md, index.md, manifest.txt, talents/*.md, incoming/.gitkeep, archive/.gitkeep" >&2
+    exit 1
+  fi
+}
+
 has_local_bootstrap() {
   [[ -f "${BOOTSTRAP_DIR}/README.md" ]] \
     && [[ -f "${BOOTSTRAP_DIR}/index.md" ]] \
@@ -52,8 +84,10 @@ install_from_manifest() {
   local rel=""
 
   while IFS= read -r rel || [[ -n "${rel}" ]]; do
+    rel="${rel%$'\r'}"
     [[ -z "${rel}" ]] && continue
     [[ "${rel}" =~ ^# ]] && continue
+    validate_manifest_path "${rel}"
     if [[ "${mode}" == "local" ]]; then
       copy_if_missing "${source_root}/${rel}" "${ROOT}/${rel}"
     else
@@ -72,6 +106,7 @@ install_from_remote() {
     exit 1
   fi
 
+  validate_manifest_path "${REMOTE_BOOTSTRAP_MANIFEST}"
   install_from_manifest <(curl -fsSL "${BOOTSTRAP_BASE}/${REMOTE_BOOTSTRAP_MANIFEST}") "" "remote"
 }
 

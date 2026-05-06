@@ -4,6 +4,7 @@ talents/api-validation.md
 talents/architecture-decisioning.md
 talents/automation-governance.md
 talents/branch-finish-workflow.md
+talents/caveman.md
 talents/code-review.md
 talents/compliance-review.md
 talents/design-before-build.md
@@ -16,8 +17,11 @@ talents/game-live-preview-workspace.md
 talents/gh-pages-site-subfolder-assets.md
 talents/github-private-repo-init-ssh.md
 talents/github-ssh-repo-alias-setup.md
+talents/grill-me.md
+talents/grill-with-docs.md
 talents/handoff-contracts.md
 talents/implementation-planning.md
+talents/improve-codebase-architecture.md
 talents/incident-response.md
 talents/literal-wordpress-port-mode.md
 talents/minimal-diff-execution.md
@@ -33,6 +37,7 @@ talents/repo-onboarding-map.md
 talents/repo-talent-acquisition-pass.md
 talents/review-feedback-triage.md
 talents/security-review.md
+talents/setup-matt-pocock-skills.md
 talents/source-grounded-readme-upgrade.md
 talents/sprint-prioritization.md
 talents/sprite-sheet-background-cleanup.md
@@ -40,7 +45,10 @@ talents/subagent-task-loop.md
 talents/supabase-admin-password-reset.md
 talents/supabase-hosted-auth-email-repair.md
 talents/systematic-debugging.md
+talents/tdd.md
+talents/to-issues.md
 talents/trend-research.md
+talents/triage.md
 talents/ux-foundation.md
 talents/ux-research.md
 talents/vercel-git-connect-ssh-alias.md
@@ -49,5 +57,6 @@ talents/visual-evidence-qa.md
 talents/workflow-mapping.md
 talents/workflow-orchestration.md
 talents/worktree-isolation.md
+talents/write-a-skill.md
 incoming/.gitkeep
 archive/.gitkeep

@@ -1,29 +1,31 @@
 ---
 slug: systematic-debugging
 title: Systematic Debugging
-summary: Debug through root-cause investigation, pattern analysis, single-hypothesis testing, and only then a minimal verified fix.
+summary: Diagnose hard bugs and performance regressions through a fast feedback loop, ranked hypotheses, targeted instrumentation, and only then a minimal verified fix.
 tags:
   - debugging
   - quality
   - verification
 triggers:
   - Test failures, production bugs, build breaks, unexpected behavior, performance regressions, or integration failures.
+  - User says "diagnose this", "debug this", reports something broken, throwing, failing, or slow.
   - Situations where a quick fix feels tempting or multiple failed attempts have already happened.
 inputs:
   - Reproduction steps, error output, recent changes, and access to the relevant system boundaries.
-  - Available tests, logs, traces, or ways to instrument the failing path.
+  - Available tests, logs, traces, fixtures, profilers, or ways to instrument the failing path.
 outputs:
   - Root-cause statement backed by evidence.
-  - Minimal fix, verification evidence, and a clear escalation decision if architecture is the real problem.
+  - Minimal fix, regression test or documented missing seam, verification evidence, and a clear escalation decision if architecture is the real problem.
 agent_behavior:
+  - Spend disproportionate effort creating a fast, deterministic pass/fail loop before hypothesizing.
   - Treat symptom fixes as failure until the root cause is understood.
-  - Investigate with evidence first, then test one hypothesis at a time.
+  - Generate ranked falsifiable hypotheses, then test one hypothesis at a time with probes mapped to predictions.
   - Stop after repeated failed fixes and question the underlying pattern instead of thrashing.
 safety:
   - Do not propose or apply fixes before completing root-cause investigation.
   - Do not bundle multiple speculative fixes into one attempt.
 status: active
-version: 1.0.0
+version: 1.1.0
 ---
 
 # Goal
@@ -53,11 +55,42 @@ No fixes without root-cause investigation first.
 
 If Phase 1 is incomplete, you are not debugging yet. You are guessing.
 
+## Diagnose Rule
+
+Build the feedback loop first. If you have a fast, deterministic, agent-runnable pass/fail signal for the user-described bug, bisection, instrumentation, and hypothesis testing have something real to consume. If you do not have that loop, staring at code will turn into guesswork.
+
 # Procedure
 
 ## Phase 1: Root-Cause Investigation
 
 Do this before proposing any fix.
+
+### 0. Build A Pass/Fail Feedback Loop
+
+Create the narrowest loop that reproduces the user's symptom and can be run repeatedly.
+
+Try options in this order:
+
+- failing test at the seam that reaches the bug
+- curl or HTTP script against a running dev server
+- CLI invocation with fixture input and stdout or snapshot diff
+- headless browser script that asserts on DOM, console, or network behavior
+- captured trace replay through the failing path
+- throwaway harness around the smallest service or function cluster
+- property or fuzz loop for intermittent wrong-output bugs
+- bisection harness suitable for `git bisect run`
+- differential loop against old version, new version, or two configs
+- HITL script only when a human must click, with captured output feeding back into the loop
+
+Improve the loop itself before moving on:
+
+- make it faster by skipping unrelated setup
+- make the signal sharper by asserting the exact symptom
+- make it deterministic by pinning time, seeds, filesystem, and network
+
+For nondeterministic bugs, raise the reproduction rate instead of waiting for a perfect repro. Loop the trigger, add stress, parallelize, narrow timing windows, or inject delays until the failure rate is high enough to debug.
+
+If no loop is possible, stop and say exactly what was tried. Ask for the missing environment, captured artifact, or permission to add temporary instrumentation. Do not proceed to hypotheses without a loop.
 
 ### 1. Read The Error Carefully
 
@@ -136,11 +169,25 @@ I think [specific cause] is the root cause because [evidence].
 
 If you cannot write that sentence, the investigation is not finished.
 
+For hard bugs, generate 3-5 ranked hypotheses before testing any one of them. Each must be falsifiable:
+
+```text
+If [X] is the cause, then [changing or observing Y] will make [Z] happen.
+```
+
+When useful, show the ranked list to the user before testing. They may have domain knowledge that reranks or eliminates candidates. If the user is not available, proceed with the best-ranked hypothesis and keep the list visible.
+
 ### 2. Test The Smallest Possible Change
 
 - change one variable at a time
 - use the smallest experiment that can confirm or reject the hypothesis
 - do not stack fixes or "improve while here"
+
+Each instrumentation probe must map to a specific hypothesis prediction. Prefer debugger or REPL inspection when available, then targeted logs at decision boundaries. Never spray logs everywhere and grep later.
+
+Tag temporary debug logs with a unique prefix such as `[DEBUG-a4f2]` so cleanup is mechanical.
+
+For performance regressions, establish a baseline measurement before changing code. Use timing harnesses, browser performance APIs, profilers, query plans, or bisection. Measure first, fix second.
 
 ### 3. Evaluate The Result Honestly
 
@@ -158,6 +205,8 @@ Only now should code change.
 - if no test framework exists, create a one-off script or command that reproduces the failure
 - verify the reproduction fails before applying the fix
 
+Write the regression test at the correct seam. The seam is correct only if the test exercises the real bug pattern as it appears at the call site. If the only available seam is too shallow, document that missing test seam as an architecture finding instead of creating a misleading test.
+
 ### 2. Implement One Minimal Fix
 
 - change only what is needed to address the identified root cause
@@ -168,6 +217,11 @@ Only now should code change.
 - re-run the failing reproduction
 - run the relevant surrounding verification to check for regressions
 - confirm the original issue is actually resolved, not merely hidden
+- re-run the original unminimized feedback loop from Phase 1
+- remove all tagged debug instrumentation and throwaway prototypes, or move retained harnesses to a clearly marked debug location
+- state the winning hypothesis in the commit, PR, or handoff so the next debugger inherits the learning
+
+After the fix, ask what would have prevented the bug. If the answer is no good test seam, tangled callers, hidden coupling, or similar structural friction, hand off to `improve-codebase-architecture` after the fix is in.
 
 ## Escalation Rule After Repeated Failures
 

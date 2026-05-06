@@ -1,31 +1,34 @@
 ---
 slug: repo-onboarding-map
 title: Repo Onboarding Map
-summary: Build a facts-only orientation map of an unfamiliar repository by reading code, tracing execution paths, and stating exactly what was inspected.
+summary: Build a facts-only orientation or zoom-out map of an unfamiliar repo, subsystem, module graph, or caller chain by reading code and stating exactly what was inspected.
 tags:
   - research
   - onboarding
   - codebase
 triggers:
   - A user asks what a repo does, where to start, or what owns a behavior.
+  - User says "zoom out" because they do not know a section of code well and need the broader module/caller map.
   - A new engineer or agent needs fast orientation before making changes.
   - Repository structure, entry points, and boundaries must be explained without drifting into redesign.
 inputs:
   - Repository tree and relevant source files.
   - Specific subsystem or behavior questions when present.
   - Available manifests, entry points, routers, commands, and config files.
+  - Domain glossary and ADRs when the repo provides them.
 outputs:
   - One-line summary, five-minute explanation, and deep dive.
-  - Explicit list of files inspected and boundaries traced.
+  - Explicit list of files inspected, modules and callers mapped, and boundaries traced.
 agent_behavior:
   - State only facts grounded in inspected code.
   - Follow real request, event, command, or data paths through the system.
+  - Use the project's domain glossary vocabulary when it exists.
   - Be explicit about what was not inspected or what remains partial.
 safety:
   - Do not turn onboarding output into a code review, redesign, or implementation plan.
   - Do not state ownership or behavior that cannot be tied to inspected files.
 status: active
-version: 1.0.0
+version: 1.1.0
 ---
 
 # Goal
@@ -105,6 +108,30 @@ Also note confusing spots that matter for onboarding:
 - files that look important but are generated or thin wrappers
 
 State these as code-grounded observations, not judgments.
+
+## 4A. Zoom-Out Mode
+
+When the user asks to "zoom out" from an unfamiliar section of code, keep the scope narrower than a full repo onboarding map:
+
+- identify the current file, module, function, or behavior being discussed
+- go one layer up and list relevant callers, owners, adapters, and downstream effects
+- explain how the area fits into the larger domain using `CONTEXT.md` vocabulary when present
+- include the files that would be the next best reads for deeper understanding
+- avoid recommendations unless the user explicitly asks for next actions
+
+Default zoom-out output:
+
+```markdown
+## Zoom-Out Map
+- Current area:
+- What calls it:
+- What it calls:
+- Domain role:
+- Important adjacent modules:
+- Why this area matters:
+- Files inspected:
+- Best next files to read:
+```
 
 ## 5. Keep The Output Strictly Factual
 

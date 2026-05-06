@@ -179,8 +179,10 @@ This is the single source of truth.
 
 ### Quick install
 
+Use a tagged release so the installer and bootstrap snapshot come from the same reviewed version:
+
 ```bash
-bash <(curl -fsSL https://raw.githubusercontent.com/WLKRLABS/tall-talents/main/scripts/install.sh)
+TALL_TALENTS_REF=v1.0.0 bash <(curl -fsSL https://raw.githubusercontent.com/WLKRLABS/tall-talents/v1.0.0/scripts/install.sh)
 ```
 
 That bootstraps `~/.tall-talents` without cloning the repo first.
@@ -188,7 +190,7 @@ That bootstraps `~/.tall-talents` without cloning the repo first.
 ### Optional verify
 
 ```bash
-bash <(curl -fsSL https://raw.githubusercontent.com/WLKRLABS/tall-talents/main/scripts/doctor.sh)
+bash <(curl -fsSL https://raw.githubusercontent.com/WLKRLABS/tall-talents/v1.0.0/scripts/doctor.sh)
 ```
 
 ### Local repo workflow
@@ -209,8 +211,10 @@ It points `~/.tall-talents` at this clone's `bootstrap/` directory and enables t
 If you already have unsynced local live-library changes that should be imported into this clone first:
 
 ```bash
-python3 scripts/dev-env.py install --import-live
+python3 scripts/dev-env.py install --import-live --confirm-public-import
 ```
+
+Review the live files before importing. `--import-live` only imports public bootstrap candidates, skips `private/`, `.env*`, logs, keys, and PEM files, and runs the privacy scanner after import.
 
 ## 🤖 How Agents Use It
 
@@ -278,6 +282,8 @@ Use personal experience to shape the workflow, then commit the reusable version:
 
 The repo includes `scripts/scan-talent-privacy.py` for high-confidence secret checks. It fails on obvious secrets and warns on personal identifiers that should usually become placeholders before publishing.
 
+Privacy scans are guardrails, not proof of safety. Do a human publishability review before committing imported or newly written talents.
+
 ## 📋 Commands
 
 ```bash
@@ -292,7 +298,7 @@ python3 scripts/rebuild-index.py --root ~/.tall-talents
 python3 scripts/create-talent.py --title "My Talent" --summary "One-line summary"
 python3 scripts/scan-talent-privacy.py --root ~/.tall-talents
 python3 scripts/dev-env.py install
-python3 scripts/dev-env.py install --import-live
+python3 scripts/dev-env.py install --import-live --confirm-public-import
 python3 scripts/dev-env.py status
 python3 scripts/dev-env.py uninstall
 python3 scripts/sync-bootstrap.py --live-root ~/.tall-talents --bootstrap-root bootstrap

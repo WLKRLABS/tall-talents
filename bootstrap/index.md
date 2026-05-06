@@ -6,6 +6,7 @@ Active talents (sorted by slug):
 - `architecture-decisioning` — Produce domain-first architecture decisions with explicit trade-offs, ADRs, operational implications, and a clear evolution path.
 - `automation-governance` — Decide whether automation should exist at all, choose the right rollout posture, and require reliability, fallback, ownership, and audit standards before approval.
 - `branch-finish-workflow` — Inspect all open worktrees, separate real local edits from stale branch drift, commit each true delta, and fast-forward the integration branch without losing on-disk work.
+- `caveman` — Switch responses into ultra-compressed technical language that drops filler while preserving exact technical meaning and safety-critical clarity.
 - `code-review` — Review completed work against exact requirements and real code, then return one-pass findings ordered by severity and evidence.
 - `compliance-review` — Evaluate legal, regulatory, policy, and audit obligations against the actual product or process, classify gaps, and define the controls or escalation needed before launch.
 - `design-before-build` — Require context discovery, option analysis, written design review, and explicit approval before any implementation starts.
@@ -18,31 +19,38 @@ Active talents (sorted by slug):
 - `gh-pages-site-subfolder-assets` — Correct broken CSS/JS/image links when a static site is served from a repo subpath on GitHub Pages.
 - `github-private-repo-init-ssh` — Turn a local project folder into a private GitHub repository, commit only safe files, bind origin to a specific SSH alias, and verify live access.
 - `github-ssh-repo-alias-setup` — Switch a local repo to a specific GitHub SSH key alias, pin repo-local Git identity, and verify safe auth plus remote access.
+- `grill-me` — Interview the user one question at a time about a plan or design until each branch of the decision tree is resolved.
+- `grill-with-docs` — Stress-test a plan against existing domain language, code reality, and ADRs while updating CONTEXT.md and decision records as decisions crystallize.
 - `handoff-contracts` — Standardize task, QA, escalation, and phase-transition handoffs so context, evidence, and next-owner expectations survive the transfer.
 - `implementation-planning` — Convert an approved design into an execution-ready plan with exact files, tasks, tests, commands, and acceptance criteria.
+- `improve-codebase-architecture` — Find deepening opportunities in a codebase by using domain language, ADRs, module depth, seams, adapters, leverage, and locality.
 - `incident-response` — Turn a production incident into a structured response with severity classification, role assignment, time-boxed investigation, stable communication, and follow-through after recovery.
 - `literal-wordpress-port-mode` — Reproduce legacy WordPress page structure literally during migration before any cleanup/refactor pass.
 - `minimal-diff-execution` — Solve the stated task with the smallest justifiable diff, resist scope creep, and separate follow-ups from the patch itself.
 - `parallel-agent-dispatch` — Run independent investigations or implementation tracks concurrently only when their context, dependencies, and write scopes are cleanly separated.
 - `performance-benchmarking` — Establish baselines, run realistic performance tests, analyze bottlenecks statistically, and report pass or fail against explicit targets.
 - `plan-execution` — Execute a written implementation plan faithfully, stop on ambiguity, and only finish after the plan's required verification passes.
-- `product-requirements` — Turn user and business need into a decision-grade opportunity assessment and PRD with explicit goals, non-goals, evidence, risks, and launch intent.
+- `product-requirements` — Turn user and business need, or the current conversation context, into a decision-grade PRD with goals, non-goals, implementation decisions, testing decisions, and issue-tracker handoff.
 - `pwa-conversion-architect` — Audit an existing web app for honest PWA fit, then design or implement the smallest viable upgrade path with explicit iPhone and browser constraints.
 - `reddit-community-presence` — Build brand presence on Reddit by mapping the right subreddits, following community rules, contributing value-first content, and handling mentions transparently.
 - `release-cut-and-publish` — Harden repo-controlled release gaps, cut a versioned release through the repo's own scripts, push the branch and tag, and verify the published GitHub release end to end.
 - `release-readiness-audit` — Judge ship readiness with a skeptical evidence-first audit that defaults to needs work until user journeys, quality gates, and release risks are actually proven.
-- `repo-onboarding-map` — Build a facts-only orientation map of an unfamiliar repository by reading code, tracing execution paths, and stating exactly what was inspected.
+- `repo-onboarding-map` — Build a facts-only orientation or zoom-out map of an unfamiliar repo, subsystem, module graph, or caller chain by reading code and stating exactly what was inspected.
 - `repo-talent-acquisition-pass` — Scan external repositories for durable workflows, normalize them into Tall Talents candidates, merge overlaps, and produce a prioritized port plan with source traceability.
 - `review-feedback-triage` — Evaluate review comments technically before agreeing or implementing, then respond with clear accept, clarify, pushback, or escalation decisions.
 - `security-review` — Review a system through threat modeling, secure-code assessment, prioritized findings, and verification that remediations actually close the risk.
+- `setup-matt-pocock-skills` — Scaffold the repo-local agent-skill configuration for issue trackers, triage labels, and domain docs before engineering workflow skills consume it.
 - `source-grounded-readme-upgrade` — Turn a repository README into a high-credibility landing page by preserving what already works, surfacing verified proof, and only adding badges, graphs, support links, and brand sections that can be confirmed.
 - `sprint-prioritization` — Choose the right sprint work and shape it into realistic, verifiable tasks using explicit prioritization, capacity, dependency, and scope-control rules.
 - `sprite-sheet-background-cleanup` — Convert chosen source frames into transparent, same-canvas sprite sheets without keying out character details that share the background color.
 - `subagent-task-loop` — Execute a written plan through one task-scoped implementer at a time, with mandatory spec-compliance and code-quality review loops before a task can close.
 - `supabase-admin-password-reset` — Reset an existing Supabase Auth user's password with a service-role workflow that avoids chat-secret exposure and preserves app authorization rules.
 - `supabase-hosted-auth-email-repair` — Repair hosted Supabase email/password login after CLI config pushes disable the email provider while signup remains disabled.
-- `systematic-debugging` — Debug through root-cause investigation, pattern analysis, single-hypothesis testing, and only then a minimal verified fix.
+- `systematic-debugging` — Diagnose hard bugs and performance regressions through a fast feedback loop, ranked hypotheses, targeted instrumentation, and only then a minimal verified fix.
+- `tdd` — Build features or fixes one vertical slice at a time with red-green-refactor, behavior tests through public interfaces, and no horizontal test-writing pass.
+- `to-issues` — Break a plan, spec, or PRD into independently grabbable issue-tracker tickets using thin vertical tracer-bullet slices.
 - `trend-research` — Bring outside-world evidence into product and strategy decisions through source-diverse market, competitor, technology, and timing analysis.
+- `triage` — Move issues through a role-based triage state machine, producing maintainer recommendations, reproducibility notes, and agent-ready briefs.
 - `ux-foundation` — Translate approved scope and user evidence into implementation-ready interface structure, component boundaries, and interaction rules before polish work begins.
 - `ux-research` — Gather and synthesize user-behavior evidence so design and product decisions are driven by observed reality rather than internal intuition.
 - `vercel-git-connect-ssh-alias` — Attach a Vercel project to its GitHub repository without losing a repo-local custom SSH host alias used for local pushes.
@@ -51,3 +59,4 @@ Active talents (sorted by slug):
 - `workflow-mapping` — Discover real workflows in code and operations, map their branches, states, handoffs, and cleanup paths, and maintain a registry that stays aligned with reality.
 - `workflow-orchestration` — Coordinate multi-phase delivery with explicit phase gates, retry limits, structured handoffs, and evidence-backed status reporting.
 - `worktree-isolation` — Create or confirm an isolated workspace on a dedicated branch, run setup, and prove the baseline is clean before implementation starts.
+- `write-a-skill` — Create new agent skills with concise trigger metadata, progressive disclosure, bundled references, and scripts only when deterministic reuse justifies them.

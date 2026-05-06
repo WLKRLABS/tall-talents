@@ -10,6 +10,7 @@ from typing import Optional
 
 
 STATE_FILENAME = "tall-talents-dev-env.json"
+BLOCKED_IMPORT_SUFFIXES = {".key", ".log", ".pem"}
 
 
 def repo_root():
@@ -48,6 +49,10 @@ def python3_path():
 
 def sync_script():
     return repo_root() / "scripts" / "sync-bootstrap.py"
+
+
+def privacy_scan_script():
+    return repo_root() / "scripts" / "scan-talent-privacy.py"
 
 
 def load_state():
@@ -110,6 +115,73 @@ def symlinked_to(live_root: Path, target_root: Path):
     return live_root.is_symlink() and live_root.resolve() == target_root
 
 
+def live_root_rejection_reason(live_root: Path):
+    resolved = live_root.resolve()
+    if resolved == Path("/"):
+        return "filesystem root is not a safe live library"
+    if resolved == Path.home().resolve():
+        return "home directory is not a safe live library"
+    if resolved == repo_root().resolve():
+        return "repo root is not a safe live library"
+    if live_root.name != ".tall-talents":
+        return "live root must be named .tall-talents"
+    return None
+
+
+def validate_live_root(live_root: Path, force: bool):
+    reason = live_root_rejection_reason(live_root)
+    if not reason:
+        return
+    if force:
+        print(f"[warn] forcing non-standard live root: {live_root} ({reason})")
+        return
+    raise SystemExit(f"[fail] refusing --live-root {live_root}: {reason}; pass --force-live-root to override")
+
+
+def import_candidate_paths(live_root: Path):
+    candidates = []
+    readme = live_root / "README.md"
+    if readme.exists() or readme.is_symlink():
+        candidates.append(readme)
+
+    talents_dir = live_root / "talents"
+    if talents_dir.exists():
+        candidates.extend(sorted(talents_dir.glob("*.md")))
+
+    return candidates
+
+
+def is_blocked_import_path(rel_path: Path):
+    parts = {part.lower() for part in rel_path.parts}
+    name = rel_path.name.lower()
+    suffixes = {suffix.lower() for suffix in rel_path.suffixes}
+    return (
+        "private" in parts
+        or "log" in parts
+        or "logs" in parts
+        or name.startswith(".env")
+        or bool(suffixes & BLOCKED_IMPORT_SUFFIXES)
+    )
+
+
+def validate_public_import(live_root: Path):
+    problems = []
+    for path in import_candidate_paths(live_root):
+        rel_path = path.relative_to(live_root)
+        if is_blocked_import_path(rel_path):
+            problems.append(f"{rel_path} matches an excluded public-import path")
+        if path.is_symlink():
+            problems.append(f"{rel_path} is a symlink")
+        elif not path.is_file():
+            problems.append(f"{rel_path} is not a regular file")
+
+    if problems:
+        detail = "\n".join(f"- {problem}" for problem in problems)
+        raise SystemExit(f"[fail] --import-live refused unsafe public import candidates:\n{detail}")
+
+    print("[ok] --import-live imports only README.md and talents/*.md; private/, .env*, logs, keys, and PEM files stay out")
+
+
 def run_sync(live_root: Path, target_root: Path):
     subprocess.run(
         [
@@ -120,6 +192,14 @@ def run_sync(live_root: Path, target_root: Path):
             "--bootstrap-root",
             str(target_root),
         ],
+        cwd=repo_root(),
+        check=True,
+    )
+
+
+def run_privacy_scan(target_root: Path):
+    subprocess.run(
+        [str(python3_path()), str(privacy_scan_script()), "--root", str(target_root)],
         cwd=repo_root(),
         check=True,
     )
@@ -140,7 +220,9 @@ def install(live_root: Path, import_live: bool):
         print(f"[ok] live root already points at repo bootstrap: {live_root}")
     else:
         if import_live and (live_root.exists() or live_root.is_symlink()):
+            validate_public_import(live_root)
             run_sync(live_root, bootstrap)
+            run_privacy_scan(bootstrap)
 
         if live_root.exists() or live_root.is_symlink():
             backup = unique_backup_path(live_root)
@@ -228,7 +310,17 @@ def main():
     install_parser.add_argument(
         "--import-live",
         action="store_true",
-        help="Import the current live library into bootstrap before linking dev mode",
+        help="Import reviewed public live-library files into bootstrap before linking dev mode",
+    )
+    install_parser.add_argument(
+        "--confirm-public-import",
+        action="store_true",
+        help="Confirm that --import-live content has been reviewed for public bootstrap import",
+    )
+    install_parser.add_argument(
+        "--force-live-root",
+        action="store_true",
+        help="Allow a non-standard --live-root after explicit review",
     )
 
     subparsers.add_parser("uninstall")
@@ -240,6 +332,9 @@ def main():
 
     if args.command == "install":
         live_root = Path(args.live_root).expanduser()
+        validate_live_root(live_root, args.force_live_root)
+        if args.import_live and not args.confirm_public_import:
+            raise SystemExit("[fail] --import-live requires --confirm-public-import after reviewing live files for public import")
         install(live_root, args.import_live)
     elif args.command == "uninstall":
         uninstall()
