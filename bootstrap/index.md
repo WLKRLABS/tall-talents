@@ -60,3 +60,4 @@ Active talents (sorted by slug):
 - `workflow-orchestration` — Coordinate multi-phase delivery with explicit phase gates, retry limits, structured handoffs, and evidence-backed status reporting.
 - `worktree-isolation` — Create or confirm an isolated workspace on a dedicated branch, run setup, and prove the baseline is clean before implementation starts.
 - `write-a-skill` — Create new agent skills with concise trigger metadata, progressive disclosure, bundled references, and scripts only when deterministic reuse justifies them.
+- `writing-shape` — Shape raw notes, fragments, rough drafts, or transcripts into a publishable article through a conversational paragraph-by-paragraph writing session.
