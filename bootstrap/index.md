@@ -8,6 +8,7 @@ Active talents (sorted by slug):
 - `branch-finish-workflow` — Inspect all open worktrees, separate real local edits from stale branch drift, commit each true delta, and fast-forward the integration branch without losing on-disk work.
 - `caveman` — Switch responses into ultra-compressed technical language that drops filler while preserving exact technical meaning and safety-critical clarity.
 - `code-review` — Review completed work against exact requirements and real code, then return one-pass findings ordered by severity and evidence.
+- `codex-cli-startup-tooling-repair` — Repair Codex CLI startup warnings and verify Browser plus Computer Use availability from the real local config without overstating backend readiness.
 - `compliance-review` — Evaluate legal, regulatory, policy, and audit obligations against the actual product or process, classify gaps, and define the controls or escalation needed before launch.
 - `design-before-build` — Require context discovery, option analysis, written design review, and explicit approval before any implementation starts.
 - `devops-automation` — Build delivery and infrastructure automation that is reproducible, observable, reversible, and secure enough to run in production.

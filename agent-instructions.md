@@ -13,6 +13,23 @@ Skip Tall Talents for:
 - obvious low-risk tasks
 - purely informational answers with no real workflow
 
+## External Skill Precedence
+
+When the user explicitly invokes a non-Tall-Talents Codex skill, plugin, or slash-style workflow, treat that invoked skill as the controlling workflow.
+
+Do not auto-activate Tall Talents just because a nearby talent matches the same domain.
+
+Tall Talents may join only when at least one of these is true:
+- the user explicitly asks for Tall Talents too
+- the invoked skill explicitly asks for a Tall Talents procedure
+- the task has a separate stage the invoked skill does not cover
+- the task is about creating, updating, validating, or routing Tall Talents itself
+
+If Tall Talents is skipped for this reason, say:
+`Controlling skill: <skill>. Tall Talents skipped; no separate talent needed.`
+
+If Tall Talents joins under an external controlling workflow, name the external workflow as controlling and each Tall Talent as supporting.
+
 ## Before Solving
 
 1. Inspect:

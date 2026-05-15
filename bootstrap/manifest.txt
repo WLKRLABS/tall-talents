@@ -6,6 +6,7 @@ talents/automation-governance.md
 talents/branch-finish-workflow.md
 talents/caveman.md
 talents/code-review.md
+talents/codex-cli-startup-tooling-repair.md
 talents/compliance-review.md
 talents/design-before-build.md
 talents/devops-automation.md
@@ -58,5 +59,6 @@ talents/workflow-mapping.md
 talents/workflow-orchestration.md
 talents/worktree-isolation.md
 talents/write-a-skill.md
+talents/writing-shape.md
 incoming/.gitkeep
 archive/.gitkeep

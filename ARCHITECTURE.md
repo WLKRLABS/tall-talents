@@ -54,6 +54,9 @@ Tall Talents is allowed to use one or more talents for a task.
 
 - Use one talent when one workflow covers the real task.
 - Use multiple talents when the work has distinct stages or disciplines.
+- When the user explicitly invokes a non-Tall-Talents Codex skill, plugin, or slash-style workflow, that invoked workflow controls by default.
+- Do not add Tall Talents under an external controlling skill only because a nearby talent matches the same domain.
+- Add Tall Talents under an external controlling skill only when the user also asks for Tall Talents, the invoked skill requests it, the task has a separate uncovered stage, or the task is about Tall Talents itself.
 - Choose a primary talent for overall control and supporting talents for specialist steps.
 - State the execution order before applying them.
 - Do not force extra talents into a task that one talent already covers cleanly.

@@ -230,8 +230,10 @@ Then:
 2. Open only the relevant files in `~/.tall-talents/talents/`
 3. Name the matching talent or talent set being used
 4. For larger tasks, pick a primary talent plus supporting talents and state the execution order
-5. Apply their procedures literally
-6. If none fit, say so explicitly and do not force-fit one
+5. If the user explicitly invoked a non-Tall-Talents Codex skill, plugin, or slash-style workflow, let that workflow control by default
+6. Add Tall Talents under that external workflow only when it covers a separate uncovered stage or the user asks for Tall Talents too
+7. Apply their procedures literally
+8. If none fit, say so explicitly and do not force-fit one
 
 This is the discipline:
 
@@ -250,6 +252,7 @@ It tells the agent:
 
 - when to activate Tall Talents
 - when to skip Tall Talents for trivial work
+- when an explicitly invoked Codex skill or plugin takes precedence over nearby Tall Talents
 - which files to inspect before solving
 - how to apply one or more existing talents without force-fitting them
 - how to decide between creating a new talent, updating one, or making no talent change after the task
