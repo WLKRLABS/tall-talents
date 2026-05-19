@@ -14,10 +14,11 @@ You are converting completed real work into Tall Talents.
    - remove secrets, tokens, API keys, passwords, service-role values, private keys, and private URLs
    - replace personal paths, account names, emails, customer names, and private repo names with placeholders unless intentionally public and necessary
    - move private context that is useful only to the owner into `~/.tall-talents/private/`, not the committed talent
-5. If creating/updating a talent, write exact markdown in `~/.tall-talents/talents/{slug}.md`.
-6. Update exact index content in `~/.tall-talents/index.md` (active only, sorted by slug).
-7. If Tall Talents repo dev mode is installed, the edit already lives in `bootstrap/`; rely on the repo hook to refresh derived files before commit.
-8. Otherwise, if you are working inside the Tall Talents repo, run `python3 scripts/sync-bootstrap.py --live-root ~/.tall-talents --bootstrap-root bootstrap` so the checked-in bootstrap snapshot matches the live library.
+5. If creating/updating a talent, write exact markdown in `~/.tall-talents/talents/{slug}/TALENT.md`.
+6. Create or append `~/.tall-talents/talents/{slug}/CHANGELOG.md` with session, change, evidence, expected effect, and oscillation check.
+7. Update exact index content in `~/.tall-talents/index.md` (active only, sorted by slug, with `TALENT.md` path).
+8. If Tall Talents repo dev mode is installed, the edit already lives in `bootstrap/`; rely on the repo hook to refresh derived files before commit.
+9. Otherwise, if you are working inside the Tall Talents repo, run `python3 scripts/sync-bootstrap.py --live-root ~/.tall-talents --bootstrap-root bootstrap` so the checked-in bootstrap snapshot matches the live library.
 
 ## Output discipline
 
@@ -26,3 +27,5 @@ You are converting completed real work into Tall Talents.
 - Preserve strict Tall Talents format (required front matter and required sections).
 - Prefer updating an existing talent when overlap is substantial.
 - Keep committed talents sanitized and reusable even when they came from personal work.
+- Do not create or update a talent without concrete session evidence.
+- Do not automatically merge talents.

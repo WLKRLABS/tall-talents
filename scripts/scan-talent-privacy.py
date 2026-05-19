@@ -16,6 +16,7 @@ TEXT_EXTENSIONS = {
     ".json",
     ".toml",
     ".env",
+    ".html",
 }
 
 SECRET_PATTERNS = [
@@ -61,7 +62,7 @@ PLACEHOLDER_MARKERS = (
 def is_text_file(path: Path) -> bool:
     if path.name.startswith(".env"):
         return True
-    if path.name in {"manifest.txt", "README.md", "index.md"}:
+    if path.name in {"manifest.txt", "README.md", "index.md", "TALENT.md", "CHANGELOG.md"}:
         return True
     return path.suffix in TEXT_EXTENSIONS
 
@@ -79,17 +80,29 @@ def looks_like_placeholder(value: str) -> bool:
     return any(marker in lower for marker in PLACEHOLDER_MARKERS)
 
 
+def root_scan_files(root: Path) -> List[Path]:
+    files: List[Path] = []
+    talents_dir = root / "talents"
+    if talents_dir.exists():
+        files.extend(sorted(p for p in talents_dir.rglob("*") if p.is_file()))
+
+    reports_dir = root / "reports"
+    if reports_dir.exists():
+        files.extend(sorted(p for p in reports_dir.rglob("*") if p.is_file()))
+
+    for rel in ("README.md", "index.md", "manifest.txt"):
+        candidate = root / rel
+        if candidate.exists():
+            files.append(candidate)
+
+    return files
+
+
 def collect_files(root: Optional[Path], paths: List[str]) -> List[Path]:
     files: List[Path] = []
 
     if root is not None:
-        talents_dir = root / "talents"
-        if talents_dir.exists():
-            files.extend(sorted(talents_dir.glob("*.md")))
-        for rel in ("README.md", "index.md", "manifest.txt"):
-            candidate = root / rel
-            if candidate.exists():
-                files.append(candidate)
+        files.extend(root_scan_files(root))
 
     for raw in paths:
         path = Path(raw).expanduser()
@@ -138,7 +151,7 @@ def scan_file(path: Path):
 
 
 def main() -> int:
-    parser = argparse.ArgumentParser(description="Scan Tall Talents markdown for obvious secrets and publishability risks.")
+    parser = argparse.ArgumentParser(description="Scan Tall Talents files for obvious secrets and publishability risks.")
     parser.add_argument("--root", help="Tall Talents root to scan, for example ~/.tall-talents or bootstrap")
     parser.add_argument("--paths", nargs="*", default=[], help="Additional files or directories to scan")
     args = parser.parse_args()

@@ -1,0 +1,117 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>Tall Talents Package Migration Implementation Notes</title>
+  <style>
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      line-height: 1.5;
+      margin: 2rem auto;
+      max-width: 980px;
+      padding: 0 1rem;
+      color: #1f2933;
+    }
+    h1, h2 {
+      line-height: 1.2;
+    }
+    code {
+      background: #eef2f6;
+      border-radius: 4px;
+      padding: 0.1rem 0.25rem;
+    }
+    table {
+      border-collapse: collapse;
+      width: 100%;
+    }
+    th, td {
+      border: 1px solid #cbd5df;
+      padding: 0.5rem;
+      text-align: left;
+      vertical-align: top;
+    }
+    th {
+      background: #f5f7fa;
+    }
+  </style>
+</head>
+<body>
+  <h1>Tall Talents Package Migration Implementation Notes</h1>
+  <p>This file is the running implementation log for the package-format and self-iteration migration.</p>
+
+  <h2>Decisions Carried From The Design Session</h2>
+  <ul>
+    <li>Active talents move from single markdown files to package folders.</li>
+    <li>The package entrypoint is <code>TALENT.md</code>.</li>
+    <li>Every package requires <code>CHANGELOG.md</code>.</li>
+    <li>Self-iteration may edit active talents automatically when concrete conversation evidence exists.</li>
+    <li>Each automatic change must append a package-local changelog entry with session, change, evidence, effect, and oscillation check.</li>
+    <li>Self-iteration writes tiny report cards for non-trivial conversations, including no-change decisions.</li>
+    <li>Raw reports are local-only under <code>private/self-iteration/</code>; sanitized reports may be committed under <code>reports/self-iteration/</code>.</li>
+    <li>Self-iteration may refine, create, archive, or split talents; automatic merge is out of scope.</li>
+  </ul>
+
+  <h2>Implementation Log</h2>
+  <table>
+    <thead>
+      <tr>
+        <th>Step</th>
+        <th>Status</th>
+        <th>Notes</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>Initial inspection</td>
+        <td>Complete</td>
+        <td>The existing repo assumes <code>talents/*.md</code> in install, dev import, validation, index rebuild, privacy scan, sync, docs, templates, and pre-commit behavior.</td>
+      </tr>
+      <tr>
+        <td>Architecture decision</td>
+        <td>Complete</td>
+        <td>Adding an ADR because the package format changes the public file contract, install manifest, validator, and agent read path.</td>
+      </tr>
+      <tr>
+        <td>Talent migration</td>
+        <td>Complete</td>
+        <td>All 60 existing talent files were moved into <code>bootstrap/talents/&lt;slug&gt;/TALENT.md</code> and seeded with <code>CHANGELOG.md</code>. No root-level <code>bootstrap/talents/*.md</code> files remain.</td>
+      </tr>
+      <tr>
+        <td>Script migration</td>
+        <td>Complete</td>
+        <td>Validation, index rebuild, scaffolding, privacy scan, sync, install, and doctor scripts are being updated to treat package folders as the only valid active talent format. I chose to keep helper assets flexible and only enforce package shape, front matter, required headings, and changelog presence.</td>
+      </tr>
+      <tr>
+        <td>Manifest tradeoff</td>
+        <td>Decision made</td>
+        <td>The manifest now ships files from active talent packages, including package-local helper assets, while rejecting hidden files, env files, logs, keys, PEM files, and package-local private/log directories. This keeps package assets usable without making the manifest an unrestricted copy list.</td>
+      </tr>
+      <tr>
+        <td>Self-iteration helper</td>
+        <td>Complete</td>
+        <td>Added a small <code>scripts/self-iteration.py</code> helper for report creation, changelog appends, and recent changelog inspection. It does not decide usefulness; the model still has to use conversation evidence.</td>
+      </tr>
+      <tr>
+        <td>Documentation and instructions</td>
+        <td>Complete</td>
+        <td>Updating README, architecture docs, repo protocol, rules, and templates so the package format is the only active contract.</td>
+      </tr>
+      <tr>
+        <td>Derived bootstrap files</td>
+        <td>Complete</td>
+        <td>Regenerated <code>bootstrap/index.md</code> and <code>bootstrap/manifest.txt</code>. Index entries now point at <code>talents/&lt;slug&gt;/TALENT.md</code>; the manifest includes files from active packages plus lifecycle/report placeholders.</td>
+      </tr>
+      <tr>
+        <td>Repo-live private directory</td>
+        <td>Decision made</td>
+        <td><code>bootstrap/private/self-iteration/</code> is intentionally ignored by Git but required for raw local self-iteration reports when repo-live mode points <code>~/.tall-talents</code> at <code>bootstrap/</code>. I updated <code>scripts/dev-env.py</code> to create that local-only directory during install.</td>
+      </tr>
+      <tr>
+        <td>Verification</td>
+        <td>Complete</td>
+        <td>Package validation, privacy scan, Python compile checks, diff hygiene, doctor, scaffolder smoke, self-iteration helper smoke, bootstrap sync, and full local/remote-style public workflow smoke passed after the migration.</td>
+      </tr>
+    </tbody>
+  </table>
+</body>
+</html>

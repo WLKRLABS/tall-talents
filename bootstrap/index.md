@@ -2,63 +2,63 @@
 
 Active talents (sorted by slug):
 
-- `api-validation` — Validate APIs across contract, authentication, error handling, integration, and performance expectations with a traceable test matrix.
-- `architecture-decisioning` — Produce domain-first architecture decisions with explicit trade-offs, ADRs, operational implications, and a clear evolution path.
-- `automation-governance` — Decide whether automation should exist at all, choose the right rollout posture, and require reliability, fallback, ownership, and audit standards before approval.
-- `branch-finish-workflow` — Inspect all open worktrees, separate real local edits from stale branch drift, commit each true delta, and fast-forward the integration branch without losing on-disk work.
-- `caveman` — Switch responses into ultra-compressed technical language that drops filler while preserving exact technical meaning and safety-critical clarity.
-- `code-review` — Review completed work against exact requirements and real code, then return one-pass findings ordered by severity and evidence.
-- `codex-cli-startup-tooling-repair` — Repair Codex CLI startup warnings and verify Browser plus Computer Use availability from the real local config without overstating backend readiness.
-- `compliance-review` — Evaluate legal, regulatory, policy, and audit obligations against the actual product or process, classify gaps, and define the controls or escalation needed before launch.
-- `design-before-build` — Require context discovery, option analysis, written design review, and explicit approval before any implementation starts.
-- `devops-automation` — Build delivery and infrastructure automation that is reproducible, observable, reversible, and secure enough to run in production.
-- `documentation-pass` — Create or repair documentation through source-grounded auditing, audience-first structure, tested examples, and explicit maintenance rules.
-- `executive-briefing` — Turn validated findings into concise, quantified, decision-ready executive communication with explicit recommendations, owners, and timelines.
-- `feedback-synthesis` — Convert raw user feedback into decision-grade evidence by collecting, normalizing, coding, quantifying, and prioritizing themes without losing the original user voice.
-- `fix-ad-hoc-codesign-fallback` — Restore runnable macOS binaries by removing invalid signatures and applying deterministic ad-hoc signing.
-- `game-live-preview-workspace` — Start the local game dev server and open the in-app browser preview before game UI or asset work so Codex and the playable surface stay side by side.
-- `gh-pages-site-subfolder-assets` — Correct broken CSS/JS/image links when a static site is served from a repo subpath on GitHub Pages.
-- `github-private-repo-init-ssh` — Turn a local project folder into a private GitHub repository, commit only safe files, bind origin to a specific SSH alias, and verify live access.
-- `github-ssh-repo-alias-setup` — Switch a local repo to a specific GitHub SSH key alias, pin repo-local Git identity, and verify safe auth plus remote access.
-- `grill-me` — Interview the user one question at a time about a plan or design until each branch of the decision tree is resolved.
-- `grill-with-docs` — Stress-test a plan against existing domain language, code reality, and ADRs while updating CONTEXT.md and decision records as decisions crystallize.
-- `handoff-contracts` — Standardize task, QA, escalation, and phase-transition handoffs so context, evidence, and next-owner expectations survive the transfer.
-- `implementation-planning` — Convert an approved design into an execution-ready plan with exact files, tasks, tests, commands, and acceptance criteria.
-- `improve-codebase-architecture` — Find deepening opportunities in a codebase by using domain language, ADRs, module depth, seams, adapters, leverage, and locality.
-- `incident-response` — Turn a production incident into a structured response with severity classification, role assignment, time-boxed investigation, stable communication, and follow-through after recovery.
-- `literal-wordpress-port-mode` — Reproduce legacy WordPress page structure literally during migration before any cleanup/refactor pass.
-- `minimal-diff-execution` — Solve the stated task with the smallest justifiable diff, resist scope creep, and separate follow-ups from the patch itself.
-- `parallel-agent-dispatch` — Run independent investigations or implementation tracks concurrently only when their context, dependencies, and write scopes are cleanly separated.
-- `performance-benchmarking` — Establish baselines, run realistic performance tests, analyze bottlenecks statistically, and report pass or fail against explicit targets.
-- `plan-execution` — Execute a written implementation plan faithfully, stop on ambiguity, and only finish after the plan's required verification passes.
-- `product-requirements` — Turn user and business need, or the current conversation context, into a decision-grade PRD with goals, non-goals, implementation decisions, testing decisions, and issue-tracker handoff.
-- `pwa-conversion-architect` — Audit an existing web app for honest PWA fit, then design or implement the smallest viable upgrade path with explicit iPhone and browser constraints.
-- `reddit-community-presence` — Build brand presence on Reddit by mapping the right subreddits, following community rules, contributing value-first content, and handling mentions transparently.
-- `release-cut-and-publish` — Harden repo-controlled release gaps, cut a versioned release through the repo's own scripts, push the branch and tag, and verify the published GitHub release end to end.
-- `release-readiness-audit` — Judge ship readiness with a skeptical evidence-first audit that defaults to needs work until user journeys, quality gates, and release risks are actually proven.
-- `repo-onboarding-map` — Build a facts-only orientation or zoom-out map of an unfamiliar repo, subsystem, module graph, or caller chain by reading code and stating exactly what was inspected.
-- `repo-talent-acquisition-pass` — Scan external repositories for durable workflows, normalize them into Tall Talents candidates, merge overlaps, and produce a prioritized port plan with source traceability.
-- `review-feedback-triage` — Evaluate review comments technically before agreeing or implementing, then respond with clear accept, clarify, pushback, or escalation decisions.
-- `security-review` — Review a system through threat modeling, secure-code assessment, prioritized findings, and verification that remediations actually close the risk.
-- `setup-matt-pocock-skills` — Scaffold the repo-local agent-skill configuration for issue trackers, triage labels, and domain docs before engineering workflow skills consume it.
-- `source-grounded-readme-upgrade` — Turn a repository README into a high-credibility landing page by preserving what already works, surfacing verified proof, and only adding badges, graphs, support links, and brand sections that can be confirmed.
-- `sprint-prioritization` — Choose the right sprint work and shape it into realistic, verifiable tasks using explicit prioritization, capacity, dependency, and scope-control rules.
-- `sprite-sheet-background-cleanup` — Convert chosen source frames into transparent, same-canvas sprite sheets without keying out character details that share the background color.
-- `subagent-task-loop` — Execute a written plan through one task-scoped implementer at a time, with mandatory spec-compliance and code-quality review loops before a task can close.
-- `supabase-admin-password-reset` — Reset an existing Supabase Auth user's password with a service-role workflow that avoids chat-secret exposure and preserves app authorization rules.
-- `supabase-hosted-auth-email-repair` — Repair hosted Supabase email/password login after CLI config pushes disable the email provider while signup remains disabled.
-- `systematic-debugging` — Diagnose hard bugs and performance regressions through a fast feedback loop, ranked hypotheses, targeted instrumentation, and only then a minimal verified fix.
-- `tdd` — Build features or fixes one vertical slice at a time with red-green-refactor, behavior tests through public interfaces, and no horizontal test-writing pass.
-- `to-issues` — Break a plan, spec, or PRD into independently grabbable issue-tracker tickets using thin vertical tracer-bullet slices.
-- `trend-research` — Bring outside-world evidence into product and strategy decisions through source-diverse market, competitor, technology, and timing analysis.
-- `triage` — Move issues through a role-based triage state machine, producing maintainer recommendations, reproducibility notes, and agent-ready briefs.
-- `ux-foundation` — Translate approved scope and user evidence into implementation-ready interface structure, component boundaries, and interaction rules before polish work begins.
-- `ux-research` — Gather and synthesize user-behavior evidence so design and product decisions are driven by observed reality rather than internal intuition.
-- `vercel-git-connect-ssh-alias` — Attach a Vercel project to its GitHub repository without losing a repo-local custom SSH host alias used for local pushes.
-- `verification-gate` — Block success claims until fresh commands, artifacts, and requirement checks prove the exact claim being made.
-- `visual-evidence-qa` — Validate visual and interaction quality through captured evidence, honest inspection, and issue reporting tied to exact screenshots or recordings.
-- `workflow-mapping` — Discover real workflows in code and operations, map their branches, states, handoffs, and cleanup paths, and maintain a registry that stays aligned with reality.
-- `workflow-orchestration` — Coordinate multi-phase delivery with explicit phase gates, retry limits, structured handoffs, and evidence-backed status reporting.
-- `worktree-isolation` — Create or confirm an isolated workspace on a dedicated branch, run setup, and prove the baseline is clean before implementation starts.
-- `write-a-skill` — Create new agent skills with concise trigger metadata, progressive disclosure, bundled references, and scripts only when deterministic reuse justifies them.
-- `writing-shape` — Shape raw notes, fragments, rough drafts, or transcripts into a publishable article through a conversational paragraph-by-paragraph writing session.
+- `api-validation` — Validate APIs across contract, authentication, error handling, integration, and performance expectations with a traceable test matrix. Path: `talents/api-validation/TALENT.md`
+- `architecture-decisioning` — Produce domain-first architecture decisions with explicit trade-offs, ADRs, operational implications, and a clear evolution path. Path: `talents/architecture-decisioning/TALENT.md`
+- `automation-governance` — Decide whether automation should exist at all, choose the right rollout posture, and require reliability, fallback, ownership, and audit standards before approval. Path: `talents/automation-governance/TALENT.md`
+- `branch-finish-workflow` — Inspect all open worktrees, separate real local edits from stale branch drift, commit each true delta, and fast-forward the integration branch without losing on-disk work. Path: `talents/branch-finish-workflow/TALENT.md`
+- `caveman` — Switch responses into ultra-compressed technical language that drops filler while preserving exact technical meaning and safety-critical clarity. Path: `talents/caveman/TALENT.md`
+- `code-review` — Review completed work against exact requirements and real code, then return one-pass findings ordered by severity and evidence. Path: `talents/code-review/TALENT.md`
+- `codex-cli-startup-tooling-repair` — Repair Codex CLI startup warnings and verify Browser plus Computer Use availability from the real local config without overstating backend readiness. Path: `talents/codex-cli-startup-tooling-repair/TALENT.md`
+- `compliance-review` — Evaluate legal, regulatory, policy, and audit obligations against the actual product or process, classify gaps, and define the controls or escalation needed before launch. Path: `talents/compliance-review/TALENT.md`
+- `design-before-build` — Require context discovery, option analysis, written design review, and explicit approval before any implementation starts. Path: `talents/design-before-build/TALENT.md`
+- `devops-automation` — Build delivery and infrastructure automation that is reproducible, observable, reversible, and secure enough to run in production. Path: `talents/devops-automation/TALENT.md`
+- `documentation-pass` — Create or repair documentation through source-grounded auditing, audience-first structure, tested examples, and explicit maintenance rules. Path: `talents/documentation-pass/TALENT.md`
+- `executive-briefing` — Turn validated findings into concise, quantified, decision-ready executive communication with explicit recommendations, owners, and timelines. Path: `talents/executive-briefing/TALENT.md`
+- `feedback-synthesis` — Convert raw user feedback into decision-grade evidence by collecting, normalizing, coding, quantifying, and prioritizing themes without losing the original user voice. Path: `talents/feedback-synthesis/TALENT.md`
+- `fix-ad-hoc-codesign-fallback` — Restore runnable macOS binaries by removing invalid signatures and applying deterministic ad-hoc signing. Path: `talents/fix-ad-hoc-codesign-fallback/TALENT.md`
+- `game-live-preview-workspace` — Start the local game dev server and open the in-app browser preview before game UI or asset work so Codex and the playable surface stay side by side. Path: `talents/game-live-preview-workspace/TALENT.md`
+- `gh-pages-site-subfolder-assets` — Correct broken CSS/JS/image links when a static site is served from a repo subpath on GitHub Pages. Path: `talents/gh-pages-site-subfolder-assets/TALENT.md`
+- `github-private-repo-init-ssh` — Turn a local project folder into a private GitHub repository, commit only safe files, bind origin to a specific SSH alias, and verify live access. Path: `talents/github-private-repo-init-ssh/TALENT.md`
+- `github-ssh-repo-alias-setup` — Switch a local repo to a specific GitHub SSH key alias, pin repo-local Git identity, and verify safe auth plus remote access. Path: `talents/github-ssh-repo-alias-setup/TALENT.md`
+- `grill-me` — Interview the user one question at a time about a plan or design until each branch of the decision tree is resolved. Path: `talents/grill-me/TALENT.md`
+- `grill-with-docs` — Stress-test a plan against existing domain language, code reality, and ADRs while updating CONTEXT.md and decision records as decisions crystallize. Path: `talents/grill-with-docs/TALENT.md`
+- `handoff-contracts` — Standardize task, QA, escalation, and phase-transition handoffs so context, evidence, and next-owner expectations survive the transfer. Path: `talents/handoff-contracts/TALENT.md`
+- `implementation-planning` — Convert an approved design into an execution-ready plan with exact files, tasks, tests, commands, and acceptance criteria. Path: `talents/implementation-planning/TALENT.md`
+- `improve-codebase-architecture` — Find deepening opportunities in a codebase by using domain language, ADRs, module depth, seams, adapters, leverage, and locality. Path: `talents/improve-codebase-architecture/TALENT.md`
+- `incident-response` — Turn a production incident into a structured response with severity classification, role assignment, time-boxed investigation, stable communication, and follow-through after recovery. Path: `talents/incident-response/TALENT.md`
+- `literal-wordpress-port-mode` — Reproduce legacy WordPress page structure literally during migration before any cleanup/refactor pass. Path: `talents/literal-wordpress-port-mode/TALENT.md`
+- `minimal-diff-execution` — Solve the stated task with the smallest justifiable diff, resist scope creep, and separate follow-ups from the patch itself. Path: `talents/minimal-diff-execution/TALENT.md`
+- `parallel-agent-dispatch` — Run independent investigations or implementation tracks concurrently only when their context, dependencies, and write scopes are cleanly separated. Path: `talents/parallel-agent-dispatch/TALENT.md`
+- `performance-benchmarking` — Establish baselines, run realistic performance tests, analyze bottlenecks statistically, and report pass or fail against explicit targets. Path: `talents/performance-benchmarking/TALENT.md`
+- `plan-execution` — Execute a written implementation plan faithfully, stop on ambiguity, and only finish after the plan's required verification passes. Path: `talents/plan-execution/TALENT.md`
+- `product-requirements` — Turn user and business need, or the current conversation context, into a decision-grade PRD with goals, non-goals, implementation decisions, testing decisions, and issue-tracker handoff. Path: `talents/product-requirements/TALENT.md`
+- `pwa-conversion-architect` — Audit an existing web app for honest PWA fit, then design or implement the smallest viable upgrade path with explicit iPhone and browser constraints. Path: `talents/pwa-conversion-architect/TALENT.md`
+- `reddit-community-presence` — Build brand presence on Reddit by mapping the right subreddits, following community rules, contributing value-first content, and handling mentions transparently. Path: `talents/reddit-community-presence/TALENT.md`
+- `release-cut-and-publish` — Harden repo-controlled release gaps, cut a versioned release through the repo's own scripts, push the branch and tag, and verify the published GitHub release end to end. Path: `talents/release-cut-and-publish/TALENT.md`
+- `release-readiness-audit` — Judge ship readiness with a skeptical evidence-first audit that defaults to needs work until user journeys, quality gates, and release risks are actually proven. Path: `talents/release-readiness-audit/TALENT.md`
+- `repo-onboarding-map` — Build a facts-only orientation or zoom-out map of an unfamiliar repo, subsystem, module graph, or caller chain by reading code and stating exactly what was inspected. Path: `talents/repo-onboarding-map/TALENT.md`
+- `repo-talent-acquisition-pass` — Scan external repositories for durable workflows, normalize them into Tall Talents candidates, merge overlaps, and produce a prioritized port plan with source traceability. Path: `talents/repo-talent-acquisition-pass/TALENT.md`
+- `review-feedback-triage` — Evaluate review comments technically before agreeing or implementing, then respond with clear accept, clarify, pushback, or escalation decisions. Path: `talents/review-feedback-triage/TALENT.md`
+- `security-review` — Review a system through threat modeling, secure-code assessment, prioritized findings, and verification that remediations actually close the risk. Path: `talents/security-review/TALENT.md`
+- `setup-matt-pocock-skills` — Scaffold the repo-local agent-skill configuration for issue trackers, triage labels, and domain docs before engineering workflow skills consume it. Path: `talents/setup-matt-pocock-skills/TALENT.md`
+- `source-grounded-readme-upgrade` — Turn a repository README into a high-credibility landing page by preserving what already works, surfacing verified proof, and only adding badges, graphs, support links, and brand sections that can be confirmed. Path: `talents/source-grounded-readme-upgrade/TALENT.md`
+- `sprint-prioritization` — Choose the right sprint work and shape it into realistic, verifiable tasks using explicit prioritization, capacity, dependency, and scope-control rules. Path: `talents/sprint-prioritization/TALENT.md`
+- `sprite-sheet-background-cleanup` — Convert chosen source frames into transparent, same-canvas sprite sheets without keying out character details that share the background color. Path: `talents/sprite-sheet-background-cleanup/TALENT.md`
+- `subagent-task-loop` — Execute a written plan through one task-scoped implementer at a time, with mandatory spec-compliance and code-quality review loops before a task can close. Path: `talents/subagent-task-loop/TALENT.md`
+- `supabase-admin-password-reset` — Reset an existing Supabase Auth user's password with a service-role workflow that avoids chat-secret exposure and preserves app authorization rules. Path: `talents/supabase-admin-password-reset/TALENT.md`
+- `supabase-hosted-auth-email-repair` — Repair hosted Supabase email/password login after CLI config pushes disable the email provider while signup remains disabled. Path: `talents/supabase-hosted-auth-email-repair/TALENT.md`
+- `systematic-debugging` — Diagnose hard bugs and performance regressions through a fast feedback loop, ranked hypotheses, targeted instrumentation, and only then a minimal verified fix. Path: `talents/systematic-debugging/TALENT.md`
+- `tdd` — Build features or fixes one vertical slice at a time with red-green-refactor, behavior tests through public interfaces, and no horizontal test-writing pass. Path: `talents/tdd/TALENT.md`
+- `to-issues` — Break a plan, spec, or PRD into independently grabbable issue-tracker tickets using thin vertical tracer-bullet slices. Path: `talents/to-issues/TALENT.md`
+- `trend-research` — Bring outside-world evidence into product and strategy decisions through source-diverse market, competitor, technology, and timing analysis. Path: `talents/trend-research/TALENT.md`
+- `triage` — Move issues through a role-based triage state machine, producing maintainer recommendations, reproducibility notes, and agent-ready briefs. Path: `talents/triage/TALENT.md`
+- `ux-foundation` — Translate approved scope and user evidence into implementation-ready interface structure, component boundaries, and interaction rules before polish work begins. Path: `talents/ux-foundation/TALENT.md`
+- `ux-research` — Gather and synthesize user-behavior evidence so design and product decisions are driven by observed reality rather than internal intuition. Path: `talents/ux-research/TALENT.md`
+- `vercel-git-connect-ssh-alias` — Attach a Vercel project to its GitHub repository without losing a repo-local custom SSH host alias used for local pushes. Path: `talents/vercel-git-connect-ssh-alias/TALENT.md`
+- `verification-gate` — Block success claims until fresh commands, artifacts, and requirement checks prove the exact claim being made. Path: `talents/verification-gate/TALENT.md`
+- `visual-evidence-qa` — Validate visual and interaction quality through captured evidence, honest inspection, and issue reporting tied to exact screenshots or recordings. Path: `talents/visual-evidence-qa/TALENT.md`
+- `workflow-mapping` — Discover real workflows in code and operations, map their branches, states, handoffs, and cleanup paths, and maintain a registry that stays aligned with reality. Path: `talents/workflow-mapping/TALENT.md`
+- `workflow-orchestration` — Coordinate multi-phase delivery with explicit phase gates, retry limits, structured handoffs, and evidence-backed status reporting. Path: `talents/workflow-orchestration/TALENT.md`
+- `worktree-isolation` — Create or confirm an isolated workspace on a dedicated branch, run setup, and prove the baseline is clean before implementation starts. Path: `talents/worktree-isolation/TALENT.md`
+- `write-a-skill` — Create new agent skills with concise trigger metadata, progressive disclosure, bundled references, and scripts only when deterministic reuse justifies them. Path: `talents/write-a-skill/TALENT.md`
+- `writing-shape` — Shape raw notes, fragments, rough drafts, or transcripts into a publishable article through a conversational paragraph-by-paragraph writing session. Path: `talents/writing-shape/TALENT.md`

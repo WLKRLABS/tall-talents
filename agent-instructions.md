@@ -34,7 +34,9 @@ If Tall Talents joins under an external controlling workflow, name the external 
 
 1. Inspect:
    - ~/.tall-talents/index.md
-   - relevant files in ~/.tall-talents/talents/
+   - relevant ~/.tall-talents/talents/<slug>/TALENT.md files
+
+   Load `CHANGELOG.md`, examples, scripts, templates, or helper files only when the selected `TALENT.md` references them, the current task needs them, or self-iteration is modifying that package.
 
 2. Identify the smallest applicable talent set, if any.
 
@@ -67,10 +69,12 @@ If Tall Talents joins under an external controlling workflow, name the external 
    - did an existing talent help materially?
    - was an existing talent missing a necessary constraint or step?
    - did no talent deserve to exist here?
+   - did a loaded talent add context or procedural bloat with no concrete benefit?
 
 10. Choose exactly one:
    - create new talent
    - update existing talent
+   - archive or split an existing talent when the evidence threshold is met
    - no change
 
 11. Create a new talent only if:
@@ -82,6 +86,15 @@ If Tall Talents joins under an external controlling workflow, name the external 
    - a clear, justified improvement was discovered
    - the change improves precision, correctness, or completeness
    - the update does not broaden scope unnecessarily
+
+12a. Archive only when:
+   - there is a serious safety or privacy problem, or
+   - three evidence-backed negative reports across at least two sessions show repeated wrong activation or net bloat
+
+12b. Split only when:
+   - one broad talent repeatedly does unrelated jobs and concrete session evidence shows narrower talents would route better
+
+12c. Do not automatically merge talents yet.
 
 13. Do not create or update talents for:
    - trivial tasks
@@ -100,19 +113,33 @@ If Tall Talents joins under an external controlling workflow, name the external 
    - keep the reusable workflow personal in origin but generic in the committed artifact
 
 16. Write or update the exact file in:
-   - ~/.tall-talents/talents/
+   - ~/.tall-talents/talents/<slug>/TALENT.md
 
 17. Update:
    - ~/.tall-talents/index.md
+   - ~/.tall-talents/talents/<slug>/CHANGELOG.md
+
+18. For every automatic talent change, append a package changelog entry with:
+   - Session
+   - Change
+   - Evidence
+   - Effect
+   - Oscillation check
+
+19. After every non-trivial conversation, run a self-iteration pass:
+   - write a raw local report under ~/.tall-talents/private/self-iteration/
+   - write a sanitized report under ~/.tall-talents/reports/self-iteration/ only when safe
+   - edit talents only when concrete evidence exists
+   - otherwise record the no-change rationale
 
 ## Quality Rules
 
-18. Keep talents narrow, reusable, and grounded in real solved work.
+20. Keep talents narrow, reusable, and grounded in real solved work.
 
-19. Preserve what already works. Evolve talents conservatively.
+21. Preserve what already works. Evolve talents conservatively.
 
-20. If no clear improvement is justified, do nothing.
+22. If no clear improvement is justified, do nothing.
 
-21. Treat ~/.tall-talents as a durable working library, not a scratchpad.
+23. Treat ~/.tall-talents as a durable working library, not a scratchpad.
 
-22. If a talent needs private context to stay useful, keep that context in `~/.tall-talents/private/` or another local-only note and commit only the sanitized workflow.
+24. If a talent needs private context to stay useful, keep that context in `~/.tall-talents/private/` or another local-only note and commit only the sanitized workflow.

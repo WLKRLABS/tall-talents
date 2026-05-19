@@ -33,35 +33,41 @@ def parse_front_matter(text: str):
     return data
 
 
+def talent_packages(root: Path):
+    talents_dir = root / "talents"
+    if not talents_dir.exists():
+        raise SystemExit(f"talents directory not found: {talents_dir}")
+    return sorted(path for path in talents_dir.iterdir() if path.is_dir())
+
+
 def main():
     parser = argparse.ArgumentParser()
     parser.add_argument("--root", required=True, help="Root path of live Tall Talents folder")
     args = parser.parse_args()
 
     root = Path(args.root).expanduser().resolve()
-    talents_dir = root / "talents"
     index_path = root / "index.md"
 
-    if not talents_dir.exists():
-        raise SystemExit(f"talents directory not found: {talents_dir}")
-
     entries = []
-    for path in sorted(talents_dir.glob("*.md")):
-        front = parse_front_matter(path.read_text(encoding="utf-8"))
+    for package in talent_packages(root):
+        talent_path = package / "TALENT.md"
+        if not talent_path.exists():
+            continue
+        front = parse_front_matter(talent_path.read_text(encoding="utf-8"))
         if not front:
             continue
         if front.get("status") != "active":
             continue
         slug = front.get("slug")
-        summary = front.get("summary", "").strip()
+        summary = str(front.get("summary", "")).strip()
         if slug:
-            entries.append((slug, summary))
+            entries.append((slug, summary, f"talents/{slug}/TALENT.md"))
 
     entries.sort(key=lambda x: x[0])
 
     lines = ["# Tall Talents Index", "", "Active talents (sorted by slug):", ""]
-    for slug, summary in entries:
-        lines.append(f"- `{slug}` — {summary}")
+    for slug, summary, path in entries:
+        lines.append(f"- `{slug}` — {summary} Path: `{path}`")
 
     index_path.write_text("\n".join(lines) + "\n", encoding="utf-8")
     print(f"[ok] wrote {index_path}")

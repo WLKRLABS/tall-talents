@@ -26,6 +26,8 @@ check_path "${ROOT}" "live root"
 check_path "${ROOT}/talents" "talents dir"
 check_path "${ROOT}/incoming" "incoming dir"
 check_path "${ROOT}/archive" "archive dir"
+check_path "${ROOT}/reports/self-iteration" "self-iteration reports dir"
+check_path "${ROOT}/private/self-iteration" "private self-iteration dir"
 check_path "${ROOT}/index.md" "index file"
 
 if [[ "${missing}" -ne 0 ]]; then

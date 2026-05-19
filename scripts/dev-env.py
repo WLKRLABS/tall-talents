@@ -146,7 +146,11 @@ def import_candidate_paths(live_root: Path):
 
     talents_dir = live_root / "talents"
     if talents_dir.exists():
-        candidates.extend(sorted(talents_dir.glob("*.md")))
+        candidates.extend(sorted(path for path in talents_dir.rglob("*") if path.is_file()))
+
+    reports_dir = live_root / "reports"
+    if reports_dir.exists():
+        candidates.extend(sorted(path for path in reports_dir.rglob("*") if path.is_file()))
 
     return candidates
 
@@ -179,7 +183,7 @@ def validate_public_import(live_root: Path):
         detail = "\n".join(f"- {problem}" for problem in problems)
         raise SystemExit(f"[fail] --import-live refused unsafe public import candidates:\n{detail}")
 
-    print("[ok] --import-live imports only README.md and talents/*.md; private/, .env*, logs, keys, and PEM files stay out")
+    print("[ok] --import-live imports README.md, public talent package files, and public reports; private/, .env*, logs, keys, and PEM files stay out")
 
 
 def run_sync(live_root: Path, target_root: Path):
@@ -234,6 +238,8 @@ def install(live_root: Path, import_live: bool):
         live_root.symlink_to(bootstrap, target_is_directory=True)
         print(f"[ok] linked live root to repo bootstrap: {live_root} -> {bootstrap}")
 
+    (bootstrap / "private" / "self-iteration").mkdir(parents=True, exist_ok=True)
+    (bootstrap / "reports" / "self-iteration").mkdir(parents=True, exist_ok=True)
     set_hooks_path(".githooks")
     write_state(
         {

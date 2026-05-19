@@ -27,7 +27,7 @@
   - `VERSION` - now set to `1.0.0`
   - `.github/workflows/ci.yml` - smoke gate already in place and should remain the Step 2 verification backbone
   - `scripts/smoke-public-workflow.sh` - rerun before closing Step 2, then add the final GitHub-hosted smoke on top
-  - `bootstrap/talents/github-ssh-repo-alias-setup.md` - personal-only alias example has been neutralized to `github-work`
+  - `bootstrap/talents/github-ssh-repo-alias-setup/TALENT.md` - personal-only alias example has been neutralized to `github-work`
 - Dependencies:
   - Step 1 completed on 2026-04-20
   - `bash scripts/smoke-public-workflow.sh` passed

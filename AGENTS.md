@@ -37,9 +37,13 @@ Before changing talent content or install/sync tooling:
 ## Edit Boundary
 
 - Committed repo snapshot lives in `bootstrap/`
+- Active talent packages live in `bootstrap/talents/<slug>/TALENT.md`
+- Each active package must include `bootstrap/talents/<slug>/CHANGELOG.md`
 - Shipped install seed is defined by `bootstrap/manifest.txt`
 - `bootstrap/index.md` is derived from active bootstrap talents
 - `bootstrap/private/` is local-only and must not be committed
+- Raw self-iteration reports belong in `bootstrap/private/self-iteration/` and must not be committed
+- Sanitized self-iteration reports may live in `bootstrap/reports/self-iteration/`
 - `scripts/install.sh` must stay in sync with the manifest-based bootstrap workflow
 
 ## Required Verification

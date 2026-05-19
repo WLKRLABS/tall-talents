@@ -26,9 +26,13 @@ def main():
     if not slug:
         raise SystemExit("generated slug is empty; provide a title with letters or numbers")
 
-    path = talents_dir / f"{slug}.md"
-    if path.exists():
-        raise SystemExit(f"refusing overwrite; file exists: {path}")
+    package_dir = talents_dir / slug
+    if package_dir.exists():
+        raise SystemExit(f"refusing overwrite; package exists: {package_dir}")
+
+    package_dir.mkdir(parents=True)
+    talent_path = package_dir / "TALENT.md"
+    changelog_path = package_dir / "CHANGELOG.md"
 
     content = f"""---
 slug: {slug}
@@ -69,10 +73,22 @@ Describe the outcome this talent is meant to achieve.
 
 # Example Prompt
 
-\"Use `{slug}` for [task], then report exact commands/files changed.\"
+"Use `{slug}` for [task], then report exact commands/files changed."
 """
-    path.write_text(content, encoding="utf-8")
-    print(f"[ok] created {path}")
+    changelog = """# Changelog
+
+## Unreleased - draft created
+
+- Session: create-talent.py
+- Change: Created package scaffold.
+- Evidence: User or agent requested a new draft talent package.
+- Effect: Provides a validator-clean starting point for authoring.
+- Oscillation check: Initial package entry; no prior change exists to undo.
+"""
+
+    talent_path.write_text(content, encoding="utf-8")
+    changelog_path.write_text(changelog, encoding="utf-8")
+    print(f"[ok] created {package_dir}")
 
 
 if __name__ == "__main__":

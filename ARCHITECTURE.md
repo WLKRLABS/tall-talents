@@ -5,7 +5,8 @@
 Tall Talents uses the filesystem as the source of truth.
 
 - Live root: `~/.tall-talents`
-- Active talents: `~/.tall-talents/talents/*.md`
+- Active talents: `~/.tall-talents/talents/<slug>/TALENT.md`
+- Per-talent history: `~/.tall-talents/talents/<slug>/CHANGELOG.md`
 - Index: `~/.tall-talents/index.md`
 
 No hidden cache, no database, no background process.
@@ -18,15 +19,16 @@ No hidden cache, no database, no background process.
 - Required front matter + required sections
 
 ### 2) Content layer
-- Talent markdown files in `talents/`
+- Talent package directories in `talents/`
 - Index markdown derived from active talents
 - Incoming/archive directories for lifecycle handling
+- Public-safe self-iteration reports in `reports/self-iteration/`
 - Optional local-only private notes in `private/`
 
 ### 3) Distribution snapshot layer
 - Repo snapshot in `bootstrap/`
 - In repo dev mode, `bootstrap/` is the live library via a symlink from `~/.tall-talents`
-- `bootstrap/talents/` holds the editable talent files that contributors review and commit
+- `bootstrap/talents/` holds the editable talent packages that contributors review and commit
 - `bootstrap/index.md` and `bootstrap/manifest.txt` include active talents only
 - `scripts/sync-bootstrap.py` regenerates the snapshot from the live library
 - `.githooks/pre-commit` regenerates derived files before commit
@@ -45,8 +47,18 @@ No hidden cache, no database, no background process.
 
 1. Agent reads `~/.tall-talents/index.md`.
 2. Agent selects relevant active talent slug(s).
-3. Agent opens specific `~/.tall-talents/talents/{slug}.md` files.
+3. Agent opens specific `~/.tall-talents/talents/{slug}/TALENT.md` files.
 4. Agent executes workflow as written.
+
+Package folders are not automatic context dumps. The default activation surface is only `TALENT.md`.
+
+Load package-local assets only when:
+
+- `TALENT.md` explicitly references them
+- the current task needs them
+- self-iteration is inspecting history or changing the package
+
+Load `CHANGELOG.md` during self-iteration or before modifying, archiving, or splitting the package.
 
 ## Composition model
 
@@ -65,21 +77,26 @@ There is no hidden orchestration engine. Composition is an agent discipline over
 
 ## Write path
 
-1. Agent derives workflow from completed real session.
-2. Agent writes or updates one talent markdown file.
-3. Agent validates file against format contract.
-4. Agent updates the live index (manual edit or rebuild script).
-5. In repo dev mode, edits land directly in `bootstrap/` and the pre-commit hook refreshes derived files.
-6. Outside repo dev mode, run manual bootstrap sync when the repo snapshot must catch up to a separate live root.
+1. Agent runs a self-iteration pass after every non-trivial conversation.
+2. Agent writes a raw local report under `private/self-iteration/`.
+3. If there is no concrete evidence, the pass may write a tiny sanitized no-change report under `reports/self-iteration/`.
+4. If concrete evidence exists, agent reads the affected package's `TALENT.md` and `CHANGELOG.md`.
+5. Agent performs the oscillation check.
+6. Agent applies one of: `refine`, `create`, `archive`, or `split`.
+7. Agent appends the package changelog entry with session, change, evidence, expected effect, and oscillation check.
+8. Agent validates package shape, rebuilds the index, runs the privacy scan, and checks diff hygiene.
+9. In repo dev mode, edits land directly in `bootstrap/` and the pre-commit hook refreshes derived files.
+10. Outside repo dev mode, run manual bootstrap sync when the repo snapshot must catch up to a separate live root.
 
 ## Privacy model
 
 Talents may be personal in origin, but committed active talents must be publishable.
 
-- `~/.tall-talents/talents/` is the active library and can be mirrored into the public repo.
-- `~/.tall-talents/private/` is for owner-only context and is not shipped in `bootstrap/manifest.txt`.
+- `~/.tall-talents/talents/` is the active package library and can be mirrored into the public repo.
+- `~/.tall-talents/reports/self-iteration/` is for sanitized report cards that are safe to commit.
+- `~/.tall-talents/private/` is for owner-only context, including raw self-iteration reports, and is not shipped in `bootstrap/manifest.txt`.
 - Public talents should use placeholders for private names, paths, accounts, URLs, customers, and providers.
-- Secrets, tokens, API keys, service-role values, reset links, auth headers, and private logs do not belong in talents.
+- Secrets, tokens, API keys, service-role values, reset links, auth headers, private logs, and raw private reports do not belong in committed talents or sanitized reports.
 - `scripts/scan-talent-privacy.py` blocks high-confidence secrets and warns about personal identifiers before commit.
 
 ## Constraints

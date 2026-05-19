@@ -3,6 +3,7 @@ import argparse
 import re
 import sys
 from pathlib import Path
+from typing import Optional
 
 REQUIRED_FIELDS = [
     "slug",
@@ -28,6 +29,7 @@ REQUIRED_SECTIONS = [
 
 ALLOWED_STATUS = {"active", "draft", "archived"}
 SLUG_RE = re.compile(r"^[a-z0-9-]+$")
+CHANGELOG_ENTRY_RE = re.compile(r"^##\s+\S", re.MULTILINE)
 
 
 def parse_front_matter(text: str):
@@ -65,19 +67,40 @@ def parse_front_matter(text: str):
             else:
                 data[key] = []
             continue
-        # invalid line
         return None, body
 
     return data, body
 
 
-def validate_file(path: Path):
+def package_dirs(root: Path, dirname: str):
+    base = root / dirname
+    if not base.exists():
+        return []
+    return sorted(path for path in base.iterdir() if path.is_dir())
+
+
+def validate_package(path: Path, expected_status: Optional[str] = None):
     errors = []
-    text = path.read_text(encoding="utf-8")
+    talent_path = path / "TALENT.md"
+    changelog_path = path / "CHANGELOG.md"
+
+    if not talent_path.exists():
+        errors.append("missing TALENT.md")
+        return errors, None
+
+    if not changelog_path.exists():
+        errors.append("missing CHANGELOG.md")
+    else:
+        changelog = changelog_path.read_text(encoding="utf-8")
+        if not CHANGELOG_ENTRY_RE.search(changelog):
+            errors.append("CHANGELOG.md must contain at least one ## entry")
+
+    text = talent_path.read_text(encoding="utf-8")
     front, body = parse_front_matter(text)
 
     if front is None:
-        return ["missing or invalid front matter"], None
+        errors.append("missing or invalid front matter in TALENT.md")
+        return errors, None
 
     for field in REQUIRED_FIELDS:
         if field not in front:
@@ -91,15 +114,16 @@ def validate_file(path: Path):
     if slug:
         if not SLUG_RE.match(slug):
             errors.append("slug must match ^[a-z0-9-]+$")
-        expected_name = f"{slug}.md"
-        if path.name != expected_name:
-            errors.append(f"filename must equal slug: expected {expected_name}")
+        if path.name != slug:
+            errors.append(f"folder name must equal slug: expected {slug}")
 
     status = front.get("status")
     if isinstance(status, list):
         errors.append("status must be scalar")
     elif status and status not in ALLOWED_STATUS:
         errors.append("status must be one of: active, draft, archived")
+    elif expected_status and status != expected_status:
+        errors.append(f"status must be {expected_status} in {path.parent.name}/")
 
     for heading in REQUIRED_SECTIONS:
         if heading not in body:
@@ -108,41 +132,50 @@ def validate_file(path: Path):
     return errors, slug
 
 
-def main():
-    parser = argparse.ArgumentParser()
-    parser.add_argument("--root", required=True, help="Root path of live Tall Talents folder")
-    args = parser.parse_args()
-
-    root = Path(args.root).expanduser().resolve()
+def validate_root(root: Path):
     talents_dir = root / "talents"
-
     if not talents_dir.exists():
         print(f"[error] talents directory not found: {talents_dir}")
         return 1
 
-    files = sorted(talents_dir.glob("*.md"))
-    if not files:
-        print(f"[warn] no talents found in {talents_dir}")
-        return 0
-
     all_ok = True
-    seen = {}
+    seen_active_slugs = {}
 
-    for file in files:
-        errors, slug = validate_file(file)
+    single_files = sorted(talents_dir.glob("*.md"))
+    for file in single_files:
+        all_ok = False
+        print(f"[fail] {file}")
+        print("  - single-file talents are invalid; use talents/<slug>/TALENT.md")
+
+    talent_packages = package_dirs(root, "talents")
+    if not talent_packages:
+        print(f"[warn] no talent packages found in {talents_dir}")
+
+    for package in talent_packages:
+        errors, slug = validate_package(package)
         if slug:
-            if slug in seen:
-                errors.append(f"duplicate slug also in {seen[slug]}")
+            if slug in seen_active_slugs:
+                errors.append(f"duplicate active/draft slug also in {seen_active_slugs[slug]}")
             else:
-                seen[slug] = file.name
+                seen_active_slugs[slug] = str(package)
 
         if errors:
             all_ok = False
-            print(f"[fail] {file}")
+            print(f"[fail] {package}")
             for err in errors:
                 print(f"  - {err}")
         else:
-            print(f"[pass] {file}")
+            print(f"[pass] {package}")
+
+    for package in package_dirs(root, "archive"):
+        errors, _slug = validate_package(package, expected_status="archived")
+        if errors:
+            all_ok = False
+            print(f"[fail] {package}")
+            for err in errors:
+                print(f"  - {err}")
+        else:
+            print(f"[pass] {package}")
 
     if not all_ok:
         print("[result] validation failed")
@@ -150,6 +183,15 @@ def main():
 
     print("[result] validation passed")
     return 0
+
+
+def main():
+    parser = argparse.ArgumentParser()
+    parser.add_argument("--root", required=True, help="Root path of live Tall Talents folder")
+    args = parser.parse_args()
+
+    root = Path(args.root).expanduser().resolve()
+    return validate_root(root)
 
 
 if __name__ == "__main__":

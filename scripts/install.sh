@@ -12,7 +12,13 @@ SCRIPT_BASE="${TALL_TALENTS_SCRIPT_BASE:-https://raw.githubusercontent.com/WLKRL
 BOOTSTRAP_MANIFEST="${BOOTSTRAP_DIR}/manifest.txt"
 REMOTE_BOOTSTRAP_MANIFEST="${TALL_TALENTS_BOOTSTRAP_MANIFEST:-manifest.txt}"
 
-mkdir -p "${ROOT}" "${ROOT}/talents" "${ROOT}/incoming" "${ROOT}/archive" "${ROOT}/private"
+mkdir -p \
+  "${ROOT}" \
+  "${ROOT}/talents" \
+  "${ROOT}/incoming" \
+  "${ROOT}/archive" \
+  "${ROOT}/private/self-iteration" \
+  "${ROOT}/reports/self-iteration"
 
 copy_if_missing() {
   local src="$1"
@@ -47,11 +53,28 @@ is_allowed_manifest_path() {
   [[ "${rel}" != *[[:space:]]* ]] || return 1
 
   case "${rel}" in
-    README.md|index.md|manifest.txt|incoming/.gitkeep|archive/.gitkeep)
+    README.md|index.md|manifest.txt|incoming/.gitkeep|archive/.gitkeep|reports/self-iteration/.gitkeep)
       return 0
       ;;
-    talents/*.md)
-      [[ "${rel#talents/}" != */* ]] || return 1
+    talents/*/*)
+      local talent_rel="${rel#talents/}"
+      local slug="${talent_rel%%/*}"
+      local package_rel="${talent_rel#*/}"
+
+      [[ "${slug}" =~ ^[a-z0-9-]+$ ]] || return 1
+      [[ -n "${package_rel}" ]] || return 1
+      [[ "${package_rel}" != .* ]] || return 1
+      [[ "${package_rel}" != *"/."* ]] || return 1
+      [[ "${package_rel}" != *".env"* ]] || return 1
+      [[ "${package_rel}" != *".key" ]] || return 1
+      [[ "${package_rel}" != *".log" ]] || return 1
+      [[ "${package_rel}" != *".pem" ]] || return 1
+      [[ "${package_rel}" != private/* ]] || return 1
+      [[ "${package_rel}" != */private/* ]] || return 1
+      [[ "${package_rel}" != logs/* ]] || return 1
+      [[ "${package_rel}" != */logs/* ]] || return 1
+      [[ "${package_rel}" != log/* ]] || return 1
+      [[ "${package_rel}" != */log/* ]] || return 1
       return 0
       ;;
     *)
@@ -65,7 +88,7 @@ validate_manifest_path() {
 
   if ! is_allowed_manifest_path "${rel}"; then
     echo "[fail] unsafe bootstrap manifest path: ${rel}" >&2
-    echo "[fail] allowed paths: README.md, index.md, manifest.txt, talents/*.md, incoming/.gitkeep, archive/.gitkeep" >&2
+    echo "[fail] allowed paths: README.md, index.md, manifest.txt, talents/<slug>/*, incoming/.gitkeep, archive/.gitkeep, reports/self-iteration/.gitkeep" >&2
     exit 1
   fi
 }
