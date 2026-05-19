@@ -2,6 +2,8 @@
 
 ## Unreleased
 
+## 2.0.0 - 2026-05-19
+
 - Migrated active talents from single markdown files to package directories with `TALENT.md` and required package-local `CHANGELOG.md`.
 - Added self-iteration report and changelog mechanics so agents can refine, create, archive, or split talents from concrete session evidence without a human review queue.
 - Updated install, validation, index, sync, scaffolding, privacy scan, repo protocol, and docs for the package-only active talent format.

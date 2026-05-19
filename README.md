@@ -13,7 +13,7 @@
   <a href="https://github.com/WLKRLABS/tall-talents/actions/workflows/ci.yml">
     <img src="https://img.shields.io/github/actions/workflow/status/WLKRLABS/tall-talents/ci.yml?branch=main&style=flat-square&label=ci" alt="CI status">
   </a>
-  <img src="https://img.shields.io/badge/version-1.0.0-black?style=flat-square" alt="Version 1.0.0">
+  <img src="https://img.shields.io/badge/version-2.0.0-black?style=flat-square" alt="Version 2.0.0">
   <a href="LICENSE">
     <img src="https://img.shields.io/github/license/WLKRLABS/tall-talents?style=flat-square" alt="MIT License">
   </a>
@@ -186,7 +186,7 @@ This is the single source of truth.
 Use a tagged release so the installer and bootstrap snapshot come from the same reviewed version:
 
 ```bash
-TALL_TALENTS_REF=v1.0.0 bash <(curl -fsSL https://raw.githubusercontent.com/WLKRLABS/tall-talents/v1.0.0/scripts/install.sh)
+TALL_TALENTS_REF=v2.0.0 bash <(curl -fsSL https://raw.githubusercontent.com/WLKRLABS/tall-talents/v2.0.0/scripts/install.sh)
 ```
 
 That bootstraps `~/.tall-talents` without cloning the repo first.
@@ -194,7 +194,7 @@ That bootstraps `~/.tall-talents` without cloning the repo first.
 ### Optional verify
 
 ```bash
-bash <(curl -fsSL https://raw.githubusercontent.com/WLKRLABS/tall-talents/v1.0.0/scripts/doctor.sh)
+bash <(curl -fsSL https://raw.githubusercontent.com/WLKRLABS/tall-talents/v2.0.0/scripts/doctor.sh)
 ```
 
 ### Local repo workflow
@@ -384,9 +384,9 @@ This repo uses SemVer.
 - [`RELEASE.md`](RELEASE.md) is the release playbook, including canonical-home cutover rules
 - `scripts/validate-versioning.sh` validates the version/changelog contract
 - `scripts/release-dry-run.sh` proves the release path through local, remote-style, and live GitHub install smoke coverage
-- `1.0.0` is the stability target for the file format, tooling, and workflow
+- `2.0.0` is the stability target for the package format, self-iteration mechanics, tooling, and workflow
 
-Current version: `1.0.0`
+Current version: `2.0.0`
 
 ## ⭐ GitHub Stars
 
